@@ -1,17 +1,23 @@
-<%-- リスト10-6の状態 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>どこつぶ</title>
+<title></title>
 </head>
 <body>
-<h1>どこつぶへようこそaaabbbbccccddd</h1>
-<form action="/docoTsubuSample/Login" method="post">
-ユーザー名：<input type="text" name="name"><br>
-パスワード：<input type="password" name="pass"><br>
-<input type="submit" value="ログイン">
-</form>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+	ITパスポート過去問道場
+	
+	<hr>
+
+	こんにちは！
+	<c:choose>
+		<c:when test="">ゲスト　さん！</c:when>
+		<c:otherwise>　さん！</c:otherwise>
+	</c:choose>
+
+
 </body>
 </html>
