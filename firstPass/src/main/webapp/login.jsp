@@ -7,7 +7,7 @@
 		<title>ログイン</title>
 	</head>
 	<body>
-		<h1>ログイン</h1>
+		ログイン
 		<form action="Login.action" method="post">
 		<p>ログインID<input type="text" name="userId"></p>
 		<p>パスワード<input type="password" name="password"></p>
