@@ -1,10 +1,10 @@
 <Context reloadable="true">
 	<Resource
-		name="jdbc/FIRSTPASS"
+		name="jdbc/book"
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="com.mysql.jdbc.Driver"
-		url="jdbc:mysql://localhost:3306/FIRSTPASS"
+		url="jdbc:mysql://localhost:3306/book"
 		connectionProperties="autoReconnect=true;verifyServerCertificate=false;useSSL=false;requireSSL=false"
 		username="root"
 		password=""
