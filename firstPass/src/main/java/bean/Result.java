@@ -8,7 +8,7 @@ public class Result implements java.io.Serializable
 	private int countUnit;//累積実施回数
 	private String year;//年度
 	private int questionNo;//問題番号
-	private String genle;//分野
+	private String genre;//分野
 	private String userId;//ユーザID
 	private String collect;//正誤
 	private String difficulty;//難易度
@@ -27,9 +27,9 @@ public class Result implements java.io.Serializable
 	{
 		return questionNo;
 	}
-	public String getGenle()
+	public String getGenre()
 	{
-		return genle;
+		return genre;
 	}
 	public String getUserId()
 	{
@@ -62,9 +62,9 @@ public class Result implements java.io.Serializable
 	{
 		this.questionNo=questionNo;
 	}
-	public void setGenle(String genle)
+	public void setGenre(String genre)
 	{
-		this.genle=genle;
+		this.genre=genre;
 	}
 	public void setUserId(String userId)
 	{
