@@ -4,19 +4,19 @@ public class Conditions implements java.io.Serializable
 {
 	//フィールド
 	//年度、分野、難易度、問題数、ブックマーク登録フラグ
-	private String year;
-	private String genre;
+	private String[] year;
+	private String[] genre;
 	private String difficulty;
 	private int questionCount;
 	private String bookmarkFlg;
 	
 	//getter
-	public String getYear()
+	public String[] getYear()
 	{
 		return this.year;
 	}
 	
-	public String getGenre()
+	public String[] getGenre()
 	{
 		return this.genre;
 	}
@@ -38,12 +38,12 @@ public class Conditions implements java.io.Serializable
 	
 	
 	//setter
-	public void setYear(String year)
+	public void setYear(String[] year)
 	{
 		this.year = year;
 	}
 	
-	public void setGenre(String genre)
+	public void setGenre(String[] genre)
 	{
 		this.genre = genre;
 	}
