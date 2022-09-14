@@ -1,7 +1,7 @@
 package bean;
 
 //個人実績をDBから抽出し、サーブレットに渡す用のBean（リストにしてサーブレットに返す）
-public class PersonalCount implements java.io.Serializable
+public class UnitResult implements java.io.Serializable
 {
 	//フィールド
 	//累計実施回数、分野、正誤、難易度、データ数
