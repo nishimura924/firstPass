@@ -13,7 +13,7 @@ public class LoginAction extends Action
 		HttpSession session = request.getSession();
 				
 		//リクエストパラメーターの取得
-		String userId = request.getParameter("useId");
+		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 		
 		//ログインIDかパスワードが未入力だったら、エラーメッセージをセットしてログイン画面に戻す。
