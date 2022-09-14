@@ -5,5 +5,15 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
   version="3.1">
   
+  
+<!--FrontController-->
+<servlet>
+   <servlet-name>front-controller</servlet-name>
+   <servlet-class>tool.FrontController</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>front-controller</servlet-name>
+   <url-pattern>*.action</url-pattern>
+</servlet-mapping>
 
 </web-app>
