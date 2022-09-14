@@ -21,6 +21,10 @@ public class SummaryOfResult implements java.io.Serializable
 	{
 		return genle;
 	}
+	public String getCollect()
+	{
+		return collect;
+	}
 	
 	//setter
 	public void setYear(String year)
