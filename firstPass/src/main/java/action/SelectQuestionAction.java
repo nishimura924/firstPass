@@ -1,15 +1,20 @@
-//出題条件選択画面を表示するためのサーブレット
+package action;
+
 
 import dao.QuestionDAO;
+import dao.ResultDAOtest;
 import bean.Conditions;
 import bean.User;
+import bean.Question;
 import bean.SummaryOfResult;
 import tool.Action;
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.http.*;
 import java.util.*;
-
+/**
+* 条件を取得し、問題リストを生成するためのアクション
+* @author　kuroki
+* @version　1.0.0
+*/
 
 public class SelectQuestionAction extends Action
 {
@@ -41,21 +46,33 @@ public class SelectQuestionAction extends Action
 		if(year==null || genre==null)
 		{
 			request.setAttribute("errorMsg", "該当する問題はありません");
+			return "ShowSelectQuestion.action";
 		}
 		
-		//ブックマークのみから出題にチェックが入っている場合
-		/*if(bookmark.equals("1"))
+		//
+		QuestionDAO dao = new QuestionDAO();
+		List<Question> question = dao.setQuestion(conditions);
+		
+		
+		if(question.size()==0)
 		{
-			//ブックマークTBLに登録されている問題を問題TBLより検索
-			QuestionDAO qdao = new QuestionDAO();
-			
-			
+			request.setAttribute("errorMsg", "該当する問題はありません");
+			return "ShowSelectQuestion.action";
 		}
-		else
+		
+		//出題順をshuffle
+		Collections.shuffle(question);
+		
+		//indexの設定
+		//index用変数を1で初期化
+		int index =1;
+		
+		//questionリスト内の各問題にインデックスをつける
+		for(int i =0; i<=question.size(); i++)
 		{
-			//条件にあった問題を問題TBLより検索
-			List<Question>originalQuestion = qDao.(cnd);
-		}*/
+			question.get(i).setIndex(index);
+			index++;
+		}
 			
 		
 		//問題リストをセッションに格納
@@ -69,8 +86,8 @@ public class SelectQuestionAction extends Action
 			String userId = user.getUserId();
 			
 			//累計実施回数を取得し、+1をしてセッションに格納
-			ResultDAO rDao= new ResultDAO();
-			int countUnit = rDao.(userId); //メソッド名追加
+			ResultDAOtest rDao= new ResultDAOtest();
+			int countUnit = rDao.getCountUnit(userId); //メソッド名追加
 			countUnit++;
 			
 			session.setAttribute("countUnit", countUnit);
@@ -79,7 +96,6 @@ public class SelectQuestionAction extends Action
 		//実績サマリリストを作成し、sessionに追加
 		List<SummaryOfResult> summary = new ArrayList<SummaryOfResult>();
 		session.setAttribute("summary", summary);
-		
 		
 		//出題jspを表示
 		return"showQuestion.jsp";
