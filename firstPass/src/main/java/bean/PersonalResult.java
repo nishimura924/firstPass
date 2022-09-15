@@ -8,10 +8,10 @@ public class PersonalResult implements java.io.Serializable
 	private int countUnit;
 	private int totalQuestionCount;
 	private String difficulty;
-	private int collectOnTotal;
-	private int collectOnStrategy;
-	private int collectOnTech;
-	private int collectOnManage;
+	private int correctOnTotal;
+	private int correctOnStrategy;
+	private int correctOnTech;
+	private int correctOnManage;
 	
 	
 	//getter
@@ -30,24 +30,24 @@ public class PersonalResult implements java.io.Serializable
 		return this.difficulty;
 	}
 	
-	public int getCollectOnTotal()
+	public int getCorrectOnTotal()
 	{
-		return this.collectOnTotal;
+		return this.correctOnTotal;
 	}
 	
-	public int getCollectOnStrategy()
+	public int getCorrectOnStrategy()
 	{
-		return this.collectOnStrategy;
+		return this.correctOnStrategy;
 	}
 	
-	public int getCollectOnTech()
+	public int getCorrectOnTech()
 	{
-		return this.collectOnTech;
+		return this.correctOnTech;
 	}
 	
-	public int getCollectOnManage()
+	public int getCorrectOnManage()
 	{
-		return this.collectOnManage;
+		return this.correctOnManage;
 	}
 	
 	
@@ -67,24 +67,24 @@ public class PersonalResult implements java.io.Serializable
 		this.difficulty = difficulty;
 	}
 	
-	public void setCollectOnTotal(int collectOnTotal)
+	public void setCorrectOnTotal(int correctOnTotal)
 	{
-		this.collectOnTotal = collectOnTotal;
+		this.correctOnTotal = correctOnTotal;
 	}
 	
-	public void setCollectOnStrategy(int collectOnStrategy)
+	public void setCorrectOnStrategy(int correctOnStrategy)
 	{
-		this.collectOnStrategy = collectOnStrategy;
+		this.correctOnStrategy = correctOnStrategy;
 	}
 	
-	public void setCollectOnTech(int collectOnTech)
+	public void setCorrectOnTech(int correctOnTech)
 	{
-		this.collectOnTech = collectOnTech;
+		this.correctOnTech = correctOnTech;
 	}
 	
-	public void setCollectOnManage(int collectOnManage)
+	public void setCorrectOnManage(int correctOnManage)
 	{
-		this.collectOnManage = collectOnManage;
+		this.correctOnManage = correctOnManage;
 	}
 	
 }

@@ -5,7 +5,7 @@ public class Choice implements java.io.Serializable
 	//フィールド
 	//選択肢の内容、正解選択肢か否か
 	private String choice;
-	private String isCollect;
+	private String isCorrect;
 	
 	//getter
 	public String getChoice()
@@ -13,9 +13,9 @@ public class Choice implements java.io.Serializable
 		return this.choice;
 	}
 	
-	public String getIsCollect()
+	public String getIsCorrect()
 	{
-		return this.isCollect;
+		return this.isCorrect;
 	}
 	
 	//setter
@@ -24,8 +24,8 @@ public class Choice implements java.io.Serializable
 		this.choice = choice;
 	}
 	
-	public void setIsCollect(String isCollect)
+	public void setIsCorrect(String isCorrect)
 	{
-		this.isCollect = isCollect;
+		this.isCorrect = isCorrect;
 	}
 }

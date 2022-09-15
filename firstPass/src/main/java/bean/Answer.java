@@ -6,19 +6,19 @@ public class Answer implements java.io.Serializable
 {
 	//フィールド
 	//正誤判定結果、正解の選択肢、過去コメントのリスト
-	private String collect;
-	private char collectChar;
+	private String correct;
+	private char correctChar;
 	private List<Comment> allComment;
 	
 	//getter
-	public String getCollect()
+	public String getCorrect()
 	{
-		return this.collect;
+		return this.correct;
 	}
 	
-	public char getCollectChar()
+	public char getCorrectChar()
 	{
-		return this.collectChar;
+		return this.correctChar;
 	}
 	
 	public List<Comment> getAllComment()
@@ -27,14 +27,14 @@ public class Answer implements java.io.Serializable
 	}
 	
 	//setter
-	public void setCollect(String collect)
+	public void setCorrect(String correct)
 	{
-		this.collect = collect;
+		this.correct = correct;
 	}
 	
-	public void setCollectChar(char collectChar)
+	public void setCorrectChar(char correctChar)
 	{
-		this.collectChar = collectChar;
+		this.correctChar = correctChar;
 	}
 	
 	public void setAllComment(List<Comment> allComment)
