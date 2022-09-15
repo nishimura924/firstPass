@@ -15,7 +15,7 @@
 
 	こんにちは！
 	<c:choose>
-		<c:when test="${user.userName == null}">ゲスト さん！</c:when>
+		<c:when test="${user == null}">ゲスト さん！</c:when>
 		<c:otherwise>${user.userName }　さん！</c:otherwise>
 	</c:choose>
 	
@@ -49,6 +49,11 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
+	
+	<%--単体テスト用 --%>
+	<form action="Index.action" method="post">
+		<input type="submit" value="セッションセット">
+	</form>
 
 </body>
 <%@include file="footer_menu.jsp" %>
