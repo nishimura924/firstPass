@@ -11,13 +11,14 @@
 	パスワードを変更します。よろしいですか？<br>
 	※セキュリティ都合上、新しいパスワードは表示しません。<br>
 	
-	
-	
 	<form action="changePasswordStart.jsp" method="post">
 		<input type="submit" value="戻る">
 	</form>
 	
-	<form action="changePasswordFinish.jsp" method="post">
+	<br>
+	
+	<form action="ChangePasswordConfirm.action" method="post">
+		<input type="hidden" name="newPassword" value=${newPassword }>
 		<input type="submit" value="変更">
 	</form>
 
