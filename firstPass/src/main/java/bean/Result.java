@@ -10,7 +10,7 @@ public class Result implements java.io.Serializable
 	private int questionNo;//問題番号
 	private String genre;//分野
 	private String userId;//ユーザID
-	private String collect;//正誤
+	private String correct;//正誤
 	private String difficulty;//難易度
 	private Date answerDate;//解答日
 	
@@ -35,9 +35,9 @@ public class Result implements java.io.Serializable
 	{
 		return userId;
 	}
-	public String getCollect()
+	public String getCorrect()
 	{
-		return collect;
+		return correct;
 	}
 	public String getDifficulty()
 	{
@@ -70,9 +70,9 @@ public class Result implements java.io.Serializable
 	{
 		this.userId=userId;
 	}
-	public void setCollect(String collect)
+	public void setCorrect(String correct)
 	{
-		this.collect=collect;
+		this.correct=correct;
 	}
 	public void setdifficulty(String difficulty)
 	{

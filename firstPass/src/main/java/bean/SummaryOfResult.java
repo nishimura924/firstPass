@@ -6,7 +6,7 @@ public class SummaryOfResult implements java.io.Serializable
 	private String year;//年度
 	private int questionNo;//問題番号
 	private String genre;//分野
-	private String collect;//正誤
+	private String correct;//正誤
 	
 	//getter
 	public String getYear()
@@ -21,9 +21,9 @@ public class SummaryOfResult implements java.io.Serializable
 	{
 		return genre;
 	}
-	public String getCollect()
+	public String getCorrect()
 	{
-		return collect;
+		return correct;
 	}
 	
 	//setter
@@ -39,9 +39,9 @@ public class SummaryOfResult implements java.io.Serializable
 	{
 		this.genre=genre;
 	}
-	public void setCollect(String collect)
+	public void setCorrect(String correct)
 	{
-		this.collect=collect;
+		this.correct=correct;
 	}
 	
 }
