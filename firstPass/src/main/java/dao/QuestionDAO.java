@@ -10,8 +10,64 @@ import java.util.*;
 
 public class QuestionDAO extends DAO
 {
+	//DBに登録されている年度を返すメソッド
+	public List<String> getYear()throws Exception
+	{
+		//戻り値用のリスト作成
+		List<String> year = new ArrayList<String>();
+		
+		//コネクションの取得
+		Connection con = getConnection();
+		
+		PreparedStatement st;
+		st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR;");
+		
+		//SQLの実行と結果の取得
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next())
+		{
+			year.add(rs.getString("YEAR"));
+		}
+		
+		st.close();
+		con.close();
+		
+		return year;
+		
+	}
+	
+	//DBに登録されている分野を返すメソッド
+	public List<String> getGenre()throws Exception
+	{
+		//戻り値用のリスト作成
+		List<String> genre = new ArrayList<String>();
+		
+		//コネクションの取得
+		Connection con = getConnection();
+		
+		PreparedStatement st;
+		st=con.prepareStatement("SELECT GENRE FROM QUESTION GROUP BY GENRE;");
+		
+		//SQLの実行と結果の取得
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next())
+		{
+			genre.add(rs.getString("GENRE"));
+		}
+		
+		st.close();
+		con.close();
+		
+		return genre;
+		
+	}
+	
+	
+	
 	//引数の値からDBを検索し、リストを返すメソッド　メソッド名仮置き
-	public List<Question> seach(Conditions conditions)throws Exception
+	public List<Question> setQuestion(Conditions conditions)throws Exception
 	{
 		//戻り値用のリストの作成
 		List<Question> question = new ArrayList<Question>();
@@ -81,31 +137,31 @@ public class QuestionDAO extends DAO
 			//正解ChoiceBeanの生成
 			Choice collect = new Choice();
 			collect.setChoice(rs.getString("COLLECT"));
-			collect.setIsCollect("1");
+			collect.setIsCorrect("1");
 			
 			//不正解ChoiceBean1の生成
 			Choice inc1 = new Choice();
 			inc1.setChoice(rs.getString("INCOLLECT_1"));
-			inc1.setIsCollect("0");
+			inc1.setIsCorrect("0");
 			
 			//不正解ChoiceBean2の生成
 			Choice inc2 = new Choice();
 			inc2.setChoice(rs.getString("INCOLLECT_2"));
-			inc2.setIsCollect("0");
+			inc2.setIsCorrect("0");
 			
 			//不正解ChoceBean3の生成
 			Choice inc3 = new Choice();
 			inc3.setChoice(rs.getString("INCOLLECT_3"));
-			inc3.setIsCollect("0");
+			inc3.setIsCorrect("0");
 			
 			//不正解ChoiceBean格納用リスト
-			List<Choice> incollect = new ArrayList<Choice>();
-			incollect.add(inc1);
-			incollect.add(inc2);
-			incollect.add(inc3);
+			List<Choice> incorrect = new ArrayList<Choice>();
+			incorrect.add(inc1);
+			incorrect.add(inc2);
+			incorrect.add(inc3);
 			
 			//不正解リストをシャッフル
-			Collections.shuffle(incollect);
+			Collections.shuffle(incorrect);
 			
 			//最終的な選択肢格納Set
 			List<Choice> choiceList = new ArrayList<Choice>();
@@ -118,15 +174,15 @@ public class QuestionDAO extends DAO
 			{
 				//不正解を1つcchoiceListに格納
 				//不正解リストshuffle後なので、常に0で取得
-				choiceList.add(incollect.get(0));
+				choiceList.add(incorrect.get(0));
 				
 			}
 			else if(difficulty.equals("normal"))
 			{
 				//不正解を全てchoiceSetに格納
-				for(int i=0; i<=incollect.size(); i++)
+				for(int i=0; i<=incorrect.size(); i++)
 				{
-					choiceList.add(incollect.get(i));
+					choiceList.add(incorrect.get(i));
 				}
 			}
 			
@@ -152,10 +208,12 @@ public class QuestionDAO extends DAO
 			
 		}
 		
-		//↓ここからブックマーク有無の絞り込み
 		//ブックマークからのみ出題希望の場合
 		if(bookmarkOnly!=null)
 		{
+			//ブックマーク登録問題用リスト
+			List<Question> bookmark = new ArrayList<Question>();
+			
 			//取得結果全件格納リストでループ
 			for(int i=0; i<=all.size(); i++)
 			{
@@ -165,26 +223,41 @@ public class QuestionDAO extends DAO
 				//ブックマーク登録ありだったら、
 				if(bookmarkFlg.equals("1"))
 				{
-					//
-					question.add(all.get(i));
+					//ブックマーク登録問題用リストに仮格納
+					bookmark.add(all.get(i));
 				}
 				else
 				{
-					//questionリストには追加しない
+					//bookmarkリストには追加しない
 				}
 			}
 			
+			//出題問題数条件よりもブックマーク登録問題用リストの長さが長ければ、先頭からquestionCountの数までをquestionリストに入れる
+			if(bookmark.size() > questionCount)
+			{
+				for(int i =0; i<questionCount; i++)
+				{
+					question.add(bookmark.get(i));
+				}
+			}
+			else
+			{
+				//questionリストにbookmarkリストの中身をそのまま移す
+				for(int i =0; i<=bookmark.size(); i++)
+				{
+					question.add(bookmark.get(i));
+				}
+			}
 			
 		}
 		else
 		{
+			//出題問題数条件の数だけquestionに追加
 			for(int i=0; i<=questionCount; i++)
+			{
+				question.add(all.get(i));
+			}
 		}
-		
-		
-	
-		
-		
 		
 		
 		st.close();
