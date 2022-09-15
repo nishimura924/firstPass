@@ -3,12 +3,12 @@ package bean;
 public class Conditions implements java.io.Serializable
 {
 	//フィールド
-	//年度、分野、難易度、問題数、ブックマーク登録フラグ
+	//年度、分野、難易度、問題数、ブックマークのみフラグ
 	private String[] year;
 	private String[] genre;
 	private String difficulty;
 	private int questionCount;
-	private String bookmarkFlg;
+	private String bookmarkOnly;
 	
 	//getter
 	public String[] getYear()
@@ -31,9 +31,9 @@ public class Conditions implements java.io.Serializable
 		return this.questionCount;
 	}
 	
-	public String getBookmartFlg()
+	public String getBookmarkOnly()
 	{
-		return this.bookmarkFlg;
+		return this.bookmarkOnly;
 	}
 	
 	
@@ -58,9 +58,9 @@ public class Conditions implements java.io.Serializable
 		this.questionCount = questionCount;
 	}
 	
-	public void setBookmarkFlg(String bookmarkFlg)
+	public void setBookmarkOnly(String bookmarkOnly)
 	{
-		this.bookmarkFlg = bookmarkFlg;
+		this.bookmarkOnly = bookmarkOnly;
 	}
 	
 	
