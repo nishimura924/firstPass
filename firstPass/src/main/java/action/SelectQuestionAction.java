@@ -2,7 +2,7 @@ package action;
 
 
 import dao.QuestionDAO;
-import dao.ResultDAOtest;
+import dao.ResultDAOkuroki;
 import bean.Conditions;
 import bean.User;
 import bean.Question;
@@ -31,7 +31,7 @@ public class SelectQuestionAction extends Action
 		String difficulty = request.getParameter("difficulty");
 		int questionCount = Integer.parseInt(request.getParameter("questionCount"));
 		
-		//条件Beanを生成し、セッションに入れる。
+		//条件Beanを生成し、セッションに入れる（条件選択画面保持用）
 		Conditions conditions = new Conditions();
 		conditions.setYear(year);
 		conditions.setGenre(genre);
@@ -86,7 +86,7 @@ public class SelectQuestionAction extends Action
 			String userId = user.getUserId();
 			
 			//累計実施回数を取得し、+1をしてセッションに格納
-			ResultDAOtest rDao= new ResultDAOtest();
+			ResultDAOkuroki rDao= new ResultDAOkuroki();
 			int countUnit = rDao.getCountUnit(userId); //メソッド名追加
 			countUnit++;
 			
