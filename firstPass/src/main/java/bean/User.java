@@ -5,6 +5,7 @@ public class User implements java.io.Serializable
 {
 	private String userId;//ユーザID
 	private String userName;//ユーザ名
+	private String userPass;//ユーザパスワード
 	private String adminFlag;//管理者フラグ
 	private int countUnit; //累計実施回数
 
@@ -16,6 +17,10 @@ public class User implements java.io.Serializable
 	public String getUserName()
 	{
 		return userName;
+	}
+	public String getUserPass()
+	{
+		return userPass;
 	}
 	public String getAdminFlag()
 	{
@@ -35,6 +40,10 @@ public class User implements java.io.Serializable
 	public void setUserName(String userName)
 	{
 		this.userName=userName;
+	}
+	public void setUserPass(String userPass)
+	{
+		this.userPass=userPass;
 	}
 	public void setAdminFlag(String adminFlag)
 	{
