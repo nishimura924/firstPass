@@ -68,7 +68,7 @@ public class SelectQuestionAction extends Action
 		int index =1;
 		
 		//questionリスト内の各問題にインデックスをつける
-		for(int i =0; i<=question.size(); i++)
+		for(int i =0; i<question.size(); i++)
 		{
 			question.get(i).setIndex(index);
 			index++;
@@ -90,7 +90,9 @@ public class SelectQuestionAction extends Action
 			int countUnit = rDao.getCountUnit(userId); //メソッド名追加
 			countUnit++;
 			
-			session.setAttribute("countUnit", countUnit);
+			//ユーザBeanに設定
+			user.setCountUnit(countUnit);
+			
 		}
 		
 		//実績サマリリストを作成し、sessionに追加

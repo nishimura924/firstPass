@@ -42,8 +42,8 @@
 			<hr>
 			
 			難易度
-			<input type="radio"	name="difficulty" value="normal" checked="checked">normal
-			<input type="radio"	name="difficulty" value="easy" >easy
+			<input type="radio"	name="difficulty" value="1" checked="checked">normal
+			<input type="radio"	name="difficulty" value="0" >easy
 			<hr>
 			
 			問題数
