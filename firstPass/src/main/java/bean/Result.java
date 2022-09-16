@@ -74,11 +74,11 @@ public class Result implements java.io.Serializable
 	{
 		this.correct=correct;
 	}
-	public void setdifficulty(String difficulty)
+	public void setDifficulty(String difficulty)
 	{
 		this.difficulty=difficulty;
 	}
-	public void answerDate(Date answerDate)
+	public void setAnswerDate(Date answerDate)
 	{
 		this.answerDate=answerDate;
 	}
