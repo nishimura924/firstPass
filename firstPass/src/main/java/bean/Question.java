@@ -74,7 +74,7 @@ public class Question implements java.io.Serializable
 		return this.choicePicFlg;
 	}
 	
-	public String getBookmartFlg()
+	public String getBookmarkFlg()
 	{
 		return this.bookmarkFlg;
 	}
