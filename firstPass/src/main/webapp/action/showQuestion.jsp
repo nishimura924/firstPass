@@ -52,19 +52,19 @@
 		■正しい答え：${answer.correctChar }<br>
 		${errorMessage }
 		<br>
-		<c:choose>
-			<c:when test="${questionOfSet[0].bookmarkFlg == null }" >
-				ブックマーク登録<input type="checkbox" name="bookmark"  >
-			</c:when>
-			<c:when test="${questionOfSet[0].bookmarkFlg == 1 }" >
-				ブックマーク解除はチェック外してください<input type="checkbox" name="bookmark" checked >
-			</c:when>
-			<c:otherwise>
-				ブックマーク登録<input type="checkbox" name="bookmark" >
-			</c:otherwise>
-		</c:choose>
-		
 		<form action="Result.action" method="post">
+			<c:choose>
+				<c:when test="${questionOfSet[0].bookmarkFlg == null }" >
+					ブックマーク登録<input type="checkbox" name="bookmark" value="1" >
+				</c:when>
+				<c:when test="${questionOfSet[0].bookmarkFlg == 1 }" >
+					ブックマーク<input type="checkbox" name="bookmark" value="1" checked ><br>
+					解除時はチェックを外してください。
+				</c:when>
+				<c:otherwise>
+					ブックマーク登録<input type="checkbox" name="bookmark" value="1" >
+				</c:otherwise>
+			</c:choose>
 			<%-- <input type="hidden" name="answer" value=${answer }> --%>	
 			<input type="submit" value="次へ">
 		</form>

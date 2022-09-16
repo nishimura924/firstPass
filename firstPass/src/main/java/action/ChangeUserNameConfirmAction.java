@@ -6,7 +6,7 @@ package action;
  */
 
 import bean.User;
-import dao.UserDAO;
+import dao.UserDAOshimada;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -38,7 +38,7 @@ public class ChangeUserNameConfirmAction extends Action
 		
 
 		//ユーザ名更新のためにSQLの実行
-		UserDAO dao = new UserDAO();
+		UserDAOshimada dao = new UserDAOshimada();
 		
 		
 		//更新失敗のときはエラー画面へ遷移
