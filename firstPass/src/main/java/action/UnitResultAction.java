@@ -1,4 +1,4 @@
-package firstPass;
+package action;
 
 import bean.SummaryOfResult;
 import tool.Action;
@@ -14,7 +14,7 @@ public class UnitResultAction extends Action
 		//セッションを取得、生成
 		HttpSession session = request.getSession();
 		
-		//セッション「実績サマリ」を取得
+		//ResultActionよりセッション「実績サマリ」を取得
 		List<SummaryOfResult> summary=(List<SummaryOfResult>)session.getAttribute("summary");
 		
 		//問題数
@@ -35,10 +35,10 @@ public class UnitResultAction extends Action
 		correctRate = correctCount/summary.size();
 		
 		//最後の問題の解答時刻を取得
-		Date answerDate = summary.get(summary.size()-1).;
+		//Date answerDate = summary.get(summary.size()-1).;
 		
 		
-		request.setAttribute("answerDate", answerDate);
+		//request.setAttribute("answerDate", answerDate);
 		//問題数をリクエストで取得
 		request.setAttribute("questionCount",summary.size());
 		//正答数をリクエストで取得
