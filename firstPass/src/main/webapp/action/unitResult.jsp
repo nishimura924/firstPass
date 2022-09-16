@@ -10,7 +10,7 @@
 	<c:when test="${user.userName == null}">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
 </c:choose>
-さんの今回のテスト結果（難易度：${summary.difficulty}）
+さんの今回のテスト結果（難易度：${difficulty}）
 
 実施日：${answerDate}
 <br>
