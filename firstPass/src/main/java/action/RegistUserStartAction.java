@@ -1,4 +1,4 @@
-package firstPass;
+package action;
 
 import bean.User;
 import dao.UserDAO;

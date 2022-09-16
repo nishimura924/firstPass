@@ -1,5 +1,10 @@
-package firstPass;
+package action;
 
+/**
+ * ユーザの入力内容を確認表示させる機能
+ * @author　森下
+ * @version　1.0.0
+ */
 import bean.User;
 import dao.UserDAO;
 import tool.Action;
