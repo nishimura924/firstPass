@@ -27,6 +27,14 @@
 		<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
 		<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：${questionOfSet[0].choice3.choice }<br>
 		<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：${questionOfSet[0].choice4.choice }<br><br>
+		<br>
+		
+		<c:choose>
+			<c:when test="${questionOfSet[0].bookmarkFlg == 1 }" >ブックマーク登録済<br></c:when>	
+			<c:otherwise><br></c:otherwise>
+		</c:choose>
+
+		<br>
 		<c:if test="${answer == null}">
 			<input type="submit" value="回答">
 		</c:if>
@@ -41,10 +49,23 @@
 			<c:otherwise>×：不正解！</c:otherwise>
 		</c:choose>
 		<br>
-		■正しい答え：${answer.correctChar }
+		■正しい答え：${answer.correctChar }<br>
+		${errorMessage }
+		<br>
+		<c:choose>
+			<c:when test="${questionOfSet[0].bookmarkFlg == null }" >
+				ブックマーク登録<input type="checkbox" name="bookmark"  >
+			</c:when>
+			<c:when test="${questionOfSet[0].bookmarkFlg == 1 }" >
+				ブックマーク解除はチェック外してください<input type="checkbox" name="bookmark" checked >
+			</c:when>
+			<c:otherwise>
+				ブックマーク登録<input type="checkbox" name="bookmark" >
+			</c:otherwise>
+		</c:choose>
 		
 		<form action="Result.action" method="post">
-			<input type="hidden" name="answer" value=${answer }>	
+			<%-- <input type="hidden" name="answer" value=${answer }> --%>	
 			<input type="submit" value="次へ">
 		</form>
 		
