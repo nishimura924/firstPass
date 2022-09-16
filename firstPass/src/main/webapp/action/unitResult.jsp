@@ -1,8 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8" %>
-<%@include file="../header.html" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="bean.User,java.util.List" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
 <c:choose>
 	<c:when test="${user.userName == null}">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
@@ -20,4 +23,4 @@
 
 
 
-<%@include file="../footer.html" %>
+<%@include file="footer_menu.jsp" %>
