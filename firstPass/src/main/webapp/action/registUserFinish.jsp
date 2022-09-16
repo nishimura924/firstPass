@@ -22,7 +22,7 @@ ${userName }
 
 </form>
 
-<%@include file="../footer.html" %>
+<%@include file="footer_menu.jsp" %>
 
 </body>
 </html>
