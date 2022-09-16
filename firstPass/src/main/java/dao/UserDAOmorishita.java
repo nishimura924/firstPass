@@ -8,7 +8,7 @@ import java.sql.*;
 //import java.util.List;
 //import java.util.ArrayList;
 
-public class UserDAO extends DAO
+public class UserDAOmorishita extends DAO
 {
 	public int countUser(String userId,String userName)throws Exception
 	{
