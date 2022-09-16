@@ -1,12 +1,14 @@
-//出題条件選択画面を表示するためのサーブレット
+package action;
 
 import dao.QuestionDAO;
 import tool.Action;
-import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.http.*;
 import java.util.*;
-
+/**
+* 出題条件選択画面表示用アクション（年度と分野をDBから取得）
+* @author　kuroki
+* @version　1.0.0
+*/
 
 public class ShowSelectQuestionAction extends Action
 {
@@ -14,17 +16,17 @@ public class ShowSelectQuestionAction extends Action
 	{
 		//TBLに登録されている全ての年度を取得する
 		QuestionDAO dao = new QuestionDAO();
-		List<String> yearList = dao.(); //メソッド名追記
+		List<String> yearList = dao.getYear(); //メソッド名追記
 		
 		//リクエスト属性yearListに年度リストをセット
 		request.setAttribute("yearList", yearList);
 		
 		//TBLに登録されている全ての分野を取得する
-		List<String> genreList = dao.();//メソッド名追記
+		List<String> genreList = dao.getGenre();//メソッド名追記
 		
 		//リクエスト属性genreListに分野リストをセット
-		request.setAttribute("genre", genreList);
+		request.setAttribute("genreList", genreList);
 		
-		return "SelectQuestion.jsp";
+		return "selectQuestion.jsp";
 	}
 }

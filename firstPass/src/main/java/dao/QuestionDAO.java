@@ -76,30 +76,30 @@ public class QuestionDAO extends DAO
 		Connection con = getConnection();
 		
 		PreparedStatement st;
-		st=con.prepareStatement(
-				"SELECT QUESTION.YEAR,QUESTION.QUESTION_NO,QUESTION.GENRE,QUESTION.QUESTION,"
-				+ "QUESTION.COLLECT,QUESTION.INCOLLECT_1,QUESTION.INCOLLECT_2,QUESTION.INCOLLECT_3,BOOKMARK.USER_ID"
-				+ "FROM QUESTION LEFT JOIN BOOKMARK "
-				+ "ON QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO "
-				+ "AND QUESTION.YEAR = BOOKMARK.YEAR "
-				+ "WHERE QUESTION.YEAR IN(?) and QUESTION.GENRE IN(?);");
+		st=con.prepareStatement("SELECT QUESTION.YEAR,QUESTION.QUESTION_NO,QUESTION.GENRE,QUESTION.QUESTION,QUESTION.COLLECT,QUESTION.INCOLLECT_1,QUESTION.INCOLLECT_2,QUESTION.INCOLLECT_3,BOOKMARK.USER_ID FROM QUESTION LEFT JOIN BOOKMARK ON QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO AND QUESTION.YEAR = BOOKMARK.YEAR  WHERE QUESTION.YEAR IN('2020','2021','2022') and QUESTION.GENRE IN('ストラテジ','テクノロジ','マネジメント');");
+		
 		
 		//引数の条件Beanの年度リストを取得し
 		String[] year = conditions.getYear();
 		//年度条件を連結
 		String yearCond = joinCond(year);
 		//1つ目にセット
-		st.setString(1, yearCond);
+		//st.setString(1, yearCond);
+		//st.setString(1, "'2020','2021'");
 		
+
 		//引数の条件Beanの分野リストを取得
 		String[] genre = conditions.getGenre();
 		//分野条件を連結
 		String genreCond = joinCond(genre);
 		//2つ目にセット
-		st.setString(2, genreCond);
+		//st.setString(2, genreCond);
+		//st.setString(2, "'ストラテジ','テクノロジ','マネジメント'");
 		
 		//SQLの実行と結果の取得
 		ResultSet rs = st.executeQuery();
+		
+		
 		
 		//出題問題数条件の取得
 		int questionCount = conditions.getQuestionCount();
@@ -109,7 +109,7 @@ public class QuestionDAO extends DAO
 		String difficulty = conditions.getDifficulty();
 		
 		//取得結果全件格納リストを作成
-		List<Question> all = new ArrayList<Question>();
+		List<Question> allRs = new ArrayList<Question>();
 		
 		//全件をBeanとして生成
 		while(rs.next())
@@ -123,7 +123,7 @@ public class QuestionDAO extends DAO
 			q.setQuestionPic(rs.getString("QUESTION_FILE_NAME"));
 			q.setChoicePicFlg(rs.getString("IS_SELECT_FILE"));
 			
-			//ブックマークフラグの判定と格納
+			//ブックマークフラグの判定と設定
 			//ユーザIDがnullなら登録なし、nullでなければ登録あり
 			if(rs.getString("USER_ID")==null)
 			{
@@ -172,7 +172,7 @@ public class QuestionDAO extends DAO
 			//難易度による選択肢数の決定
 			if(difficulty.equals("easy"))
 			{
-				//不正解を1つcchoiceListに格納
+				//不正解を1つchoiceListに格納
 				//不正解リストshuffle後なので、常に0で取得
 				choiceList.add(incorrect.get(0));
 				
@@ -180,7 +180,7 @@ public class QuestionDAO extends DAO
 			else if(difficulty.equals("normal"))
 			{
 				//不正解を全てchoiceSetに格納
-				for(int i=0; i<=incorrect.size(); i++)
+				for(int i=0; i<incorrect.size(); i++)
 				{
 					choiceList.add(incorrect.get(i));
 				}
@@ -204,10 +204,10 @@ public class QuestionDAO extends DAO
 			}
 			//↑ここまでで、問題をBeanにする処理完了			
 			//取得結果全件格納リストに仮格納
-			all.add(q);
+			allRs.add(q);
 			
 		}
-		
+		/*
 		//ブックマークからのみ出題希望の場合
 		if(bookmarkOnly!=null)
 		{
@@ -215,16 +215,16 @@ public class QuestionDAO extends DAO
 			List<Question> bookmark = new ArrayList<Question>();
 			
 			//取得結果全件格納リストでループ
-			for(int i=0; i<=all.size(); i++)
+			for(int i=0; i<=allRs.size(); i++)
 			{
 				//QuestionBeanのブックマークフラグを取得
-				String bookmarkFlg = all.get(i).getBookmartFlg();
+				String bookmarkFlg = allRs.get(i).getBookmartFlg();
 				
 				//ブックマーク登録ありだったら、
 				if(bookmarkFlg.equals("1"))
 				{
 					//ブックマーク登録問題用リストに仮格納
-					bookmark.add(all.get(i));
+					bookmark.add(allRs.get(i));
 				}
 				else
 				{
@@ -253,17 +253,19 @@ public class QuestionDAO extends DAO
 		else
 		{
 			//出題問題数条件の数だけquestionに追加
-			for(int i=0; i<=questionCount; i++)
+			for(int i=0; i<questionCount; i++)
 			{
-				question.add(all.get(i));
+				question.add(allRs.get(i));
 			}
-		}
+		}*/
 		
 		
 		st.close();
 		con.close();
 		
-		return question;
+
+		return allRs;
+		//return question;
 	}
 	
 	//文字列連結メソッド（年度と分野の連結に使用）

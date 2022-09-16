@@ -27,8 +27,11 @@
 		<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
 		<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：${questionOfSet[0].choice3.choice }<br>
 		<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：${questionOfSet[0].choice4.choice }<br><br>
-		<input type="submit" value="回答">
-	</form>
+		<c:if test="${answer == null}">
+			<input type="submit" value="回答">
+		</c:if>
+		</form>
+	
 
 	<hr>
 	
@@ -40,7 +43,8 @@
 		<br>
 		■正しい答え：${answer.correctChar }
 		
-		<form action="Result.action" method="post">	
+		<form action="Result.action" method="post">
+			<input type="hidden" name="answer" value=${answer }>	
 			<input type="submit" value="次へ">
 		</form>
 		
