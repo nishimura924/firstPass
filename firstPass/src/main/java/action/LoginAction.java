@@ -23,11 +23,11 @@ public class LoginAction extends Action
 		
 		
 		//セッションuserが取得出来た場合
-		//if(session.getAttribute("user") != null)
-		//{
+		if(session.getAttribute("user") != null)
+		{
 			//ログイン中エラー画面に遷移する。
-	//		return "login-error.jsp";
-	//	}
+			return "login-error.jsp";
+		}
 		
 			
 		//ログインIDかパスワードが未入力だったら、エラーメッセージをセットしてログイン画面に戻す。
@@ -45,10 +45,10 @@ public class LoginAction extends Action
 		//UserDAOの検索メソッド呼び出し（引数にリクエストパラメータの値をセット）
 		//UserDAOで生成したBeanをuserで受ける
 		UserDAOtest dao =new UserDAOtest();
-		User user =dao.seach(userId, password);
-		
-		//利用者情報TBLから利用者情報が取れた場合、セッションに格納してメニュー画面を表示
-		if(user!=null)
+		User user =dao.login(userId, password);
+	
+		//userBeanからuserIDが取得できる場合、セッションに格納してメニュー画面を表示
+		if(user.getUserId()!=null)
 		{
 			session.setAttribute("user",user);
 			return "index.jsp";

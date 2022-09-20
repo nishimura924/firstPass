@@ -21,7 +21,9 @@
 			<c:otherwise>${user.userName }</c:otherwise>
 		</c:choose>
 		」さん、条件を選んで出題開始してください。<br>
+		<c:if test ="${user == null }">
 		ログインがお済でない方は<a href="login.jsp">こちら</a>
+		</c:if>
 		
 		<form action="SelectQuestion.action" method="post">
 			<c:if test="${user != null }">
@@ -42,8 +44,8 @@
 			<hr>
 			
 			難易度
-			<input type="radio"	name="difficulty" value="1" checked="checked">normal
-			<input type="radio"	name="difficulty" value="0" >easy
+			<input type="radio"	name="difficulty" value="0" checked="checked">normal
+			<input type="radio"	name="difficulty" value="1" >easy
 			<hr>
 			
 			問題数
