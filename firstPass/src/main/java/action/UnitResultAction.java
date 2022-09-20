@@ -26,7 +26,18 @@ public class UnitResultAction extends Action
 		List<SummaryOfResult> summary=(List<SummaryOfResult>)session.getAttribute("summary");
 		//難易度の情報を取得
 		
-		if(summary != null)
+		
+		if(summary == null)
+		{
+			//問題数をリクエストで取得し、０件表示
+			request.setAttribute("questionCount",questionCount);
+			//正答数をリクエストで取得し、０件表示
+			request.setAttribute("correctCount", correctCount);
+			
+			return "unitResult.jsp";
+			
+		}
+		else if(summary != null)
 		{
 			//Listの長さ（問題数）をカウントアップ
 			for(int i=0; i<=summary.size(); i++)
@@ -39,7 +50,7 @@ public class UnitResultAction extends Action
 				}
 			}
 			//問題数をリクエストで取得
-			request.setAttribute("questionCount","テスト");
+			request.setAttribute("questionCount",questionCount);
 			//正答数をリクエストで取得
 			request.setAttribute("correctCount", correctCount);
 			
