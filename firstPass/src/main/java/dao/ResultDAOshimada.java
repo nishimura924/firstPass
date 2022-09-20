@@ -12,22 +12,40 @@ public class ResultDAOshimada extends DAO
 		//戻り用変数 0で初期化
 		int countUnit =0;
 		
-		//コネクションの取得
-		Connection con = getConnection();
+		Connection con = null;
 		
-		PreparedStatement st;
-		st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT");
+		try {
 		
-		//SQLの実行と結果の取得
-		ResultSet rs = st.executeQuery();
-		
-		if(rs!=null)
-		{
-			countUnit = rs.getInt("COUNT_UNIT");
+			con = getConnection();
+			PreparedStatement st;
+			st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT");
+			
+			//SQLの実行と結果の取得
+			ResultSet rs = st.executeQuery();
+			st.close();
+			if(rs!=null)
+			{
+				countUnit = rs.getInt("COUNT_UNIT");
+			}
 		}
-		
-		st.close();
-		con.close();
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		}
 		
 		return countUnit;
 	}
@@ -37,12 +55,13 @@ public class ResultDAOshimada extends DAO
 		
 		int line = 0;
 		Connection con = null;
+		PreparedStatement st = null;
 		
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
 		
-			PreparedStatement st = con.prepareStatement("INSERT INTO RESULT VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+			st = con.prepareStatement("INSERT INTO RESULT VALUES(?, ?, ?, ?, ?, ?, ?, now())");
 		
 			st.setInt(1, result.getCountUnit());
 			st.setString(2, result.getYear());
@@ -51,21 +70,18 @@ public class ResultDAOshimada extends DAO
 			st.setString(5, result.getUserId());
 			st.setString(6, result.getCorrect());
 			st.setString(7, result.getDifficulty());
-			st.setDate(8, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
-		
-			line = st.executeUpdate();
 			
+			line = st.executeUpdate();
 			st.close();
 			
 			if(line != 1)
 			{
 				con.rollback();
-				con.setAutoCommit(true);
-				con.close();
-				return 0;
+				line = 0;
+			}else
+			{
+				con.commit();
 			}
-			
-			con.commit();
 		
 		}catch(SQLException e)
 		{

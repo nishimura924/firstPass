@@ -9,49 +9,68 @@ public class UserDAOshimada extends DAO
 	public int search(String userId, String userPassword, String userName) throws Exception
 	{
 		
-		Connection con = getConnection();
-		
-		//一旦ダミーのSQL文格納
-		PreparedStatement st = con.prepareStatement("SELECT * FROM USER");
-		
-		
-		if(userId.equals("")) {
-			st.close();
-			con.close();
-			return -1;
-		}
-		//重複確認
-		else if(userPassword.equals(""))
-		{
-			st = con.prepareStatement("SELECT * FROM USER where USER_ID!=? AND USER_NAME=?");
-			st.setString(1, userId);
-			st.setString(2, userName);
-			
-		}
-		//一致確認
-		else if(userName.equals(""))
-		{
-			st = con.prepareStatement("SELECT * FROM USER where USER_ID=? AND USER_PASSWORD=?");
-			st.setString(1, userId);
-			st.setString(2, userPassword);
-		}
-		else
-		{
-			st.close();
-			con.close();
-			return -1;
-		}
-
-		ResultSet rs = st.executeQuery();
 		int line = 0;
+		Connection con = null;
+		PreparedStatement st = null;
 		
-		while (rs.next())
+		try
 		{
-			line += 1;
+			con = getConnection();
+			
+			if(userId.equals("")) {
+				st.close();
+				line =  -1;
+			}
+			//ユーザID重複確認
+			else if(userPassword.equals(""))
+			{
+				st = con.prepareStatement("SELECT * FROM USER where USER_ID!=? AND USER_NAME=?");
+				st.setString(1, userId);
+				st.setString(2, userName);	
+				ResultSet rs = st.executeQuery();
+				st.close();
+				while (rs.next())
+				{
+					line += 1;
+				}
+			}
+			//パスワード一致確認
+			else if(userName.equals(""))
+			{
+				st = con.prepareStatement("SELECT * FROM USER where USER_ID=? AND USER_PASSWORD=?");
+				st.setString(1, userId);
+				st.setString(2, userPassword);
+				ResultSet rs = st.executeQuery();
+				st.close();
+				while (rs.next())
+				{
+					line += 1;
+				}
+			}
+			else
+			{
+				st.close();
+				line =  -1;
+			}
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			
+		}finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
 		}
-		
-		st.close();
-		con.close();
 		
 		return line;
 	}
@@ -59,52 +78,89 @@ public class UserDAOshimada extends DAO
 	
 	public boolean update(String userId, String userPassword, String userName) throws Exception
 	{
-		Connection con = getConnection();
-		con.setAutoCommit(false);
+		Connection con = null;
+		boolean isOK = false;
+		PreparedStatement st = null;
 		
-		//一旦ダミーのSQL文格納
-		PreparedStatement st = con.prepareStatement("UPDATE USER SET USER_NAME='dummy' WHERE USER_ID='dummy'");
-		
-		if(userId.equals("")) {
-			st.close();
-			con.close();
-			return false;
-		}
-		//ユーザ名更新
-		else if(userPassword.equals(""))
+		try
 		{
-			st = con.prepareStatement("UPDATE USER SET USER_NAME=? WHERE USER_ID=?");
-			st.setString(1, userName);
-			st.setString(2, userId);
-		}
-		//ユーザパスワード更新
-		else if(userName.equals(""))
-		{
-			st = con.prepareStatement("UPDATE USER SET USER_PASSWORD=? WHERE USER_ID=?");
-			st.setString(1, userPassword);
-			st.setString(2, userId);
-		}
-		else
-		{
-			st.close();
-			con.close();
-			return false;
-		}
-		
-		int line = st.executeUpdate();
-		st.close();
+			con = getConnection();
+			con.setAutoCommit(false);
 			
-		if(line != 1)
+			if(userId.equals("")) {
+				st.close();
+				isOK =  false;
+			}
+			//ユーザ名更新
+			else if(userPassword.equals(""))
+			{
+				st = con.prepareStatement("UPDATE USER SET USER_NAME=? WHERE USER_ID=?");
+				st.setString(1, userName);
+				st.setString(2, userId);
+				int line = st.executeUpdate();
+				st.close();
+				if(line != 1)
+				{
+					con.rollback();
+					isOK = false;
+				}else
+				{
+					con.commit();
+					isOK = true;
+				}
+				
+			}
+			//ユーザパスワード更新
+			else if(userName.equals(""))
+			{
+				st = con.prepareStatement("UPDATE USER SET USER_PASSWORD=? WHERE USER_ID=?");
+				st.setString(1, userPassword);
+				st.setString(2, userId);
+				int line = st.executeUpdate();
+				st.close();
+				if(line != 1)
+				{
+					con.rollback();
+					isOK =  false;
+				}else
+				{
+					con.commit();
+					isOK = true;
+				}
+			}
+			else
+			{
+				st.close();
+				isOK =  false;
+			}
+		}
+		catch(SQLException e)
 		{
-			con.rollback();
-			con.setAutoCommit(true);
-			con.close();
-			return false;
+			try
+			{
+				con.rollback();
+			}
+			catch (SQLException e2)
+			{
+				e2.printStackTrace();
+			}
+		}
+		finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.setAutoCommit(true);
+					con.close();
+				}
+				catch (SQLException e3)
+				{
+					e3.printStackTrace();
+				}
+			}
 		}
 		
-		con.commit();
-		con.setAutoCommit(true);
-		con.close();
-		return true;
+		return isOK;
 	}
 }
