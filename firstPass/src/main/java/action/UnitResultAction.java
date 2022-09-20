@@ -1,6 +1,8 @@
 package action;
 
 import bean.SummaryOfResult;
+import bean.Answer;
+import bean.Result;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.Date;
@@ -21,6 +23,8 @@ public class UnitResultAction extends Action
 		int correctCount = 0;
 		//正答率
 		int correctRate = 0;
+		
+		//Date answerDate = null;
 				
 		//セッション「実績サマリ」を取得
 		List<SummaryOfResult> summary=(List<SummaryOfResult>)session.getAttribute("summary");
@@ -30,7 +34,7 @@ public class UnitResultAction extends Action
 		if(summary.size() != 0)
 		{
 			//Listの長さ（問題数）をカウントアップ
-			for(int i=0; i<=summary.size(); i++)
+			for(int i=0; i<summary.size(); i++)
 			{
 				questionCount++;
 				
@@ -49,9 +53,9 @@ public class UnitResultAction extends Action
 			request.setAttribute("correctRate", correctRate);
 		}
 			//最後の問題の解答時刻を取得
-			//result answerDate = summary.get(summary.size()-1).;
+			//Date answerDate = summary.get(summary.size()-1).getAnswerDate();
 			//request.setAttribute("answerDate", answerDate);
 
-			return "unitResult.jsp";
+		return "unitResult.jsp";
 	}
 }
