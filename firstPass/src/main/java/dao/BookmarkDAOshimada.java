@@ -9,30 +9,28 @@ public class BookmarkDAOshimada extends DAO
 	{
 		int line = 0;
 		Connection con = null;
+		PreparedStatement st = null;
 		
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
 		
-			PreparedStatement st = con.prepareStatement("INSERT INTO BOOKMARK VALUES(?, ?, ?)");
-		
+			st = con.prepareStatement("INSERT INTO BOOKMARK VALUES(?, ?, ?)");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());
 		
 			line = st.executeUpdate();
-			
 			st.close();
 			
 			if(line != 1)
 			{
 				con.rollback();
-				con.setAutoCommit(true);
-				con.close();
-				return 0;
+				line =  0;
+			}else
+			{
+				con.commit();
 			}
-			
-			con.commit();
 		
 		}catch(SQLException e)
 		{
@@ -70,31 +68,28 @@ public class BookmarkDAOshimada extends DAO
 		
 		int line = 0;
 		Connection con = null;
+		PreparedStatement st = null;
 		
 		try {
 			con = getConnection();
 			con.setAutoCommit(false);
 		
-			PreparedStatement st = con.prepareStatement("DELETE FROM BOOKMARK WHERE USER_ID=? AND YEAR=? AND QUESTION_NO=?");
-		
+			st = con.prepareStatement("DELETE FROM BOOKMARK WHERE USER_ID=? AND YEAR=? AND QUESTION_NO=?");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());
 		
 			line = st.executeUpdate();
-			
 			st.close();
-			
 			if(line != 1)
 			{
 				con.rollback();
-				con.setAutoCommit(true);
-				con.close();
-				return 0;
+				line =  0;
+			}else
+			{
+				con.commit();
 			}
 			
-			con.commit();
-		
 		}catch(SQLException e)
 		{
 			try
