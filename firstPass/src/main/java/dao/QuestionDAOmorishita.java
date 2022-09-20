@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 
-public class QuestionDAO extends DAO
+public class QuestionDAOmorishita extends DAO
 {
 	//DBに登録されている分野を返すメソッド
 	public List<String> getGenre()throws Exception
