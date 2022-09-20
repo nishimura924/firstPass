@@ -32,25 +32,25 @@ public class UnitResultAction extends Action
 			for(int i=0; i<=summary.size(); i++)
 			{
 				questionCount++;
+				
 				if(summary.get(i).getCorrect().equals("1"))
 				{
 					correctCount++;
 				}
 			}
-			correctRate = correctCount/summary.size();
-		}
-			//最後の問題の解答時刻を取得
-			//result answerDate = summary.get(summary.size()-1).;
-				
-				
-			//request.setAttribute("answerDate", answerDate);
 			//問題数をリクエストで取得
 			request.setAttribute("questionCount",questionCount);
 			//正答数をリクエストで取得
 			request.setAttribute("correctCount", correctCount);
+			
+			correctRate = correctCount/summary.size();
 			//正答率をリクエストで取得
 			request.setAttribute("correctRate", correctRate);
-				
+		}
+			//最後の問題の解答時刻を取得
+			//result answerDate = summary.get(summary.size()-1).;
+			//request.setAttribute("answerDate", answerDate);
+
 			return "unitResult.jsp";
 	}
 }
