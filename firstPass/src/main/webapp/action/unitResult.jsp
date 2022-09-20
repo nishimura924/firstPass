@@ -11,7 +11,7 @@
 	<c:otherwise>${user.userName }</c:otherwise>
 </c:choose>
 <form>
-さんの今回のテスト結果（難易度：<p>${Result.difficulty}</p>)
+さんの今回のテスト結果（難易度：<p>${Result.difficulty}</p>
 
 実施日：<p></p>
 <br>

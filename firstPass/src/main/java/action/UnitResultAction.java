@@ -39,7 +39,7 @@ public class UnitResultAction extends Action
 				}
 			}
 			//問題数をリクエストで取得
-			request.setAttribute("questionCount",questionCount);
+			request.setAttribute("questionCount","テスト");
 			//正答数をリクエストで取得
 			request.setAttribute("correctCount", correctCount);
 			
