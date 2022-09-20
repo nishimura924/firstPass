@@ -1,6 +1,6 @@
-package firstPass;
+package action;
 
-import dao.ResultDAO;
+import dao.ResultDAOmorishita;
 import bean.Result;
 import bean.AllResult;
 import tool.Action;
@@ -38,7 +38,7 @@ public class AllResultAction extends Action
 		}
 
 		//結果のDBから値を取得
-		ResultDAO dao = new ResultDAO();
+		ResultDAOmorishita dao = new ResultDAOmorishita();
 		AllResult allResult = new AllResult();
 		allResult.setGenre(genre);
 		List<AllResult> list = dao.selectResult(difficulty,sort,answerDateFrom,answerDateTo,allResult);
