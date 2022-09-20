@@ -12,7 +12,7 @@ import java.util.Date;
 import javax.servlet.http.*;
 
 
-public class ResultDAO extends DAO
+public class ResultDAOmorishita extends DAO
 {
 	public List<AllResult> selectResult(String difficulty,String sort,Date answerDateFrom,Date answerDateTo,AllResult allResult)throws Exception
 	{
