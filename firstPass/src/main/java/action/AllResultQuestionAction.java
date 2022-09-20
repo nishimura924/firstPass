@@ -1,4 +1,4 @@
-package firstPass;
+package action;
 
 /**
 * ランキングの出力条件表示のアクション（分野をDBから取得）
