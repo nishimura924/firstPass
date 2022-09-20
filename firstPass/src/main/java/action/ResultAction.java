@@ -75,7 +75,7 @@ public class ResultAction extends Action
 				//ゲストユーザの場合は実績DBに格納しないだけでエラーではない
 		}
 		
-		// 実績DB用の格納
+		// 実績DB用の格納(ログインユーザのみ)
 		if(user != null)
 		{
 			//実績DB用
@@ -85,6 +85,15 @@ public class ResultAction extends Action
 			result.setCorrect(answer.getCorrect());
 			//日時はdaoの中でsql.Dateで取得
 			//result.setAnswerDate(new Date());
+			
+			//　実績DBに書き込み
+			ResultDAOshimada dao = new ResultDAOshimada();
+			
+			if(dao.insert(result) != 1)
+			{
+				String errorMessage = "DB更新ができません。";
+				request.setAttribute("errorMessage", errorMessage);
+			}
 		}
 		else
 		{
@@ -92,22 +101,12 @@ public class ResultAction extends Action
 			
 		}
 
-		//結果画面用はゲストユーザも含めて格納
+		//結果画面用(ログインユーザ・ゲストユーザ両方)
 		SummaryOfResult summaryThis = new SummaryOfResult();
 		summaryThis.setYear(questionOfSet.get(0).getYear());
 		summaryThis.setQuestionNo(questionOfSet.get(0).getQuestionNo());
 		summaryThis.setGenre(questionOfSet.get(0).getGenre());
 		summaryThis.setCorrect(answer.getCorrect());
-		
-		
-		//　実績DBに書き込み
-		ResultDAOshimada dao = new ResultDAOshimada();
-		
-		if(dao.insert(result) != 1)
-		{
-			String errorMessage = "DB更新ができません。";
-			request.setAttribute("errorMessage", errorMessage);
-		}
 		
 		//sessionのsummaryに今回分をセット
 		List<SummaryOfResult> summary;
@@ -130,76 +129,80 @@ public class ResultAction extends Action
 		//12　コメントの登録
 		
 		
-		// ブックマークの処理
-		BookmarkDAOshimada dao2 = new BookmarkDAOshimada();
-		Bookmark bookmark = new Bookmark();
-		bookmark.setUserId(user.getUserId());
-		bookmark.setYear(questionOfSet.get(0).getYear());
-		bookmark.setQuestionNo(questionOfSet.get(0).getQuestionNo());	
-		
-		if(questionOfSet.get(0).getBookmarkFlg().equals("1"))
+		// ブックマークの処理(ログインユーザのみ)
+		if(user != null)
 		{
-			if(request.getParameter("bookmark") == null)
+			BookmarkDAOshimada dao2 = new BookmarkDAOshimada();
+			Bookmark bookmark = new Bookmark();
+			bookmark.setUserId(user.getUserId());
+			bookmark.setYear(questionOfSet.get(0).getYear());
+			bookmark.setQuestionNo(questionOfSet.get(0).getQuestionNo());	
+			
+			//今回ブックマーク登録の処理
+			if(questionOfSet.get(0).getBookmarkFlg().equals("1"))
 			{
-				//登録済から解除
-				//登録済から解除
-				if(dao2.delete(bookmark) != 1)
-				{
-					//エラーメッセージ
+				//既存DBにブックマークがない場合は登録(基本的にはnullはない想定)
+				if(request.getParameter("bookmark") == null)
+				{	
+					if(dao2.delete(bookmark) != 1)
+					{
+						//DB登録処理のエラー
+					}
+					else
+					{
+						//ok
+					}
+					
 				}
+				//既存DBにブックマークがある場合登録処理不要
+				else if( request.getParameter("bookmark").equals("1"))
+				{
+				}
+				//既存DBにブックマークがない場合は登録
 				else
 				{
-					//ok
-				}
-				
-			}
-			else if( request.getParameter("bookmark").equals("1"))
-			{
-				//登録済かつ解除しないなので処理なし
-			}else
-			{
-				//登録済から解除
-				if(dao2.delete(bookmark) != 1)
-				{
-					//エラーメッセージ
-				}
-				else
-				{
-					//ok
+					if(dao2.delete(bookmark) != 1)
+					{
+						//DBの登録失敗→エラー
+					}
+					else
+					{
+						//ok
+					}
 				}
 			}
-		}
-		else
-		{
-			if(request.getParameter("bookmark") == null)
-			{
-				//エラーなのでスルー(発生しないはず)
-			}
-			else if( request.getParameter("bookmark").equals("1"))
-			{
-				//登録なしから今回登録
-				if(dao2.insert(bookmark) != 1)
-				{
-					//エラーメッセージ
-				}
-				else
-				{
-					//OK
-				}
-			}
+			//今回ブックマーク解除の処理
 			else
 			{
-				//登録なしかつ登録しないなので処理なし
+				//既存DBにブックマークがない場合は、解除処理不要(基本的にはnullはない想定)
+				if(request.getParameter("bookmark") == null)
+				{
+					
+				}
+				///既存DBにブックマークがある場合は解除
+				else if( request.getParameter("bookmark").equals("1"))
+				{
+					if(dao2.insert(bookmark) != 1)
+					{
+						//DBの登録失敗→エラー
+					}
+					else
+					{
+						//OK
+					}
+				}
+				//既存DBにブックマークがない場合は、解除処理不要
+				else
+				{
+				}
 			}
 		}
 		
 		
-		//先頭の問題を削除して、残りが0がどうかで遷移先が変わる
+		//先頭の問題を削除して、残りが0がどうかで遷移先異なる(ログインユーザ・ゲストユーザ両方)
 		questionOfSet.remove(0);
 		request.setAttribute("questionOfSet", questionOfSet);
 		
-		//answerのクリア
-		//これがないと、次の問題表示がおかしくなる
 		session.removeAttribute("answer");
 		
 		if(questionOfSet.size() == 0)
