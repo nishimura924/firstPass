@@ -205,7 +205,7 @@ public class ResultAction extends Action
 		if(questionOfSet.size() == 0)
 		{
 			//本当は別画面
-			return "unitResult.jsp";
+			return "UnitResult.action";
 		}
 		
 		return "showQuestion.jsp";
