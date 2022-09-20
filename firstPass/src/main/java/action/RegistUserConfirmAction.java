@@ -6,7 +6,7 @@ package action;
  * @version　1.0.0
  */
 import bean.User;
-import dao.UserDAO;
+import dao.UserDAOmorishita;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -45,8 +45,8 @@ public class RegistUserConfirmAction extends Action
 		user.setUserPass(userPass);
 		user.setUserName(userName);
 		user.setAdminFlag(adminFlag);
-		UserDAO dao = new UserDAO();
-		int line = dao.insert(user);
+		UserDAOmorishita dao = new UserDAOmorishita();
+		int line = dao.addUser(user);
 		
 		if(line>0)
 		{
