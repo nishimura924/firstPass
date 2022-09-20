@@ -1,6 +1,6 @@
 package action;
 
-import dao.QuestionDAO;
+import dao.QuestionDAOkuroki;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.*;
@@ -15,7 +15,7 @@ public class ShowSelectQuestionAction extends Action
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{
 		//TBLに登録されている全ての年度を取得する
-		QuestionDAO dao = new QuestionDAO();
+		QuestionDAOkuroki dao = new QuestionDAOkuroki();
 		List<String> yearList = dao.getYear(); //メソッド名追記
 		
 		//リクエスト属性yearListに年度リストをセット
