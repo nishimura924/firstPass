@@ -27,17 +27,7 @@ public class UnitResultAction extends Action
 		//難易度の情報を取得
 		
 		
-		if(summary.size() == 0)
-		{
-			//問題数をリクエストで取得し、０件表示
-			request.setAttribute("questionCount",questionCount);
-			//正答数をリクエストで取得し、０件表示
-			request.setAttribute("correctCount", correctCount);
-			
-			return "unitResult.jsp";
-			
-		}
-		else if(summary.size() != 0)
+		if(summary.size() != 0)
 		{
 			//Listの長さ（問題数）をカウントアップ
 			for(int i=0; i<=summary.size(); i++)
