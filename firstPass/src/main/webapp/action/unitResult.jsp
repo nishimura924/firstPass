@@ -1,15 +1,19 @@
 <%@page contentType="text/html; charset=UTF-8" %>
-<%@include file="../header.html" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="bean.User,java.util.List" %>
-
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	</head>
+	<body>
 <c:choose>
 	<c:when test="${user.userName == null}">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
 </c:choose>
-さんの今回のテスト結果（難易度：${Condition.difficulty}）
+<form>
+さんの今回のテスト結果（難易度：<p>${Result.difficulty}</p>
 
-実施日：${answerDate}
+実施日：<p></p>
 <br>
 出題数:${questionCount}問
 <br>
@@ -17,7 +21,9 @@
 <br>
 正答率：${correctRate}％
 <br>
+</form>
+</body>
+</html>
 
 
-
-<%@include file="../footer.html" %>
+<%@include file="footer_menu.jsp" %>
