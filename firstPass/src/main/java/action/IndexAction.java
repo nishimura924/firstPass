@@ -18,9 +18,9 @@ public class IndexAction extends Action
 		
 		//ログイン系
 		User user = new User();
-		user.setUserId("id0001");
-		user.setUserName("name1");
-		user.setCountUnit(6);
+		user.setUserId("id0002");
+		user.setUserName("name222");
+		user.setCountUnit(2);
 		
 		session.setAttribute("user", user);
 		
@@ -52,7 +52,7 @@ public class IndexAction extends Action
 		question.setChoice3(choice3);
 		question.setChoice4(choice4);
 //		question.setChoicePicFlg(String choicePicFlg);
-		question.setBookmarkFlg("1");	//登録なし	
+		question.setBookmarkFlg("1");	//登録あり	
 		
 		questionOfSet.add(question);
 		
@@ -82,7 +82,7 @@ public class IndexAction extends Action
 		question2.setChoice3(choice23);
 		question2.setChoice4(choice24);
 //		question2.setChoicePicFlg(String choicePicFlg);
-		question2.setBookmarkFlg("1");	//登録あり	
+		question2.setBookmarkFlg("1");	//登録あり
 		
 		questionOfSet.add(question2);
 

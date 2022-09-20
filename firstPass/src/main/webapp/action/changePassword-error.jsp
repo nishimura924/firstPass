@@ -7,10 +7,11 @@
 </head>
 <body>
 
-	パスワードの入力エラー
+	DB操作でエラーとなりました。<br>
+	時間を置いて再度お試しください。<br>
 	
-	<form action="changePasswordStart.jsp" method="post">
-		<input type="submit" value="戻る">
+	<form action="index.jsp" method="post">
+		<input type="submit" value="トップ画面に戻る">
 	</form>
 
 </body>

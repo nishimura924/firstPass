@@ -22,11 +22,13 @@ public class ResultDAOshimada extends DAO
 			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
-			st.close();
+			
 			if(rs!=null)
 			{
 				countUnit = rs.getInt("COUNT_UNIT");
 			}
+			
+			st.close();
 		}
 		catch(SQLException e)
 		{
@@ -72,7 +74,6 @@ public class ResultDAOshimada extends DAO
 			st.setString(7, result.getDifficulty());
 			
 			line = st.executeUpdate();
-			st.close();
 			
 			if(line != 1)
 			{
@@ -82,6 +83,8 @@ public class ResultDAOshimada extends DAO
 			{
 				con.commit();
 			}
+			
+			st.close();
 		
 		}catch(SQLException e)
 		{

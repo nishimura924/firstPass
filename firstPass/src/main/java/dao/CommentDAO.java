@@ -22,7 +22,6 @@ public class CommentDAO extends DAO
 			st.setString(3, comment.getUserId());
 		
 			ResultSet rs = st.executeQuery();
-			st.close();
 			
 			commentList = new ArrayList<Comment>();
 		
@@ -36,6 +35,8 @@ public class CommentDAO extends DAO
 				commentDB.setComment(rs.getString("COMMENT"));
 				commentList.add(commentDB);
 			}
+			
+			st.close();
 			
 		}
 		catch(SQLException e)
@@ -81,7 +82,6 @@ public class CommentDAO extends DAO
 			st.setString(4, comment.getComment());
 			
 			line = st.executeUpdate();
-			st.close();
 			
 			if(line != 1)
 			{
@@ -91,6 +91,8 @@ public class CommentDAO extends DAO
 			{
 				con.commit();
 			}
+			
+			st.close();
 			
 		}catch(SQLException e)
 		{

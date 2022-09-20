@@ -33,18 +33,16 @@ public class ChangeUserNameConfirmAction extends Action
 		String userId = user.getUserId();
 		String userName = user.getUserName();
 		
-		//入力値チェックは不要
+		//入力値チェックは実施なし
+		
+		
 		String newUserName = request.getParameter("newUserName");
-		
-
-		//ユーザ名更新のためにSQLの実行
 		UserDAOshimada dao = new UserDAOshimada();
-		
 		
 		//更新失敗のときはエラー画面へ遷移
 		if(! dao.update(userId, "", newUserName))
 		{
-			return "changeUserNameConfirm-error.jsp";
+			return "changeUserName-error.jsp";
 		}
 		
 		//問題なければsession更新後ユーザ名変更完了画面へ遷移

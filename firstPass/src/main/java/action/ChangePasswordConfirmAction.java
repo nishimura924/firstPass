@@ -33,17 +33,16 @@ public class ChangePasswordConfirmAction extends Action
 		String userId = user.getUserId();
 		
 		//入力値チェックは不要
+		
+		
 		String newPassword = request.getParameter("newPassword");
-		
-		
-		//パスワード更新のためSQLの実行
 		UserDAOshimada dao = new UserDAOshimada();
 
 		
-		//画面入力のパスワードがDBの値と異なるエラー画面へ遷移
+		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移
 		if(! dao.update(userId, newPassword, ""))
 		{
-			return "changePasswordConfirm-error.jsp";
+			return "changePassword-error.jsp";
 		}
 		
 		//問題なければパスワード変更完了画面へ遷移

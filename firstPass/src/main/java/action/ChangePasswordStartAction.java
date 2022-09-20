@@ -31,11 +31,9 @@ public class ChangePasswordStartAction extends Action
 		}
 		
 		String userId = user.getUserId();
-		
-		
-		//入力値チェック
 		String password = request.getParameter("password");
 		String errorMessage = "";
+		
 		
 		//現在のパスワードが入力なしだとパスワード変更開始画面へ遷移
 		if(password == null || password.equals(""))
@@ -70,13 +68,11 @@ public class ChangePasswordStartAction extends Action
 			request.setAttribute("errorMessage", errorMessage);
 			return "changePasswordStart.jsp";
 		}
-		
-		
-		//現在のパスワードが正しいかのチェックのためにSQL実行
+	
 		UserDAOshimada dao = new UserDAOshimada();
 		
 		//画面入力のパスワードが登録済と異なるとパスワード変更開始画面へ遷移
-		if(0 == dao.search(userId, password, ""))
+		if(1 != dao.search(userId, password, ""))
 		{
 			errorMessage = "登録済のパスワードと異なります";
 			request.setAttribute("errorMessage", errorMessage);
