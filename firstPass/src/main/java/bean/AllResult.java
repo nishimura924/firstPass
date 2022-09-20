@@ -6,7 +6,8 @@ public class AllResult implements java.io.Serializable
 	private String userId;//ユーザID
 	private String answerCount;//回答数
 	private String correctCount;//正答数
-	private int correctRate;//正答率
+	private String[] genre;
+	private double correctRate;//正答率
 
 	//getter
 	public String getUserId()
@@ -21,9 +22,13 @@ public class AllResult implements java.io.Serializable
 	{
 		return correctCount;
 	}
-	public int getCorrectRate()
+	public double getCorrectRate()
 	{
 		return correctRate;
+	}
+	public String[] getGenre()
+	{
+		return this.genre;
 	}
 	
 	
@@ -40,9 +45,13 @@ public class AllResult implements java.io.Serializable
 	{
 		this.correctCount=correctCount;
 	}
-	public void setCorrectRate(int correctRate)
+	public void setCorrectRate(double correctRate)
 	{
 		this.correctRate=correctRate;
+	}
+	public void setGenre(String[] genre)
+	{
+		this.genre = genre;
 	}
 
 }
