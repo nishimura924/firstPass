@@ -41,11 +41,11 @@ public class UserDAOshimada extends DAO
 				st.setString(1, userId);
 				st.setString(2, userPassword);
 				ResultSet rs = st.executeQuery();
-				st.close();
 				while (rs.next())
 				{
 					line += 1;
 				}
+				st.close();
 			}
 			else
 			{
@@ -117,7 +117,6 @@ public class UserDAOshimada extends DAO
 				st.setString(1, userPassword);
 				st.setString(2, userId);
 				int line = st.executeUpdate();
-				st.close();
 				if(line != 1)
 				{
 					con.rollback();
@@ -127,6 +126,7 @@ public class UserDAOshimada extends DAO
 					con.commit();
 					isOK = true;
 				}
+				st.close();
 			}
 			else
 			{

@@ -32,30 +32,27 @@ public class ChangeUserNameStartAction extends Action
 
 		String userId = user.getUserId();
 		String userName = user.getUserName();
-		
-		
-		//入力値チェック
-		//未入力ならエラーメッセージセットしてchangeUserNameStartに戻す
 		String newUserName = request.getParameter("newUserName");
 		String errorMessage = "";
 		
+		//変更後のユーザ名がが入力なしだとユーザ名変更開始画面へ遷移
 		if(newUserName == null || newUserName.equals(""))
 		{
 			errorMessage = "変更後が未入力です";
 			request.setAttribute("errorMessage", errorMessage);
 			return  "changeUserNameStart.jsp";
-			
-		}else if(newUserName.equals(userName))
+		}
+		//変更前後のユーザ名が同じだとユーザ名変更開始画面へ遷移
+		else if(newUserName.equals(userName))
 		{
 			errorMessage = "変更前後が同じです";
 			request.setAttribute("errorMessage", errorMessage);
 			return  "changeUserNameStart.jsp";
 		}
 		
-		//ユーザ名の重複チェックのためにSQLの実行
 		UserDAOshimada dao = new UserDAOshimada();
 		
-		//画面入力のユーザ名が登録済だとユーザ名変更開始画面に遷移
+		//変更後のユーザ名が他のユーザにて登録済だとユーザ名変更開始画面に遷移
 		if(0 < dao.search(userId, "", newUserName))
 		{
 			errorMessage = "このユーザ名は既に使われています";
