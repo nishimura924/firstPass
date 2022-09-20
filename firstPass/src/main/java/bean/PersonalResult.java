@@ -8,10 +8,10 @@ public class PersonalResult implements java.io.Serializable
 	private int countUnit;
 	private int totalQuestionCount;
 	private String difficulty;
-	private int correctOnTotal;
-	private int correctOnStrategy;
-	private int correctOnTech;
-	private int correctOnManage;
+	private String correctOnTotal;
+	private String correctOnStrategy;
+	private String correctOnTech;
+	private String correctOnManage;
 	
 	
 	//getter
@@ -20,7 +20,7 @@ public class PersonalResult implements java.io.Serializable
 		return this.countUnit;
 	}
 	
-	public int getTotalQuestinCount()
+	public int getTotalQuestionCount()
 	{
 		return this.totalQuestionCount;
 	}
@@ -30,22 +30,22 @@ public class PersonalResult implements java.io.Serializable
 		return this.difficulty;
 	}
 	
-	public int getCorrectOnTotal()
+	public String getCorrectOnTotal()
 	{
 		return this.correctOnTotal;
 	}
 	
-	public int getCorrectOnStrategy()
+	public String getCorrectOnStrategy()
 	{
 		return this.correctOnStrategy;
 	}
 	
-	public int getCorrectOnTech()
+	public String getCorrectOnTech()
 	{
 		return this.correctOnTech;
 	}
 	
-	public int getCorrectOnManage()
+	public String getCorrectOnManage()
 	{
 		return this.correctOnManage;
 	}
@@ -67,22 +67,22 @@ public class PersonalResult implements java.io.Serializable
 		this.difficulty = difficulty;
 	}
 	
-	public void setCorrectOnTotal(int correctOnTotal)
+	public void setCorrectOnTotal(String correctOnTotal)
 	{
 		this.correctOnTotal = correctOnTotal;
 	}
 	
-	public void setCorrectOnStrategy(int correctOnStrategy)
+	public void setCorrectOnStrategy(String correctOnStrategy)
 	{
 		this.correctOnStrategy = correctOnStrategy;
 	}
 	
-	public void setCorrectOnTech(int correctOnTech)
+	public void setCorrectOnTech(String correctOnTech)
 	{
 		this.correctOnTech = correctOnTech;
 	}
 	
-	public void setCorrectOnManage(int correctOnManage)
+	public void setCorrectOnManage(String correctOnManage)
 	{
 		this.correctOnManage = correctOnManage;
 	}

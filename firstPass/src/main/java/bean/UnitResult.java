@@ -7,9 +7,9 @@ public class UnitResult implements java.io.Serializable
 	//累計実施回数、分野、正誤、難易度、データ数
 	private int countUnit;
 	private String genre;
-	private String isCorrect;
+	private int isCorrectCount;
 	private String difficulty;
-	private int countData;
+	private int totalCountOfGenre;
 	
 	
 	//getter
@@ -24,9 +24,9 @@ public class UnitResult implements java.io.Serializable
 		return this.genre;
 	}
 	
-	public String getIsCorrect()
+	public int getIsCorrectCount()
 	{
-		return this.isCorrect;
+		return this.isCorrectCount;
 	}
 	
 	public String getDifficulty()
@@ -34,9 +34,9 @@ public class UnitResult implements java.io.Serializable
 		return this.difficulty;
 	}
 	
-	public int getCountDate()
+	public int getTotalCountOfGenre()
 	{
-		return this.countData;
+		return this.totalCountOfGenre;
 	}
 	
 	//setter
@@ -50,9 +50,9 @@ public class UnitResult implements java.io.Serializable
 		this.genre = genre;
 	}
 	
-	public void setIsCorrect(String isCorrect)
+	public void setIsCorrectCount(int isCorrectCount)
 	{
-		this.isCorrect = isCorrect;
+		this.isCorrectCount = isCorrectCount;
 	}
 	
 	public void setDifficulty(String difficulty)
@@ -60,9 +60,9 @@ public class UnitResult implements java.io.Serializable
 		this.difficulty = difficulty;
 	}
 	
-	public void setCountDate(int countData)
+	public void setTotalCountOfGenre(int totalCountOfGenre)
 	{
-		this.countData = countData;
+		this.totalCountOfGenre = totalCountOfGenre;
 	}
 	
 	
