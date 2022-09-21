@@ -1,5 +1,11 @@
 package action;
 
+/**
+* 問題解答結果のアクション
+* @author　森下
+* @version　1.0.0
+*/
+
 import bean.SummaryOfResult;
 import bean.Answer;
 import bean.Result;
