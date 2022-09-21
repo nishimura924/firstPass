@@ -61,4 +61,5 @@ TO<input type="date" name="toDate" value="2100-01-01" >
 
 
 	</body>
+	<%@include file="footer_menu.jsp" %>
 </html>
