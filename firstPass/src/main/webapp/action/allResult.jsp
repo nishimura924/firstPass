@@ -22,18 +22,69 @@
 <hr>
 
 <P>難易度</P>
+<c:choose>
+<c:when test="${difficulty==null }">
 <input type="radio" name="difficulty" value="1" checked>normal＆easy
 <input type="radio" name="difficulty" value="0" >normalのみ
+</c:when>
+<c:when test="${difficulty==1 }">
+<input type="radio" name="difficulty" value="1" checked>normal＆easy
+<input type="radio" name="difficulty" value="0" >normalのみ
+</c:when>
+<c:when test="${difficulty==0 }">
+<input type="radio" name="difficulty" value="1" >normal＆easy
+<input type="radio" name="difficulty" value="0" checked>normalのみ
+</c:when>
+</c:choose>
+
 <hr>
+
 <P>ユーザ実施期間</P>
+<c:choose>
+<c:when test="${fromDate==null }">
 FROM<input type="date" name="fromDate" value="2022-01-01" >
-<br>
+</c:when>
+<c:when test="${fromDate!=null }">
+FROM<input type="date" name="fromDate" value=${fromDate } >
+</c:when>
+</c:choose>
+
+<c:choose>
+<c:when test="${toDate==null }">
 TO<input type="date" name="toDate" value="2100-01-01" >
+</c:when>
+<c:when test="${toDate!=null }">
+TO<input type="date" name="toDate" value=${toDate } >
+</c:when>
+</c:choose>
 <hr>
+
+<c:choose>
+<c:when test="${sort==null }">
 <P>ソート方法</P>
 <input type="radio" name="sort" value="COUNT(COUNT_UNIT)" checked>回答数
 <input type="radio" name="sort" value="SUM(IS_CORRECT)" >正答数
 <input type="radio" name="sort" value="collectRate" >正答率
+</c:when>
+<c:when test="${sort.equals('COUNT(COUNT_UNIT)')}">
+<P>ソート方法</P>
+<input type="radio" name="sort" value="COUNT(COUNT_UNIT)" checked>回答数
+<input type="radio" name="sort" value="SUM(IS_CORRECT)" >正答数
+<input type="radio" name="sort" value="collectRate" >正答率
+</c:when>
+<c:when test="${sort.equals('SUM(IS_CORRECT)')  }">
+<P>ソート方法</P>
+<input type="radio" name="sort" value="COUNT(COUNT_UNIT)" >回答数
+<input type="radio" name="sort" value="SUM(IS_CORRECT)" checked>正答数
+<input type="radio" name="sort" value="collectRate" >正答率
+</c:when>
+<c:when test="${sort.equals('collectRate')  }">
+<P>ソート方法</P>
+<input type="radio" name="sort" value="COUNT(COUNT_UNIT)" >回答数
+<input type="radio" name="sort" value="SUM(IS_CORRECT)" >正答数
+<input type="radio" name="sort" value="collectRate" checked>正答率
+</c:when>
+</c:choose>
 
 <br>
 <hr>
@@ -56,6 +107,7 @@ TO<input type="date" name="toDate" value="2100-01-01" >
 		<td>${AllResult.correctCount}問</td>
 		<td>${Math.round(AllResult.correctRate)}％</td>
 		</tr>
+	
 	</c:forEach>
 </table>
 

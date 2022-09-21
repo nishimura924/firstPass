@@ -48,6 +48,11 @@ public class AllResultAction extends Action
 		
 		session.setAttribute("list", list);
 		
+		request.setAttribute("difficulty", difficulty);
+		request.setAttribute("fromDate", answerDateFrom);
+		request.setAttribute("toDate", answerDateTo);
+		request.setAttribute("sort", sort);
+		
 		return "allResult.jsp";
 		
 	}
