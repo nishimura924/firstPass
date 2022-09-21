@@ -7,6 +7,6 @@
 		url="jdbc:mysql://localhost:3306/FIRSTPASS"
 		connectionProperties="autoReconnect=true;verifyServerCertificate=false;useSSL=false;requireSSL=false"
 		username="root"
-		password=""
+		password="Admin#01"
 	/>
 </Context>
