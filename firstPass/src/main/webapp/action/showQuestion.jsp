@@ -17,24 +17,49 @@
 	${questionOfSet[0].year }　問${questionOfSet[0].questionNo }<br>
 	${questionOfSet[0].genre }<br>
 	<br>
-	${questionOfSet[0].question }
-	<img src="${questionOfSet[0].questionPic}">
-	
-	<br><br>
 	
 	<c:choose>
-		<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
-			<%--選択肢の画像ファイル名なし？ --%>
-		</c:when>	
-		<c:otherwise><br></c:otherwise>
+		<c:when test="${questionOfSet[0].choicePicFlg == 0 }" >
+			${questionOfSet[0].question }
+		</c:when>
+		<c:otherwise>
+			<img src="../img/${questionOfSet[0].question }" />
+		</c:otherwise>
+		
 	</c:choose>
+
+	 
+	<%-- <img src="../img/question.jpeg" /> --%>
+	<br><br>
+	
 	<br>
 	
 	<form action="Answer.action" method="post">	
-		<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：${questionOfSet[0].choice1.choice }<br>
-		<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
-		<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：${questionOfSet[0].choice3.choice }<br>
-		<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：${questionOfSet[0].choice4.choice }<br><br>
+		<c:choose>
+			<c:when test="${questionOfSet[0].choicePicFlg == 0 }" >
+				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：${questionOfSet[0].choice1.choice }<br>
+				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
+				<c:choose>
+					<c:when test="${conditions.difficulty == 0 }" >		
+						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：${questionOfSet[0].choice3.choice }<br>
+						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：${questionOfSet[0].choice4.choice }<br><br>
+					</c:when>
+					<c:otherwise></c:otherwise>	
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：<img src="../img/${questionOfSet[0].choice1.choice}" /><br>
+				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：<img src="../img/${questionOfSet[0].choice2.choice}" /><br>
+				<c:choose>
+					<c:when test="${conditions.difficulty == 0 }" >
+						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：<img src="../img/${questionOfSet[0].choice3.choice}" /><br>
+						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：<img src="../img/${questionOfSet[0].choice4.choice}" /><br><br>
+					</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>	
+			</c:otherwise>
+		</c:choose>
+		
 		<br>
 		
 		<c:choose>
