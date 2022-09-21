@@ -33,8 +33,8 @@ public class ResultDAOmorishita extends DAO
 			if(sort.equals("SUM(COUNT_UNIT)"))
 			{
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT USER_ID,SUM(COUNT_UNIT),COUNT(IS_CORRECT) FROM RESULT WHERE DIFFICULTY like ? AND GENRE IN("+ genreCond +")AND IS_CORRECT='1'AND ANSWER_DATE >= ? AND ANSWER_DATE <= ? GROUP BY USER_ID ORDER BY SUM(COUNT_UNIT) DESC;");
-				st.setString(1,"%"+difficulty+"%");
+				st=con.prepareStatement("SELECT USER.USER_NAME,SUM(RESULT.COUNT_UNIT),COUNT(RESULT.IS_CORRECT='1') FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE DIFFICULTY =? AND RESULT.GENRE IN("+ genreCond +")AND  RESULT.ANSWER_DATE >=? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY SUM(RESULT.COUNT_UNIT) DESC;");
+				st.setString(1,difficulty);
 				st.setDate(2,(java.sql.Date) answerDateFrom);
 				st.setDate(3,(java.sql.Date) answerDateTo);
 				ResultSet rs =st.executeQuery();
@@ -44,11 +44,10 @@ public class ResultDAOmorishita extends DAO
 				
 				while(rs.next())
 				{
-					
 					//AllResult allResult = new AllResult();
-					allResult.setUserId(rs.getString("USER_ID"));
-					allResult.setAnswerCount(rs.getString("SUM(COUNT_UNIT)"));
-					allResult.setCorrectCount(rs.getString("COUNT(IS_CORRECT)"));
+					allResult.setUserId(rs.getString("USER.USER_NAME"));
+					allResult.setAnswerCount(rs.getString("SUM(RESULT.COUNT_UNIT)"));
+					allResult.setCorrectCount(rs.getString("COUNT(RESULT.IS_CORRECT='1')"));
 					list.add(allResult);
 					
 					
@@ -60,8 +59,8 @@ public class ResultDAOmorishita extends DAO
 			else if(sort.equals("COUNT(IS_CORRECT)"))
 			{
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT USER_ID,SUM(COUNT_UNIT),COUNT(IS_CORRECT) FROM RESULT WHERE DIFFICULTY like ? AND GENRE IN("+ genreCond +") AND IS_CORRECT='1'AND ANSWER_DATE >=? AND ANSWER_DATE <= ? GROUP BY USER_ID ORDER BY SUM(COUNT_UNIT) DESC;");
-				st.setString(1,"%"+difficulty+"%");
+				st=con.prepareStatement("SELECT USER.USER_NAME,SUM(RESULT.COUNT_UNIT),COUNT(RESULT.IS_CORRECT='1') FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE DIFFICULTY =? AND RESULT.GENRE IN("+ genreCond +")AND  RESULT.ANSWER_DATE >=? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY COUNT(RESULT.IS_CORRECT='1') DESC;");
+				st.setString(1,difficulty);
 				st.setDate(2,(java.sql.Date) answerDateFrom);
 				st.setDate(3,(java.sql.Date) answerDateTo);
 				ResultSet rs =st.executeQuery();
@@ -69,9 +68,9 @@ public class ResultDAOmorishita extends DAO
 				while(rs.next())
 				{
 					//AllResult allResult = new AllResult();
-					allResult.setUserId(rs.getString("USER_ID"));
-					allResult.setAnswerCount(rs.getString("SUM(COUNT_UNIT)"));
-					allResult.setCorrectCount(rs.getString("COUNT(IS_CORRECT)"));
+					allResult.setUserId(rs.getString("USER.USER_NAME"));
+					allResult.setAnswerCount(rs.getString("SUM(RESULT.COUNT_UNIT)"));
+					allResult.setCorrectCount(rs.getString("COUNT(RESULT.IS_CORRECT='1')"));
 					list.add(allResult);
 				}
 				st.close();
@@ -83,7 +82,7 @@ public class ResultDAOmorishita extends DAO
 			if(sort.equals("SUM(COUNT_UNIT)"))
 			{
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT USER_ID,SUM(COUNT_UNIT),COUNT(IS_CORRECT) FROM RESULT WHERE GENRE IN("+ genreCond +")AND IS_CORRECT='1'AND ANSWER_DATE >= ? AND ANSWER_DATE <= ? GROUP BY USER_ID ORDER BY SUM(COUNT_UNIT) DESC;");
+				st=con.prepareStatement("SELECT USER.USER_NAME,SUM(RESULT.COUNT_UNIT),COUNT(RESULT.IS_CORRECT='1') FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE RESULT.GENRE IN("+ genreCond +")AND  RESULT.ANSWER_DATE >=? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY SUM(RESULT.COUNT_UNIT) DESC;");
 				//st.setString(1,"%"+difficulty+"%");
 				st.setDate(1,(java.sql.Date) answerDateFrom);
 				st.setDate(2,(java.sql.Date) answerDateTo);
@@ -94,9 +93,9 @@ public class ResultDAOmorishita extends DAO
 				while(rs.next())
 				{
 					//AllResult allResult = new AllResult();
-					allResult.setUserId(rs.getString("USER_ID"));
-					allResult.setAnswerCount(rs.getString("SUM(COUNT_UNIT)"));
-					allResult.setCorrectCount(rs.getString("COUNT(IS_CORRECT)"));
+					allResult.setUserId(rs.getString("USER.USER_NAME"));
+					allResult.setAnswerCount(rs.getString("SUM(RESULT.COUNT_UNIT)"));
+					allResult.setCorrectCount(rs.getString("COUNT(RESULT.IS_CORRECT='1')"));
 					list.add(allResult);
 				}
 				st.close();
@@ -105,7 +104,7 @@ public class ResultDAOmorishita extends DAO
 			else if(sort.equals("COUNT(IS_CORRECT)"))
 			{
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT USER_ID,SUM(COUNT_UNIT),COUNT(IS_CORRECT) FROM RESULT WHERE GENRE IN("+ genreCond +") AND IS_CORRECT='1'AND ANSWER_DATE >=? AND ANSWER_DATE <= ? GROUP BY USER_ID ORDER BY SUM(COUNT_UNIT) DESC;");
+				st=con.prepareStatement("SELECT USER.USER_NAME,SUM(RESULT.COUNT_UNIT),COUNT(RESULT.IS_CORRECT='1') FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE RESULT.GENRE IN("+ genreCond +")AND  RESULT.ANSWER_DATE >=? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY COUNT(RESULT.IS_CORRECT='1') DESC;");
 				//st.setString(1,"%"+difficulty+"%");
 				st.setDate(1,(java.sql.Date) answerDateFrom);
 				st.setDate(2,(java.sql.Date) answerDateTo);
@@ -114,9 +113,9 @@ public class ResultDAOmorishita extends DAO
 				while(rs.next())
 				{
 					//AllResult allResult = new AllResult();
-					allResult.setUserId(rs.getString("USER_ID"));
-					allResult.setAnswerCount(rs.getString("SUM(COUNT_UNIT)"));
-					allResult.setCorrectCount(rs.getString("COUNT(IS_CORRECT)"));
+					allResult.setUserId(rs.getString("USER.USER_NAME"));
+					allResult.setAnswerCount(rs.getString("SUM(RESULT.COUNT_UNIT)"));
+					allResult.setCorrectCount(rs.getString("COUNT(RESULT.IS_CORRECT='1')"));
 					list.add(allResult);
 				}
 				st.close();
