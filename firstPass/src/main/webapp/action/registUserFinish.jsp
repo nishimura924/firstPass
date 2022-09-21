@@ -16,7 +16,7 @@
 <p>ログイン名</p> 
 ${userId }
 <p>パスワード</p>
-${userPass }
+非表示
 <p>ユーザ名</p>
 ${userName }
 

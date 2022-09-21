@@ -26,15 +26,13 @@
 <input type="radio" name="difficulty" value="0" >normalのみ
 <hr>
 <P>ユーザ実施期間</P>
-FROM<input type="date" name="fromDate"  >
-${errorMsgFrom }
+FROM<input type="date" name="fromDate" value="2022-01-01" >
 <br>
-TO<input type="date" name="toDate"  >
-${errorMsgTo }
+TO<input type="date" name="toDate" value="2100-01-01" >
 <hr>
 <P>ソート方法</P>
-<input type="radio" name="sort" value="SUM(COUNT_UNIT)" checked>回答数
-<input type="radio" name="sort" value="COUNT(IS_CORRECT)" >正答数
+<input type="radio" name="sort" value="COUNT(COUNT_UNIT)" checked>回答数
+<input type="radio" name="sort" value="SUM(IS_CORRECT)" >正答数
 <input type="radio" name="sort" value="collectRate" >正答率
 
 <br>
@@ -43,11 +41,6 @@ ${errorMsgTo }
 </form>
 
 <br>
-<c:choose>
-	<c:when test="${user.userName == null }">ゲスト</c:when>
-	<c:otherwise>${user.userName }</c:otherwise>
-</c:choose>
-さんの順位は、位です。
 
 <table border="1" width="600" cellspacing="0" cellpadding="5">
 	<tr>
@@ -61,7 +54,7 @@ ${errorMsgTo }
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>
-		<td>${Math.round((AllResult.correctCount/AllResult.answerCount)*100)}％</td>
+		<td>${Math.round(AllResult.correctRate)}％</td>
 		</tr>
 	</c:forEach>
 </table>

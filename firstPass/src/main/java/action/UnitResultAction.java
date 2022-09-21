@@ -22,7 +22,7 @@ public class UnitResultAction extends Action
 		//正解数
 		int correctCount = 0;
 		//正答率
-		int correctRate = 0;
+		//int correctRate = 0;
 		
 		//Date answerDate = null;
 				
@@ -48,7 +48,9 @@ public class UnitResultAction extends Action
 			//正答数をリクエストで取得
 			request.setAttribute("correctCount", correctCount);
 			
-			correctRate = correctCount/summary.size();
+			double cr =(double)correctCount;
+			double qc = (double)questionCount;
+			String correctRate = String.valueOf(Math.round((cr/qc)*100));
 			//正答率をリクエストで取得
 			request.setAttribute("correctRate", correctRate);
 		}
