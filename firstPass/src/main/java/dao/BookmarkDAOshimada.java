@@ -21,7 +21,6 @@ public class BookmarkDAOshimada extends DAO
 			st.setInt(3, bookmark.getQuestionNo());
 		
 			line = st.executeUpdate();
-			st.close();
 			
 			if(line != 1)
 			{
@@ -31,6 +30,8 @@ public class BookmarkDAOshimada extends DAO
 			{
 				con.commit();
 			}
+			
+			st.close();
 		
 		}catch(SQLException e)
 		{
@@ -80,7 +81,7 @@ public class BookmarkDAOshimada extends DAO
 			st.setInt(3, bookmark.getQuestionNo());
 		
 			line = st.executeUpdate();
-			st.close();
+			
 			if(line != 1)
 			{
 				con.rollback();
@@ -89,6 +90,8 @@ public class BookmarkDAOshimada extends DAO
 			{
 				con.commit();
 			}
+			
+			st.close();
 			
 		}catch(SQLException e)
 		{

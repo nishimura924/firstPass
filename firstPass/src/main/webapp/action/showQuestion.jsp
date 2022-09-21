@@ -22,6 +22,14 @@
 	
 	<br><br>
 	
+	<c:choose>
+		<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+			<%--選択肢の画像ファイル名なし？ --%>
+		</c:when>	
+		<c:otherwise><br></c:otherwise>
+	</c:choose>
+	<br>
+	
 	<form action="Answer.action" method="post">	
 		<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：${questionOfSet[0].choice1.choice }<br>
 		<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
@@ -52,6 +60,7 @@
 		■正しい答え：${answer.correctChar }<br>
 		${errorMessage }
 		<br>
+		
 		<form action="Result.action" method="post">
 			<c:choose>
 				<c:when test="${questionOfSet[0].bookmarkFlg == null }" >
@@ -65,8 +74,19 @@
 					ブックマーク登録<input type="checkbox" name="bookmark" value="1" >
 				</c:otherwise>
 			</c:choose>
-			<%-- <input type="hidden" name="answer" value=${answer }> --%>	
-			<input type="submit" value="次へ">
+			<br><br>
+			
+			＜コメント登録＞<br>
+			<input type="text" name="comment" ><br><br>
+			
+			
+			＜過去のコメント＞<br>
+			<c:forEach var="commentPast" items="${answer.allComment }">
+				${commentPast.commentDate }　　${commentPast.comment }<br>
+			</c:forEach>
+			
+			<input type="submit" name="submitFinish" value="途中終了">
+			<input type="submit" name="submitNext" value="次へ">
 		</form>
 		
 	</c:if>

@@ -7,8 +7,10 @@ package action;
  */
 
 import bean.Answer;
+import bean.Comment;
 import bean.Question;
 import bean.User;
+import dao.CommentDAO;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.*;
@@ -33,10 +35,25 @@ public class AnswerAction extends Action
 		}
 		
 		
-		//正解の判定
 		Answer answer = new Answer();
-		answer.setCorrect(request.getParameter("choice"));
 		
+		//実績用に正解不正解を格納
+		//ボタン押さななかった場合は不正解
+		if(request.getParameter("choice") == null)
+		{
+			answer.setCorrect("0");
+		}
+		else if(request.getParameter("choice").equals("0") || request.getParameter("choice").equals("1"))
+		{
+			answer.setCorrect(request.getParameter("choice"));
+		}
+		//その他の値が入っても不正解(入らない想定)
+		else
+		{
+			answer.setCorrect("0");
+		}
+		
+		//正解の選択肢を問題から抽出
 		if (questionOfSet.get(0).getChoice1().getIsCorrect() == "1")
 		{
 			answer.setCorrectChar('ア');
@@ -55,13 +72,34 @@ public class AnswerAction extends Action
 		}
 		else
 		{
-			//エラーに飛ばす？
 		}
 	
-		//コメントの取得
-		//あとでつくる
+		//コメントの取得(ログインユーザのみ)
 		//answer.setAllComment(List<Comment>);
+		User user = (User)session.getAttribute("user");
 		
+		if(user != null)
+		{
+			CommentDAO dao = new CommentDAO();
+			Comment comment = new Comment();
+			comment.setYear(questionOfSet.get(0).getYear());
+			comment.setQuestionNo(questionOfSet.get(0).getQuestionNo());
+			comment.setUserId(user.getUserId());
+			
+			List<Comment> allComment = new ArrayList<Comment>();
+			allComment = dao.search(comment);
+			
+			if(allComment.size() ==  0)
+			{
+				//コメントなしなのでスルー
+			}
+			else
+			{
+				answer.setAllComment(allComment);
+			}
+			
+		}
+				
 		//sessionに変更
 		session.setAttribute("answer", answer);
 		

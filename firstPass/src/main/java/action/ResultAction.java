@@ -8,12 +8,14 @@ package action;
 
 import bean.Answer;
 import bean.Bookmark;
+import bean.Comment;
 import bean.Conditions;
 import bean.Question;
 import bean.Result;
 import bean.SummaryOfResult;
 import bean.User;
 import dao.BookmarkDAOshimada;
+import dao.CommentDAO;
 import dao.ResultDAOshimada;
 import tool.Action;
 import javax.servlet.http.*;
@@ -91,7 +93,7 @@ public class ResultAction extends Action
 			
 			if(dao.insert(result) != 1)
 			{
-				String errorMessage = "DB更新ができません。";
+				String errorMessage = "実績登録ができません。";
 				request.setAttribute("errorMessage", errorMessage);
 			}
 		}
@@ -125,79 +127,110 @@ public class ResultAction extends Action
 		summary.add(summaryThis);
 		session.setAttribute("summary", summary);
 		
-		//11　コメントの取得
-		//12　コメントの登録
+		
+		//　コメントの登録(ログインユーザのみ)
+		if(user != null)
+		{
+			CommentDAO dao2 = new CommentDAO();
+			Comment comment = new Comment();
+			comment.setYear(questionOfSet.get(0).getYear());
+			comment.setQuestionNo(questionOfSet.get(0).getQuestionNo());
+			comment.setUserId(user.getUserId());
+			
+			//コメントなければ何もしない
+			if(request.getParameter("comment") == null || request.getParameter("comment").trim().isEmpty())
+			{
+				
+			}
+			//コメントがあれば登録
+			else
+			{
+				comment.setComment(request.getParameter("comment"));
+				if(dao2.insert(comment) != 1)
+				{
+					//DB登録処理のエラー
+					String errorMessage = "コメント登録ができません。";
+					request.setAttribute("errorMessage", errorMessage);
+				}
+				else
+				{
+					//ok
+				}
+			}
+			
+		}
 		
 		
 		// ブックマークの処理(ログインユーザのみ)
 		if(user != null)
 		{
-			BookmarkDAOshimada dao2 = new BookmarkDAOshimada();
+			BookmarkDAOshimada dao3 = new BookmarkDAOshimada();
 			Bookmark bookmark = new Bookmark();
 			bookmark.setUserId(user.getUserId());
 			bookmark.setYear(questionOfSet.get(0).getYear());
 			bookmark.setQuestionNo(questionOfSet.get(0).getQuestionNo());	
 			
-			//今回ブックマーク登録の処理
-			if(questionOfSet.get(0).getBookmarkFlg().equals("1"))
+			
+			if(questionOfSet.get(0).getBookmarkFlg() == null)
 			{
-				//既存DBにブックマークがない場合は登録(基本的にはnullはない想定)
+				//0or1が必ず入るのでエラー
+			}
+			//既存DBにブックマーク登録ない場合
+			else if(questionOfSet.get(0).getBookmarkFlg().equals("0"))
+			{
+				//リクエストがnull = チェックがついていないのでスルー
 				if(request.getParameter("bookmark") == null)
 				{	
-					if(dao2.delete(bookmark) != 1)
-					{
-						//DB登録処理のエラー
-					}
-					else
-					{
-						//ok
-					}
-					
 				}
-				//既存DBにブックマークがある場合登録処理不要
+				//リクエストがブックマーク登録なのでDB登録実施
 				else if( request.getParameter("bookmark").equals("1"))
 				{
-				}
-				//既存DBにブックマークがない場合は登録
-				else
-				{
-					if(dao2.delete(bookmark) != 1)
+					if(dao3.insert(bookmark) != 1)
 					{
 						//DBの登録失敗→エラー
-					}
-					else
-					{
-						//ok
-					}
-				}
-			}
-			//今回ブックマーク解除の処理
-			else
-			{
-				//既存DBにブックマークがない場合は、解除処理不要(基本的にはnullはない想定)
-				if(request.getParameter("bookmark") == null)
-				{
-					
-				}
-				///既存DBにブックマークがある場合は解除
-				else if( request.getParameter("bookmark").equals("1"))
-				{
-					if(dao2.insert(bookmark) != 1)
-					{
-						//DBの登録失敗→エラー
+						String errorMessage = "ブックマーク登録ができません。";
+						request.setAttribute("errorMessage", errorMessage);
 					}
 					else
 					{
 						//OK
 					}
 				}
-				//既存DBにブックマークがない場合は、解除処理不要
 				else
 				{
 				}
 			}
+			//既存DBにブックマーク登録ある場合
+			else if(questionOfSet.get(0).getBookmarkFlg().equals("1"))
+			{
+				//リクエストがnull = チェックがついていないので削除
+				if(request.getParameter("bookmark") == null)
+				{	
+					if(dao3.delete(bookmark) != 1)
+					{
+						//DBの登録失敗→エラー
+						String errorMessage = "ブックマーク解除ができません。";
+						request.setAttribute("errorMessage", errorMessage);
+					}
+					else
+					{
+						//ok
+					}
+				}
+				//登録継続はスルー
+				else if( request.getParameter("bookmark").equals("1"))
+				{
+				}
+				else
+				{
+				}
+			}
+			//SelectQuesiton.jspで設定するブックマーク登録フラグは0or1のみ
+			else
+			{
+			}
+			
 		}
-		
 		
 		//先頭の問題を削除して、残りが0がどうかで遷移先異なる(ログインユーザ・ゲストユーザ両方)
 		questionOfSet.remove(0);
@@ -207,8 +240,15 @@ public class ResultAction extends Action
 		
 		if(questionOfSet.size() == 0)
 		{
-			//本当は別画面
-			return "unitResult.jsp";
+			//得点結果・分析画面へ遷移
+			return "UnitResult.action";
+		}
+		//途中終了
+		else if(request.getParameter("submitFinish") != null)
+		{
+			//得点結果・分析画面へ遷移
+			session.removeAttribute("questionOfSet");
+			return "UnitResult.action";
 		}
 		
 		return "showQuestion.jsp";
