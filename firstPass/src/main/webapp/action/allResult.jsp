@@ -54,7 +54,7 @@ TO<input type="date" name="toDate" value="2100-01-01" >
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>
-		<td>${AllResult.correctRate}％</td>
+		<td>${Math.round(AllResult.correctRate)}％</td>
 		</tr>
 	</c:forEach>
 </table>
