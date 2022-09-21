@@ -27,6 +27,7 @@ public class QuestionDAOkuroki extends DAO
 		//分野条件を連結
 		String genreCond = joinCond(genre);
 		
+		//nullで初期化
 		Connection con = null;
 		
 		try
@@ -209,6 +210,7 @@ public class QuestionDAOkuroki extends DAO
 				}
 				
 			}
+			//ブックマーク問題のみ出題希望なしの場合
 			else
 			{
 				//取得結果全件格納リストの長さと問題数条件の小さいほうを取得
@@ -222,18 +224,31 @@ public class QuestionDAOkuroki extends DAO
 				}
 			}
 			st.close();
+			//戻り値用リスト返却
+			return question;
 		
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
+			//空のリストを返却
+			List<Question> dummy = new ArrayList<Question>();
+			return dummy;
 		}
 		finally
 		{
-			con.close();
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-		//戻り値用リスト返却
-		return question;
 	}
 		
 		//文字列連結メソッド（年度と分野の連結に使用）
@@ -264,26 +279,46 @@ public class QuestionDAOkuroki extends DAO
 		//戻り値用のリスト作成
 		List<String> year = new ArrayList<String>();
 		
-		//コネクションの取得
-		Connection con = getConnection();
-		
-		PreparedStatement st;
-		st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR;");
-		
-		//SQLの実行と結果の取得
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next())
+		Connection con =null;
+		try
 		{
-			year.add(rs.getString("YEAR"));
+			//コネクションの取得
+			con = getConnection();
+		
+			PreparedStatement st;
+			st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR;");
+			
+			//SQLの実行と結果の取得
+			ResultSet rs = st.executeQuery();
+			
+			while(rs.next())
+			{
+				year.add(rs.getString("YEAR"));
+			}
+			
+			st.close();
+			return year;
 		}
-		
-		st.close();
-		con.close();
-		
-		return year;
-		
-	}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+		finally
+		{
+			if(con!=null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+}
 	
 	//DBに登録されている分野を返すメソッド
 	public List<String> getGenre()throws Exception
@@ -309,17 +344,26 @@ public class QuestionDAOkuroki extends DAO
 			}
 			
 			st.close();
+			return genre;
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
+			return null;
 		}
 		finally
 		{
-			con.close();
+			if(con!=null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-		
-		return genre;
-		
 	}
 }

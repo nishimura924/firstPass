@@ -18,7 +18,6 @@
 <c:when test ="${conditions.difficulty =='1'}">easy</c:when>
 </c:choose>
 ）
-実施日：${summary.get[0]. }
 <br>
 出題数:${questionCount }問
 <br>

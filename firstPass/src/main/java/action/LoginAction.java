@@ -45,7 +45,7 @@ public class LoginAction extends Action
 		//UserDAOの検索メソッド呼び出し（引数にリクエストパラメータの値をセット）
 		//UserDAOで生成したBeanをuserで受ける
 		UserDAOkuroki dao =new UserDAOkuroki();
-		User user =dao.login(userId, password);
+		User user =dao.doLogin(userId, password);
 	
 		//userBeanからuserIDが取得できる場合、セッションに格納してメニュー画面を表示
 		if(user.getUserId()!=null)

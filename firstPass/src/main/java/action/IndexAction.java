@@ -51,7 +51,7 @@ public class IndexAction extends Action
 		question.setChoice2(choice2);
 		question.setChoice3(choice3);
 		question.setChoice4(choice4);
-//		question.setChoicePicFlg(String choicePicFlg);
+		question.setChoicePicFlg("0");
 		question.setBookmarkFlg("1");	//登録あり	
 		
 		questionOfSet.add(question);
@@ -81,13 +81,43 @@ public class IndexAction extends Action
 		question2.setChoice2(choice22);
 		question2.setChoice3(choice23);
 		question2.setChoice4(choice24);
-//		question2.setChoicePicFlg(String choicePicFlg);
+		question2.setChoicePicFlg("0");
 		question2.setBookmarkFlg("1");	//登録あり
 		
 		questionOfSet.add(question2);
 
 		session.setAttribute("questionOfSet", questionOfSet);
 
+		//問題3問目
+		Choice choice31 = new Choice();
+		Choice choice32 = new Choice();
+		Choice choice33 = new Choice();
+		Choice choice34 = new Choice();
+		Question question3 = new Question();
+		choice31.setChoice("choice1.jpeg");
+		choice32.setChoice("choice2.jpeg");
+		choice33.setChoice("choice3.jpeg");
+		choice34.setChoice("choice4.jpeg");
+		choice31.setIsCorrect("1");
+		choice32.setIsCorrect("0");
+		choice33.setIsCorrect("0");
+		choice34.setIsCorrect("0");
+				
+		question3.setIndex(3);
+		question3.setYear("2022年猫期");
+		question3.setQuestionNo(1);
+		question3.setGenre("ストラテジ系");
+		question3.setQuestion("question.jpeg");
+		question3.setQuestionPic("1");
+		question3.setChoice1(choice31);
+		question3.setChoice2(choice32);
+		question3.setChoice3(choice33);
+		question3.setChoice4(choice34);
+		question3.setChoicePicFlg("1");
+		question3.setBookmarkFlg("1");	//登録あり	
+				
+		questionOfSet.add(question3);
+		
 		
 		//検索条件
 		Conditions conditions = new Conditions();
@@ -97,7 +127,7 @@ public class IndexAction extends Action
 		String[] genre = new String[1];
 		genre[0] = "ストラテジ系";
 		conditions.setGenre(genre);
-		conditions.setDifficulty("1");	//0がeasy, 1がnormal
+		conditions.setDifficulty("0");	//0がnormal, 1がeasy
 		conditions.setQuestionCount(1);
 		conditions.setBookmarkOnly("0");
 
