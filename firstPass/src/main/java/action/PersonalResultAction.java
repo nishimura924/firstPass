@@ -34,7 +34,13 @@ public class PersonalResultAction extends Action
 		
 		//実績TBLに問い合わせ
 		ResultDAOkuroki dao = new ResultDAOkuroki();
-		List<UnitResult> urList = dao.getPersonalResult(userId);//メソッド名追記すること
+		List<UnitResult> urList = dao.getPersonalResult(userId);
+		
+		//実績リストの長さが0の場合（過去実績なし）、エラー画面に遷移
+		if(urList.size()==0)
+		{
+			return "personalResult-nodata-error.jsp";
+		}
 				
 		//実績TBLから降順で取得しているため、リストの0番目が最大実施回数を示す
 		int maxCountUnit = urList.get(0).getCountUnit();

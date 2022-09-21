@@ -5,6 +5,7 @@ import java.util.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ResultDAOkuroki extends DAO
 {
@@ -13,38 +14,61 @@ public class ResultDAOkuroki extends DAO
 	{
 		//戻り用変数 0で初期化
 		int countUnit =0;
-		
-		//コネクションの取得
-		Connection con = getConnection();
-		
-		PreparedStatement st;
-		st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT FROM RESULT");
-		
-		//SQLの実行と結果の取得
-		ResultSet rs = st.executeQuery();
-		
-		while(rs.next())
+		//nullで初期化
+		Connection con = null;
+		try
 		{
-			countUnit = rs.getInt("COUNT_UNIT");
+			//コネクションの取得
+			con = getConnection();
+		
+			PreparedStatement st;
+			st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT FROM RESULT");
+			
+			//SQLの実行と結果の取得
+			ResultSet rs = st.executeQuery();
+		
+			while(rs.next())
+			{
+				countUnit = rs.getInt("COUNT_UNIT");
+			}
+		
+			st.close();
+			return countUnit;
 		}
-		
-		st.close();
-		con.close();
-		
-		return countUnit;
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return countUnit;
+		}
+		finally
+		{
+			if(con!=null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	
 	//個人過去実績取得用
-	public List<UnitResult> getPersonalResult(String userId)
+	public List<UnitResult> getPersonalResult(String userId)throws Exception
 	{
 		//戻り値用リストの生成
 		List<UnitResult> urList = new ArrayList<UnitResult>();
 		
+		//nullで初期化
+		Connection con = null;
 		try
 		{
 			//コネクションの取得
-			Connection con = getConnection();
+			con = getConnection();
 			
 			PreparedStatement st;
 			st = con.prepareStatement("SELECT COUNT_UNIT,GENRE,DIFFICULTY, COUNT(*),SUM(IS_CORRECT) FROM RESULT WHERE USER_ID =? GROUP BY COUNT_UNIT,GENRE,DIFFICULTY ORDER BY COUNT_UNIT DESC, GENRE;");
@@ -70,22 +94,27 @@ public class ResultDAOkuroki extends DAO
 			}
 			
 			st.close();
-			con.close();
 			return urList;
-				
 		}
-		catch(Exception e)
+		catch(SQLException e)
 		{
 			e.printStackTrace();
+			List<UnitResult> dummy = new ArrayList<UnitResult>();
+			return dummy;
 		}
 		finally
 		{
-
-			//st.close();
-			//con.close();
+			if(con!=null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-			
-		
-		return urList;
 	}
 }
