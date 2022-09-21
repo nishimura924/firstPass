@@ -95,19 +95,19 @@ TO<input type="date" name="toDate" value=${toDate } >
 
 <table border="1" width="600" cellspacing="0" cellpadding="5">
 	<tr>
+	<td>順位</td>
 	<td>ユーザ名</td>
 	<td>回答数</td>
 	<td>正答数</td>
 	<td>正答率</td>
-
-	<c:forEach var="AllResult" items="${list}">
-		<tr>
+	
+	<c:forEach var="AllResult" items="${list}" varStatus="status">
+		</tr>
+		<td>${status.index +1}位</td>
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>
 		<td>${Math.round(AllResult.correctRate)}％</td>
-		</tr>
-	
 	</c:forEach>
 </table>
 
