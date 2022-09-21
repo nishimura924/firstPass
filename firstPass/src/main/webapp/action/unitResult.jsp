@@ -24,7 +24,8 @@
 <br>
 正答数：${correctCount }問
 <br>
-正答率：${correctRate }％
+正答率：${correctRate}％
+
 <br>
 </form>
 </body>
