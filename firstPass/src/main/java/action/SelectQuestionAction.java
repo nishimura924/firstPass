@@ -24,6 +24,9 @@ public class SelectQuestionAction extends Action
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
+		//answerの削除
+		session.removeAttribute("answer");
+		
 		//出題条件の取得（リクエストパラメータ）
 		String bookmark = request.getParameter("bookmark");
 		String[] year = request.getParameterValues("year");
