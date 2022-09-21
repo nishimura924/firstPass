@@ -15,6 +15,8 @@ public class RegistUserConfirmAction extends Action
 {
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{ 
+		//セッションの取得、生成
+		HttpSession session = request.getSession();
 		
 		//リクエストパラメータの取得
 		String userId=request.getParameter("userId");
@@ -50,10 +52,17 @@ public class RegistUserConfirmAction extends Action
 		
 		if(line>0)
 		{
-			//リクエスト取得し、完了画面へ渡す	
+			//リクエストにユーザIDとユーザ名をセット（確認画面表示用）
 			request.setAttribute("userId", userId);
-			request.setAttribute("userPass", userPass);
 			request.setAttribute("userName", userName);
+			
+			//新規会員登録後ログイン状態にするため、UserBeanを生成しセッションにセット
+			User newUser = new User();
+			newUser.setUserId(userId);
+			newUser.setUserName(userName);
+			newUser.setAdminFlag(adminFlag);
+			session.setAttribute("user",newUser);
+			
 			return "registUserFinish.jsp";
 		}
 		else
