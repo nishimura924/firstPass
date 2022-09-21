@@ -1,5 +1,11 @@
 package action;
 
+/**
+* ランキングの表示のアクション
+* @author　森下
+* @version　1.0.0
+*/
+
 import dao.ResultDAOmorishita;
 import bean.Result;
 import bean.AllResult;
