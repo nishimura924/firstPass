@@ -81,7 +81,7 @@ public class ResultDAOmorishita extends DAO
 			AllResult showResult = new AllResult();
 			showResult.setUserId(rs.getString("USER.USER_NAME"));
 			showResult.setAnswerCount(rs.getString("COUNT(RESULT.COUNT_UNIT)"));
-			showResult.setCorrectCount(rs.getString("SUM(RESULT.IS_CORRECT)"));
+			showResult.setCorrectCount(rs.getInt("SUM(RESULT.IS_CORRECT)")+"");
 			showResult.setCorrectRate(rs.getDouble("rate"));
 			list.add(showResult);
 		}
