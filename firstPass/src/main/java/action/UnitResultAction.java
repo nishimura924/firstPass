@@ -7,6 +7,7 @@ package action;
 */
 
 import bean.SummaryOfResult;
+import bean.User;
 import bean.Answer;
 import bean.Result;
 import tool.Action;
@@ -22,6 +23,16 @@ public class UnitResultAction extends Action
 	{ 
 		//セッションを取得、生成
 		HttpSession session = request.getSession();
+		//セッション属性userを取得
+		User user = (User)session.getAttribute("user");
+		//セッション属性userが取得できて、管理者権限フラグが1の場合、管理者メニューのみ表示のためアクセスエラー画面へ遷移
+		if(user!=null)
+		{
+			if(user.getAdminFlag()=="1")
+			{
+				return"access-error.jsp";
+			}			
+		}
 		
 		//問題数
 		int questionCount = 0;
