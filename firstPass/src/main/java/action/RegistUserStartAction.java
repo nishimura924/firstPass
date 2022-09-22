@@ -37,7 +37,7 @@ public class RegistUserStartAction extends Action
 			return "registUserStart.jsp";
         }
 		//ユーザー名の入力値チェック
-        String nameCheck = userId;
+        String nameCheck = userName;
         if(nameCheck.matches("[0-9a-zA-Zａ-ｚＡ-Ｚあ-ん]{1,100}")==false)
         {
         	request.setAttribute("errorMessage", "ユーザー名が誤りです。（１００文字以下）");
