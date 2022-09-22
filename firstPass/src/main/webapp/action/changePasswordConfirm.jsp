@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>パスワード変更</title>
 </head>
 <body>
 
@@ -23,5 +23,5 @@
 	</form>
 
 </body>
-
+<%@include file="footer_mypage.jsp" %>
 </html>
