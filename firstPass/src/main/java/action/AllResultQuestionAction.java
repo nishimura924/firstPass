@@ -6,7 +6,7 @@ package action;
 * @version　1.0.0
 */
 
-import dao.QuestionDAOmorishita;
+import dao.QuestionDAO;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.List;
@@ -16,7 +16,7 @@ public class AllResultQuestionAction extends Action
 {	
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{
-		QuestionDAOmorishita dao = new QuestionDAOmorishita();
+		QuestionDAO dao = new QuestionDAO();
 		
 		//DB内の分野項目を取得する
 		List<String> genreList = dao.getGenre();
