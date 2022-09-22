@@ -1,7 +1,7 @@
 package action;
 
 
-import dao.QuestionDAOkuroki;
+import dao.QuestionDAO;
 import dao.ResultDAOkuroki;
 import bean.Conditions;
 import bean.User;
@@ -53,7 +53,7 @@ public class SelectQuestionAction extends Action
 		}
 		
 		//
-		QuestionDAOkuroki dao = new QuestionDAOkuroki();
+		QuestionDAO dao = new QuestionDAO();
 		List<Question> question = dao.setQuestion(conditions);
 		
 		
