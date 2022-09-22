@@ -16,6 +16,8 @@
 <c:when test ="${conditions.difficulty =='0'}">normal</c:when>
 	
 <c:when test ="${conditions.difficulty =='1'}">easy</c:when>
+
+<c:when test ="${conditions.difficulty ==null}">出力エラー</c:when>
 </c:choose>
 ）
 <br>

@@ -49,6 +49,18 @@ public class UnitResultAction extends Action
 					correctCount++;
 				}
 			}
+			
+			//エラー制御
+			if(questionCount == 0)
+			{
+				request.setAttribute("questionCount","出力エラー");
+				request.setAttribute("correctRate", "出力エラー");
+			}
+			else if(correctCount == 0)
+			{
+				request.setAttribute("correctCount", "出力エラー");
+			}
+			
 			//問題数をリクエストで取得
 			request.setAttribute("questionCount",questionCount);
 			//正答数をリクエストで取得
@@ -60,9 +72,6 @@ public class UnitResultAction extends Action
 			//正答率をリクエストで取得
 			request.setAttribute("correctRate", correctRate);
 		}
-			//最後の問題の解答時刻を取得
-			//Date answerDate = summary.get(summary.size()-1).getAnswerDate();
-			//request.setAttribute("answerDate", answerDate);
 
 		return "unitResult.jsp";
 	}
