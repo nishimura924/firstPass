@@ -6,7 +6,7 @@ package action;
  */
 
 import bean.User;
-import dao.UserDAOshimada;
+import dao.UserDAO;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -69,7 +69,7 @@ public class ChangePasswordStartAction extends Action
 			return "changePasswordStart.jsp";
 		}
 	
-		UserDAOshimada dao = new UserDAOshimada();
+		UserDAO dao = new UserDAO();
 		
 		//画面入力のパスワードが登録済と異なるとパスワード変更開始画面へ遷移
 		if(1 != dao.search(userId, password, ""))

@@ -6,7 +6,7 @@ package action;
  */
 
 import bean.User;
-import dao.UserDAOshimada;
+import dao.UserDAO;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -36,7 +36,7 @@ public class ChangePasswordConfirmAction extends Action
 		
 		
 		String newPassword = request.getParameter("newPassword");
-		UserDAOshimada dao = new UserDAOshimada();
+		UserDAO dao = new UserDAO();
 
 		
 		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移

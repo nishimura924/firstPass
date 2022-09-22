@@ -14,9 +14,9 @@ import bean.Question;
 import bean.Result;
 import bean.SummaryOfResult;
 import bean.User;
-import dao.BookmarkDAOshimada;
+import dao.BookmarkDAO;
 import dao.CommentDAO;
-import dao.ResultDAOshimada;
+import dao.ResultDAO;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.*;
@@ -89,7 +89,7 @@ public class ResultAction extends Action
 			//result.setAnswerDate(new Date());
 			
 			//　実績DBに書き込み
-			ResultDAOshimada dao = new ResultDAOshimada();
+			ResultDAO dao = new ResultDAO();
 			
 			if(dao.insert(result) != 1)
 			{
@@ -164,7 +164,7 @@ public class ResultAction extends Action
 		// ブックマークの処理(ログインユーザのみ)
 		if(user != null)
 		{
-			BookmarkDAOshimada dao3 = new BookmarkDAOshimada();
+			BookmarkDAO dao3 = new BookmarkDAO();
 			Bookmark bookmark = new Bookmark();
 			bookmark.setUserId(user.getUserId());
 			bookmark.setYear(questionOfSet.get(0).getYear());

@@ -3,7 +3,7 @@ package dao;
 import bean.Bookmark;
 import java.sql.*;
 
-public class BookmarkDAOshimada extends DAO
+public class BookmarkDAO extends DAO
 {
 	public int insert(Bookmark bookmark) throws Exception
 	{
