@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<c:if test="${user == null}">
+	<jsp:forward page="registUserError.jsp" />
+</c:if>
+
 <p>新規登録確認</p>
 <p>以下の内容でよろしいでしょうか。</p>
 

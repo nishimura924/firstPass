@@ -12,6 +12,8 @@
 	<jsp:forward page="registUserError.jsp" />
 </c:if>
 
+
+
 <p>新規登録開始</p>
 <p>以下を入力してください。</p>
 
