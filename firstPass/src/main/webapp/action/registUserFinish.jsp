@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<c:if test="${user != null}">
+<c:if test="${user == null}">
 	<jsp:forward page="registUserError.jsp" />
 </c:if>
 

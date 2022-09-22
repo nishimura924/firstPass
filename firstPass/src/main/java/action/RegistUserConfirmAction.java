@@ -20,7 +20,7 @@ public class RegistUserConfirmAction extends Action
 		
 		//userがnullならエラー画面に遷移(URL直接入力)
 		User inUser = (User)session.getAttribute("user");
-		if(inUser == null)
+		if(inUser != null)
 		{
 			return "access-error.jsp";	
 		}
