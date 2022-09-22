@@ -18,7 +18,7 @@ public class RegistUserStartAction extends Action
 		User user = (User)session.getAttribute("user");
 		if(user != null)
 		{
-			return "access-error.jsp";	
+			return "registUserError.jsp";	
 		}
 		
 		//リクエストパラメータの取得
