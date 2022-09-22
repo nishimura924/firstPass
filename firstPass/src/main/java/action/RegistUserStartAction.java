@@ -12,6 +12,15 @@ public class RegistUserStartAction extends Action
 	public String execute(HttpServletRequest request, HttpServletResponse response)throws Exception
 		
 	{   
+		//セッションの接続
+		HttpSession session = request.getSession();
+		//userがnullならエラー画面に遷移(URL直接入力)
+		User user = (User)session.getAttribute("user");
+		if(user != null)
+		{
+			return "access-error.jsp";	
+		}
+		
 		//リクエストパラメータの取得
 		String userId=request.getParameter("userId");
 		String userPass=request.getParameter("userPass");
