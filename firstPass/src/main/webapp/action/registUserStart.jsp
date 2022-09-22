@@ -17,13 +17,13 @@
 
 <form action="RegistUserStart.action" method="post">
 
-ユーザID<input type="text" name="userId" value=${userId }>
+ユーザID（半角英数字）<input type="text" name="userId" value=${userId }>
 <br>
-パスワード<input type="password" name="userPass"value=${userPass }>
+パスワード（半角英数字、8文字以上）<input type="password" name="userPass"value=${userPass }>
 <br>
 パスワード（確認用）<input type="password" name="passwordConfirm"value=${passwordConfirm }>
 <br>
-ユーザ名（半角英数字、8文字以上）<input type="text" name="userName"value=${userName }>
+ユーザ名<input type="text" name="userName"value=${userName }>
 <br>
 
 <p><input type = "submit" value="次へ"></p>
