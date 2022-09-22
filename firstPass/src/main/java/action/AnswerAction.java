@@ -100,7 +100,6 @@ public class AnswerAction extends Action
 			
 		}
 				
-		//sessionに変更
 		session.setAttribute("answer", answer);
 		
 		return "showQuestion.jsp";

@@ -30,7 +30,6 @@ public class ChangeUserNameStartAction extends Action
 			return "access-error.jsp";	
 		}
 
-		String userId = user.getUserId();
 		String userName = user.getUserName();
 		String newUserName = request.getParameter("newUserName");
 		String errorMessage = "";
@@ -46,6 +45,14 @@ public class ChangeUserNameStartAction extends Action
 		else if(newUserName.equals(userName))
 		{
 			errorMessage = "変更前後が同じです";
+			request.setAttribute("errorMessage", errorMessage);
+			return  "changeUserNameStart.jsp";
+		}
+		
+		//変更後のユーザ名が100文字以上だとエラー
+		if(! ValidCheck.validUserName(newUserName))
+		{
+			errorMessage = "ユーザー名が誤りです。（１００文字以下）";
 			request.setAttribute("errorMessage", errorMessage);
 			return  "changeUserNameStart.jsp";
 		}

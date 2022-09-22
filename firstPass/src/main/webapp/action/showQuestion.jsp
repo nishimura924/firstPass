@@ -108,6 +108,7 @@
 			
 			<c:if test="${user != null }" >
 				＜コメント登録＞<br>
+				（500文字超の場合、501文字目以降は削除されます。）<br>
 				<input type="text" name="comment" ><br><br>
 			
 				＜過去のコメント＞<br>

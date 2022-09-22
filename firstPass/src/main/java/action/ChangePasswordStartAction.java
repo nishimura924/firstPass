@@ -30,7 +30,6 @@ public class ChangePasswordStartAction extends Action
 			return "access-error.jsp";	
 		}
 		
-		String userId = user.getUserId();
 		String password = request.getParameter("password");
 		String errorMessage = "";
 		
@@ -48,6 +47,14 @@ public class ChangePasswordStartAction extends Action
 		if(newPassword == null || newPassword.equals(""))
 		{
 			errorMessage = "新しいパスワードが未入力です";
+			request.setAttribute("errorMessage", errorMessage);
+			return "changePasswordStart.jsp";
+		}
+		
+		//新しいパスワード(1回目)が半角英数字、８文字以上でないとパスワード変更開始画面へ遷移
+		if(! ValidCheck.validUserPass(newPassword))
+		{
+			errorMessage = "新しいパスワードが誤りです。（最低８文字、半角英数字のみ）";
 			request.setAttribute("errorMessage", errorMessage);
 			return "changePasswordStart.jsp";
 		}

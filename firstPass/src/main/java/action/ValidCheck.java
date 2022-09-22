@@ -17,4 +17,10 @@ public class ValidCheck
 	{
 		return userPass.matches("[0-9a-zA-Z]{8,100}");
 	}
+	
+	//コメントの入力値チェック（５００文字以内）
+	public static boolean validComment(String comment)
+	{
+		return comment.matches("[0-9a-zA-Zａ-ｚＡ-Ｚあ-ん一-龠々～？！]{1,5}");
+	}
 }

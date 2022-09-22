@@ -47,6 +47,13 @@ public class ResultAction extends Action
 			return "access-error.jsp";
 		}
 		
+		//コメント登録の場合は、実績登録などはまだしない(「次へ」ボタンのときにする)
+		if(request.getParameter("submitComment") != null)
+		{
+			request.setAttribute("comment", request.getParameter("comment"));
+			return "RegistComment.action";
+		}
+		
 		
 		//ログインユーザの実績をDB格納するための事前処理
 		//セッション名は要確認
@@ -145,7 +152,15 @@ public class ResultAction extends Action
 			//コメントがあれば登録
 			else
 			{
-				comment.setComment(request.getParameter("comment"));
+				String commentString = request.getParameter("comment");
+				
+				//500文字超はカット
+				if(! ValidCheck.validComment(commentString))
+				{
+					commentString = commentString.substring(0,500);
+				}
+				
+				comment.setComment(commentString);
 				if(dao2.insert(comment) != 1)
 				{
 					//DB登録処理のエラー
