@@ -3,12 +3,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>出題・解答</title>
 </head>
 <body>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 	
 	<c:if test="${questionOfSet == null}">
+		<jsp:forward page="access-error.jsp" />
+	</c:if>
+	
+	<c:if test="${user.adminFlag == 1}">
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 
@@ -19,24 +24,33 @@
 	<br>
 	
 	<c:choose>
-		<c:when test="${questionOfSet[0].choicePicFlg == 0 }" >
-			${questionOfSet[0].question }
+		<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+			<img src="../img/${questionOfSet[0].question }" />
 		</c:when>
 		<c:otherwise>
-			<img src="../img/${questionOfSet[0].question }" />
+			${questionOfSet[0].question }
 		</c:otherwise>
 		
 	</c:choose>
 
-	 
-	<%-- <img src="../img/question.jpeg" /> --%>
 	<br><br>
 	
 	<br>
 	
 	<form action="Answer.action" method="post">	
 		<c:choose>
-			<c:when test="${questionOfSet[0].choicePicFlg == 0 }" >
+			<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：<img src="../img/${questionOfSet[0].choice1.choice}" /><br>
+				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：<img src="../img/${questionOfSet[0].choice2.choice}" /><br>
+				<c:choose>
+					<c:when test="${conditions.difficulty == 0 }" >
+						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：<img src="../img/${questionOfSet[0].choice3.choice}" /><br>
+						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：<img src="../img/${questionOfSet[0].choice4.choice}" /><br><br>
+					</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>			
+			</c:when>
+			<c:otherwise>
 				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：${questionOfSet[0].choice1.choice }<br>
 				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
 				<c:choose>
@@ -46,17 +60,6 @@
 					</c:when>
 					<c:otherwise></c:otherwise>	
 				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：<img src="../img/${questionOfSet[0].choice1.choice}" /><br>
-				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：<img src="../img/${questionOfSet[0].choice2.choice}" /><br>
-				<c:choose>
-					<c:when test="${conditions.difficulty == 0 }" >
-						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：<img src="../img/${questionOfSet[0].choice3.choice}" /><br>
-						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：<img src="../img/${questionOfSet[0].choice4.choice}" /><br><br>
-					</c:when>
-					<c:otherwise></c:otherwise>
-				</c:choose>	
 			</c:otherwise>
 		</c:choose>
 		
@@ -87,6 +90,7 @@
 		<br>
 		
 		<form action="Result.action" method="post">
+			<c:if test="${user != null }" >
 			<c:choose>
 				<c:when test="${questionOfSet[0].bookmarkFlg == null }" >
 					ブックマーク登録<input type="checkbox" name="bookmark" value="1" >
@@ -99,17 +103,20 @@
 					ブックマーク登録<input type="checkbox" name="bookmark" value="1" >
 				</c:otherwise>
 			</c:choose>
+			</c:if>
 			<br><br>
 			
-			＜コメント登録＞<br>
-			<input type="text" name="comment" ><br><br>
+			<c:if test="${user != null }" >
+				＜コメント登録＞<br>
+				<input type="text" name="comment" ><br><br>
 			
-			
-			＜過去のコメント＞<br>
-			<c:forEach var="commentPast" items="${answer.allComment }">
-				${commentPast.commentDate }　　${commentPast.comment }<br>
-			</c:forEach>
-			
+				＜過去のコメント＞<br>
+				<c:forEach var="commentPast" items="${answer.allComment }">
+					${commentPast.commentDate }　　${commentPast.comment }<br>
+				</c:forEach>
+			</c:if>
+			<br>		
+			<input type="submit" name="submitComment" value="コメント登録">
 			<input type="submit" name="submitFinish" value="途中終了">
 			<input type="submit" name="submitNext" value="次へ">
 		</form>
