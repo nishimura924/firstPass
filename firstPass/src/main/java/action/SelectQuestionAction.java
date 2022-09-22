@@ -25,14 +25,16 @@ public class SelectQuestionAction extends Action
 		request.setCharacterEncoding("UTF-8");
 		
 		//セッション属性userを取得
+		//ゲストの場合、userはNull
 		User user = (User)session.getAttribute("user");
 		//セッション属性userが取得できて、管理者権限フラグが1の場合、管理者メニューのみ表示のためアクセスエラー画面へ遷移
 		if(user!=null)
 		{
-			if(user.getAdminFlag()=="1")
+			if(user.getAdminFlag().equals("1"))
 			{
 				return"access-error.jsp";
-			}			
+			}
+			
 		}
 
 		
@@ -64,9 +66,10 @@ public class SelectQuestionAction extends Action
 			return "ShowSelectQuestion.action";
 		}
 		
-		//
+		
+		//問題抽出メソッドの呼び出し
 		QuestionDAO dao = new QuestionDAO();
-		List<Question> question = dao.setQuestion(conditions);
+		List<Question> question = dao.setQuestion(conditions,user);
 		
 		
 		if(question.size()==0)

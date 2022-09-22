@@ -7,7 +7,10 @@
 		<title>出題条件選択</title>
 	</head>
 	<body>
-		<%--セッション"conditions"から以前選択していた選択肢がこの画面に戻ってきても選択されるようにするのを追加すること --%>
+
+		<c:if test="${user!=null && user.adminFlag == 1}">
+				<jsp:forward page="access-error.jsp"></jsp:forward>
+		</c:if>
 		
 		<c:if test ="${yearList==null || genreList==null }">
 			<jsp:forward page="ShowSelectQuestion.action"></jsp:forward>

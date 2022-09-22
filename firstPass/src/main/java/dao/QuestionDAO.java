@@ -1,6 +1,7 @@
 package dao;
 
 import bean.Question;
+import bean.User;
 import bean.Choice;
 import bean.Conditions;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.*;
 public class QuestionDAO extends DAO
 {	
 	//引数の値からDBを検索し、リストを返すメソッド　メソッド名仮置き
-	public List<Question> setQuestion(Conditions conditions)throws Exception
+	public List<Question> setQuestion(Conditions conditions,User user)throws Exception
 	{
 		//戻り値用のリストの作成
 		List<Question> question = new ArrayList<Question>();
@@ -27,6 +28,14 @@ public class QuestionDAO extends DAO
 		//分野条件を連結
 		String genreCond = joinCond(genre);
 		
+		//ユーザIDを設定
+		String userId="";
+		//引数のUserがnullでなければ、ユーザIDをセット
+		if(user!=null)
+		{
+			userId = user.getUserId();
+		}
+		
 		//nullで初期化
 		Connection con = null;
 		
@@ -36,8 +45,8 @@ public class QuestionDAO extends DAO
 			con = getConnection();
 		
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT QUESTION.YEAR,QUESTION.QUESTION_NO,QUESTION.GENRE,QUESTION.QUESTION,QUESTION.QUESTION_FILE_NAME,QUESTION.CORRECT,QUESTION.INCORRECT_1,QUESTION.INCORRECT_2,QUESTION.INCORRECT_3,QUESTION.IS_SELECT_FILE,BOOKMARK.USER_ID FROM QUESTION LEFT JOIN BOOKMARK ON QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO AND QUESTION.YEAR = BOOKMARK.YEAR  WHERE QUESTION.YEAR IN("+ yearCond +") and QUESTION.GENRE IN("+ genreCond +");");
-				
+			st=con.prepareStatement("SELECT QUESTION.YEAR,QUESTION.QUESTION_NO,QUESTION.GENRE,QUESTION.QUESTION,QUESTION.QUESTION_FILE_NAME,QUESTION.CORRECT,QUESTION.INCORRECT_1,QUESTION.INCORRECT_2,QUESTION.INCORRECT_3,QUESTION.IS_SELECT_FILE,BOOKMARK.USER_ID FROM QUESTION LEFT JOIN BOOKMARK ON QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO AND QUESTION.YEAR = BOOKMARK.YEAR  WHERE QUESTION.YEAR IN("+ yearCond +") and QUESTION.GENRE IN("+ genreCond +") ");
+			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
 		
@@ -70,14 +79,14 @@ public class QuestionDAO extends DAO
 				q.setChoicePicFlg(rs.getString("IS_SELECT_FILE"));
 				
 				//ブックマークフラグの判定と設定
-				//ユーザIDがnullなら登録なし、nullでなければ登録あり
-				if(rs.getString("USER_ID")==null)
+				//ユーザIDが一致すれば、登録あり、一致しなければ登録なし
+				if(userId.equals(rs.getString("USER_ID")))
 				{
-					q.setBookmarkFlg("0"); //登録なし
+					q.setBookmarkFlg("1"); //登録あり
 				}
 				else
 				{
-					q.setBookmarkFlg("1"); //登録あり				
+					q.setBookmarkFlg("0"); //登録なし				
 				}
 			
 				//正解ChoiceBeanの生成
