@@ -36,5 +36,5 @@
 </body>
 </html>
 
-
+<a href="myPage.jsp">マイページへ戻る</a>
 <%@include file="footer_menu.jsp" %>
