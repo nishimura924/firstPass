@@ -8,9 +8,6 @@
 </head>
 <body>
 
-<c:if test="${user == null}">
-	<jsp:forward page="registUserError.jsp" />
-</c:if>
 <c:if test="${userId == null}">
 	<jsp:forward page="access-error.jsp" />
 </c:if>

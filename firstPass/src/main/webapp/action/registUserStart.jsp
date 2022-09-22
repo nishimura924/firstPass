@@ -8,8 +8,8 @@
 </head>
 <body>
 
-	<c:if test="${user == null}">
-		<jsp:forward page="access-error.jsp" />
+	<c:if test="${user != null}">
+		<jsp:forward page="registUserError.jsp" />
 	</c:if>
 
 <p>新規登録開始</p>
