@@ -3,10 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>ユーザ名変更</title>
 </head>
 <body>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 	
  	<c:if test="${user == null}">
 		<jsp:forward page="access-error.jsp" />
@@ -39,5 +40,5 @@
 	</form>
 
 </body>
-
+<%@include file="footer_mypage.jsp" %>
 </html>

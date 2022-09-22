@@ -3,10 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>パスワード変更</title>
 </head>
 <body>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
 	
 	<c:if test="${user.userName == null}">
 		<jsp:forward page="access-error.jsp" />
@@ -19,5 +20,5 @@
 	パスワードの変更が完了しました。
 
 </body>
-<%@include file="footer_menu.jsp" %>
+<%@include file="footer_mypage.jsp" %>
 </html>

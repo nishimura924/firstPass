@@ -3,10 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<title>トップ画面</title>
 </head>
 <body>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 	ITパスポート過去問道場
 	
