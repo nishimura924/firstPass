@@ -24,6 +24,18 @@ public class SelectQuestionAction extends Action
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		
+		//セッション属性userを取得
+		User user = (User)session.getAttribute("user");
+		//セッション属性userが取得できて、管理者権限フラグが1の場合、管理者メニューのみ表示のためアクセスエラー画面へ遷移
+		if(user!=null)
+		{
+			if(user.getAdminFlag()=="1")
+			{
+				return"access-error.jsp";
+			}			
+		}
+
+		
 		//answerの削除
 		session.removeAttribute("answer");
 		
@@ -82,7 +94,6 @@ public class SelectQuestionAction extends Action
 		session.setAttribute("questionOfSet", question);
 		
 		//ユーザの取得(ログイン中か否か）
-		User user = (User)session.getAttribute("user");
 		if(user!=null)
 		{
 			//ユーザIDの取得
