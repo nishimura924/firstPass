@@ -23,8 +23,13 @@ public class PersonalResultAction extends Action
 		
 		//セッション属性userを取得
 		User user = (User)session.getAttribute("user");
-		//セッション属性userが取得できなければ、エラー画面へ遷移
+		//セッション属性userが取得できなければ、ゲストのためアクセスエラー画面へ遷移
 		if(user==null)
+		{
+			return"access-error.jsp";
+		}
+		//管理者権限フラグが1の場合、管理者メニューのみ表示のためアクセスエラー画面へ遷移
+		if(user.getAdminFlag()=="1")
 		{
 			return"access-error.jsp";
 		}
