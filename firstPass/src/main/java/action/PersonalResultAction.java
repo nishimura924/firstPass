@@ -3,7 +3,7 @@ package action;
 import bean.PersonalResult;
 import bean.UnitResult;
 import bean.User;
-import dao.ResultDAOkuroki;
+import dao.ResultDAO;
 import tool.Action;
 import javax.servlet.http.*;
 import java.util.*;
@@ -33,7 +33,7 @@ public class PersonalResultAction extends Action
 		String userId = user.getUserId();
 		
 		//実績TBLに問い合わせ
-		ResultDAOkuroki dao = new ResultDAOkuroki();
+		ResultDAO dao = new ResultDAO();
 		List<UnitResult> urList = dao.getPersonalResult(userId);
 		
 		//実績リストの長さが0の場合（過去実績なし）、エラー画面に遷移

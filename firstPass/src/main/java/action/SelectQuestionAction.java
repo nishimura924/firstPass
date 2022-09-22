@@ -2,7 +2,7 @@ package action;
 
 
 import dao.QuestionDAO;
-import dao.ResultDAOkuroki;
+import dao.ResultDAO;
 import bean.Conditions;
 import bean.User;
 import bean.Question;
@@ -89,7 +89,7 @@ public class SelectQuestionAction extends Action
 			String userId = user.getUserId();
 			
 			//累計実施回数を取得し、+1をしてセッションに格納
-			ResultDAOkuroki rDao= new ResultDAOkuroki();
+			ResultDAO rDao= new ResultDAO();
 			int countUnit = rDao.getMaxCountUnit(userId);
 			countUnit++;
 			

@@ -1,7 +1,7 @@
 package action;
 
 import bean.User;
-import dao.UserDAOkuroki;
+import dao.UserDAO;
 import tool.Action;
 import javax.servlet.http.*;
 /**
@@ -44,7 +44,7 @@ public class LoginAction extends Action
 		
 		//UserDAOの検索メソッド呼び出し（引数にリクエストパラメータの値をセット）
 		//UserDAOで生成したBeanをuserで受ける
-		UserDAOkuroki dao =new UserDAOkuroki();
+		UserDAO dao =new UserDAO();
 		User user =dao.doLogin(userId, password);
 	
 		//userBeanからuserIDが取得できる場合、セッションに格納してメニュー画面を表示

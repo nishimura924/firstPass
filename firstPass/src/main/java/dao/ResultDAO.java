@@ -88,7 +88,10 @@ public class ResultDAO extends DAO
 				con = getConnection();
 			
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT FROM RESULT");
+				st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT FROM RESULT WHERE USER_ID=?");
+				
+				//userIdをセット
+				st.setString(1, userId);
 				
 				//SQLの実行と結果の取得
 				ResultSet rs = st.executeQuery();
