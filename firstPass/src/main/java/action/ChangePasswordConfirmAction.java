@@ -40,7 +40,7 @@ public class ChangePasswordConfirmAction extends Action
 
 		
 		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移
-		if(! dao.update(userId, newPassword, ""))
+		if(! dao.userPasswordUpdate(user, newPassword))
 		{
 			return "changePassword-error.jsp";
 		}

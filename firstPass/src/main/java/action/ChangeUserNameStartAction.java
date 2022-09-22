@@ -53,7 +53,7 @@ public class ChangeUserNameStartAction extends Action
 		UserDAO dao = new UserDAO();
 		
 		//変更後のユーザ名が他のユーザにて登録済だとユーザ名変更開始画面に遷移
-		if(0 < dao.search(userId, "", newUserName))
+		if(0 != dao.userNameSearch(newUserName))
 		{
 			errorMessage = "このユーザ名は既に使われています";
 			request.setAttribute("errorMessage", errorMessage);

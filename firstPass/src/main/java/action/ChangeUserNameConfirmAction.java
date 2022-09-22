@@ -40,7 +40,7 @@ public class ChangeUserNameConfirmAction extends Action
 		UserDAO dao = new UserDAO();
 		
 		//更新失敗のときはエラー画面へ遷移
-		if(! dao.update(userId, "", newUserName))
+		if(! dao.userNameUpdate(user,  newUserName))
 		{
 			return "changeUserName-error.jsp";
 		}

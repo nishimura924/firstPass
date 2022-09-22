@@ -72,7 +72,7 @@ public class ChangePasswordStartAction extends Action
 		UserDAO dao = new UserDAO();
 		
 		//画面入力のパスワードが登録済と異なるとパスワード変更開始画面へ遷移
-		if(1 != dao.search(userId, password, ""))
+		if(1 != dao.userPasswordSearch(user, password))
 		{
 			errorMessage = "登録済のパスワードと異なります";
 			request.setAttribute("errorMessage", errorMessage);

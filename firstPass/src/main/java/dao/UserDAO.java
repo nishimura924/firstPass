@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class UserDAO extends DAO
 {
-	public int search(String userId, String userPassword, String userName) throws Exception
+	public int userNameSearch(String newUserName) throws Exception
 	{
 		
 		int line = 0;
@@ -21,41 +21,17 @@ public class UserDAO extends DAO
 		{
 			con = getConnection();
 			
-			if(userId.equals("")) {
-				st.close();
-				line =  -1;
-			}
-			//ユーザID重複確認
-			else if(userPassword.equals(""))
+			//ユーザ名重複確認
+			st = con.prepareStatement("SELECT USER_NAME FROM USER where USER_NAME=? GROUP BY USER_NAME");
+			st.setString(1, newUserName);	
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next())
 			{
-				st = con.prepareStatement("SELECT * FROM USER where USER_ID!=? AND USER_NAME=?");
-				st.setString(1, userId);
-				st.setString(2, userName);	
-				ResultSet rs = st.executeQuery();
-				st.close();
-				while (rs.next())
-				{
-					line += 1;
-				}
+				line += 1;
 			}
-			//パスワード一致確認
-			else if(userName.equals(""))
-			{
-				st = con.prepareStatement("SELECT * FROM USER where USER_ID=? AND USER_PASSWORD=?");
-				st.setString(1, userId);
-				st.setString(2, userPassword);
-				ResultSet rs = st.executeQuery();
-				while (rs.next())
-				{
-					line += 1;
-				}
-				st.close();
-			}
-			else
-			{
-				st.close();
-				line =  -1;
-			}
+			
+			st.close();
 			
 		}catch(SQLException e)
 		{
@@ -79,8 +55,54 @@ public class UserDAO extends DAO
 		return line;
 	}
 	
-	
-	public boolean update(String userId, String userPassword, String userName) throws Exception
+	public int userPasswordSearch(User user, String password) throws Exception
+	{
+		
+		int line = 0;
+		Connection con = null;
+		PreparedStatement st = null;
+		
+		try
+		{
+			con = getConnection();
+			
+			//パスワード一致確認
+			st = con.prepareStatement("SELECT USER_PASSWORD FROM USER "
+					+ "WHERE USER_ID=? AND USER_PASSWORD=?"
+					+ "GROUP BY USER_PASSWORD");
+			st.setString(1, user.getUserId());
+			st.setString(2, password);
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next())
+			{
+				line += 1;
+			}
+			
+			st.close();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			
+		}finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		}
+		
+		return line;
+	}	
+	public boolean userNameUpdate(User user,  String newUserName) throws Exception
 	{
 		Connection con = null;
 		boolean isOK = false;
@@ -91,52 +113,80 @@ public class UserDAO extends DAO
 			con = getConnection();
 			con.setAutoCommit(false);
 			
-			if(userId.equals("")) {
-				st.close();
-				isOK =  false;
-			}
-			//ユーザ名更新
-			else if(userPassword.equals(""))
+			st = con.prepareStatement("UPDATE USER SET USER_NAME=? WHERE USER_ID=?");
+			st.setString(1, newUserName);
+			st.setString(2, user.getUserId());
+			int line = st.executeUpdate();
+			
+			if(line != 1)
 			{
-				st = con.prepareStatement("UPDATE USER SET USER_NAME=? WHERE USER_ID=?");
-				st.setString(1, userName);
-				st.setString(2, userId);
-				int line = st.executeUpdate();
-				st.close();
-				if(line != 1)
+				con.rollback();
+				isOK = false;
+			}else
+			{
+				con.commit();
+				isOK = true;
+			}
+
+			st.close();
+		}
+		catch(SQLException e)
+		{
+			try
+			{
+				con.rollback();
+			}
+			catch (SQLException e2)
+			{
+				e2.printStackTrace();
+			}
+		}
+		finally
+		{
+			if(con != null)
+			{
+				try
 				{
-					con.rollback();
-					isOK = false;
-				}else
-				{
-					con.commit();
-					isOK = true;
+					con.setAutoCommit(true);
+					con.close();
 				}
-				
-			}
-			//ユーザパスワード更新
-			else if(userName.equals(""))
-			{
-				st = con.prepareStatement("UPDATE USER SET USER_PASSWORD=? WHERE USER_ID=?");
-				st.setString(1, userPassword);
-				st.setString(2, userId);
-				int line = st.executeUpdate();
-				if(line != 1)
+				catch (SQLException e3)
 				{
-					con.rollback();
-					isOK =  false;
-				}else
-				{
-					con.commit();
-					isOK = true;
+					e3.printStackTrace();
 				}
-				st.close();
 			}
-			else
+		}
+		
+		return isOK;
+	}
+	
+	public boolean userPasswordUpdate(User user, String newUserPassword) throws Exception
+	{
+		Connection con = null;
+		boolean isOK = false;
+		PreparedStatement st = null;
+		
+		try
+		{
+			con = getConnection();
+			con.setAutoCommit(false);
+			
+			st = con.prepareStatement("UPDATE USER SET USER_PASSWORD=? WHERE USER_ID=?");
+			st.setString(1, newUserPassword);
+			st.setString(2, user.getUserId());
+			int line = st.executeUpdate();
+			if(line != 1)
 			{
-				st.close();
+				con.rollback();
 				isOK =  false;
+			}else
+			{
+				con.commit();
+				isOK = true;
 			}
+			
+			st.close();
+			
 		}
 		catch(SQLException e)
 		{
