@@ -5,6 +5,7 @@ import dao.UserDAO;
 import tool.Action;
 import java.util.List;
 import javax.servlet.http.*;
+import java.util.*;
 
 
 public class RegistUserStartAction extends Action
@@ -30,23 +31,22 @@ public class RegistUserStartAction extends Action
 		
 		
 		//ユーザーIDの入力値チェック
-        String idCheck = userId;
-        if(idCheck.matches("[0-9a-zA-Z]{1,100}")==false)
+        Boolean idCheck = ValidCheck.validUserId(userId);
+        if(idCheck==false)
         {
         	request.setAttribute("errorMessage", "ユーザーIDが誤りです。（１００文字以下）");
 			return "registUserStart.jsp";
         }
 		//ユーザー名の入力値チェック
-        String nameCheck = userName;
-        if(nameCheck.matches("[0-9a-zA-Zａ-ｚＡ-Ｚあ-ん]{1,100}")==false)
+        Boolean nameCheck = ValidCheck.validUserName(userName);
+        if(nameCheck==false)
         {
         	request.setAttribute("errorMessage", "ユーザー名が誤りです。（１００文字以下）");
 			return "registUserStart.jsp";
         }
 		//パスワード入力値チェック（最低８文字、半角英数字のみ）
-		// 検索する文字列を用意
-        String passCheck = userPass;
-        if(passCheck.matches("[0-9a-zA-Z]{8,100}")==false)
+        Boolean passCheck = ValidCheck.validUserPass(userPass);
+        if(passCheck==false)
         {
         	request.setAttribute("errorMessage", "パスワードが誤りです。（最低８文字、半角英数字のみ）");
 			return "registUserStart.jsp";
@@ -132,4 +132,6 @@ public class RegistUserStartAction extends Action
 			return "registUserStart.jsp";
 		}
 	}
+
+
 }
