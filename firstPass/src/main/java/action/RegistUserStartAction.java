@@ -27,6 +27,31 @@ public class RegistUserStartAction extends Action
 		String passwordConfirm=request.getParameter("passwordConfirm");
 		String userName=request.getParameter("userName");
 		
+		
+		
+		//ユーザーIDの入力値チェック
+        String idCheck = userId;
+        if(idCheck.matches("{1,100}")==false)
+        {
+        	request.setAttribute("errorMessage", "ユーザーIDが誤りです。（１００文字以下）");
+			return "registUserStart.jsp";
+        }
+		//ユーザー名の入力値チェック
+        String nameCheck = userId;
+        if(nameCheck.matches("{1,100}")==false)
+        {
+        	request.setAttribute("errorMessage", "ユーザー名が誤りです。（１００文字以下）");
+			return "registUserStart.jsp";
+        }
+		//パスワード入力値チェック（最低８文字、半角英数字のみ）
+		// 検索する文字列を用意
+        String passCheck = userPass;
+        if(passCheck.matches("[0-9a-zA-Z]{8,100}")==false)
+        {
+        	request.setAttribute("errorMessage", "パスワードが誤りです。（最低８文字、半角英数字のみ）");
+			return "registUserStart.jsp";
+        }
+			
 		//いずれかの項目が未入力だったら、エラー画面へ遷移
 		if(userId==null)
 		{
