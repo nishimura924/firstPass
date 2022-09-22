@@ -10,7 +10,7 @@ public class ValidCheck
 	//ユーザー名の入力値チェック（１００文字以内）
 	public static boolean validUserName(String userName)
 	{
-		return userName.matches("[0-9a-zA-Zａ-ｚＡ-Ｚあ-ん一-龠々]{1,100}");
+		return userName.matches("[0-9a-zA-Zａ-ｚＡ-Ｚあ-ん一-龠々～？！]{1,100}");
 	}
 	//ユーザーパスワードの入力値チェック（半角英数字、８文字以上）
 	public static boolean validUserPass(String userPass)
