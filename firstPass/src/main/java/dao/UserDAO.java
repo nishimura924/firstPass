@@ -324,7 +324,7 @@ public class UserDAO extends DAO
 					//beanの生成・設定
 					user.setUserId(rs.getString("USER_ID"));
 					user.setUserName(rs.getString("USER_NAME"));
-					user.setAdminFlag(rs.getString("ADMIN_FLG"));
+					user.setAdminFlag(rs.getString("ADMIN_FLAG"));
 					
 				}
 			
