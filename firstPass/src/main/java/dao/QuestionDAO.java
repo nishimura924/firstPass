@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class QuestionDAOkuroki extends DAO
+public class QuestionDAO extends DAO
 {	
 	//引数の値からDBを検索し、リストを返すメソッド　メソッド名仮置き
 	public List<Question> setQuestion(Conditions conditions)throws Exception
