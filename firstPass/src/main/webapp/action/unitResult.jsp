@@ -7,7 +7,7 @@
 	</head>
 	<body>
 	
-<c:if test="${quesitonCount == null}">
+<c:if test="${questionCount == null}">
 	<jsp:forward page="access-error.jsp" />
 </c:if>
 <c:choose>
