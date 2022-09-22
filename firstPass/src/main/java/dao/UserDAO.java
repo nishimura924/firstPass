@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 public class UserDAO extends DAO
 {
+	//ユーザ名がDBに存在するかの確認
 	public int userNameSearch(String newUserName) throws Exception
 	{
 		
@@ -21,8 +22,13 @@ public class UserDAO extends DAO
 		{
 			con = getConnection();
 			
-			//ユーザ名重複確認
-			st = con.prepareStatement("SELECT USER_NAME FROM USER where USER_NAME=? GROUP BY USER_NAME");
+			st = con.prepareStatement("SELECT"
+					+ " USER_NAME"
+					+ " FROM USER"
+					+ " WHERE"
+					+ " USER_NAME=?"
+					+ " GROUP BY"
+					+ " USER_NAME");
 			st.setString(1, newUserName);	
 			ResultSet rs = st.executeQuery();
 			
@@ -55,6 +61,7 @@ public class UserDAO extends DAO
 		return line;
 	}
 	
+	//パスワードがDBに存在するかの確認
 	public int userPasswordSearch(User user, String password) throws Exception
 	{
 		
@@ -66,10 +73,15 @@ public class UserDAO extends DAO
 		{
 			con = getConnection();
 			
-			//パスワード一致確認
-			st = con.prepareStatement("SELECT USER_PASSWORD FROM USER "
-					+ "WHERE USER_ID=? AND USER_PASSWORD=?"
-					+ "GROUP BY USER_PASSWORD");
+			st = con.prepareStatement("SELECT"
+					+ " USER_PASSWORD"
+					+ " FROM USER"
+					+ " WHERE"
+					+ " USER_ID=?"
+					+ " AND"
+					+ " USER_PASSWORD=?"
+					+ " GROUP BY"
+					+ " USER_PASSWORD");
 			st.setString(1, user.getUserId());
 			st.setString(2, password);
 			ResultSet rs = st.executeQuery();
@@ -101,7 +113,9 @@ public class UserDAO extends DAO
 		}
 		
 		return line;
-	}	
+	}
+	
+	//ユーザ名の更新
 	public boolean userNameUpdate(User user,  String newUserName) throws Exception
 	{
 		Connection con = null;
@@ -113,7 +127,10 @@ public class UserDAO extends DAO
 			con = getConnection();
 			con.setAutoCommit(false);
 			
-			st = con.prepareStatement("UPDATE USER SET USER_NAME=? WHERE USER_ID=?");
+			st = con.prepareStatement("UPDATE USER SET"
+					+ " USER_NAME=?"
+					+ " WHERE"
+					+ " USER_ID=?");
 			st.setString(1, newUserName);
 			st.setString(2, user.getUserId());
 			int line = st.executeUpdate();
@@ -160,6 +177,7 @@ public class UserDAO extends DAO
 		return isOK;
 	}
 	
+	//パスワードの更新
 	public boolean userPasswordUpdate(User user, String newUserPassword) throws Exception
 	{
 		Connection con = null;
@@ -171,7 +189,10 @@ public class UserDAO extends DAO
 			con = getConnection();
 			con.setAutoCommit(false);
 			
-			st = con.prepareStatement("UPDATE USER SET USER_PASSWORD=? WHERE USER_ID=?");
+			st = con.prepareStatement("UPDATE USER SET"
+					+ " USER_PASSWORD=?"
+					+ " WHERE"
+					+ " USER_ID=?");
 			st.setString(1, newUserPassword);
 			st.setString(2, user.getUserId());
 			int line = st.executeUpdate();
@@ -353,4 +374,180 @@ public class UserDAO extends DAO
 
 			}
 		}
+	
+	//ユーザ名、パスワード、管理者権限の全件確認
+	public List<User> adminSearchAll() throws Exception
+	{
+		
+		Connection con = null;
+		PreparedStatement st = null;
+		List<User> adminUserList = new ArrayList<User>();
+			
+		try
+		{
+			con = getConnection();
+			
+			st = con.prepareStatement("SELECT"
+					+ " USER_ID AS ID"
+					+ ", USER_NAME AS NAME"
+					+ ", ADMIN_FLAG AS FLAG"
+					+ " FROM USER GROUP BY"
+					+ " USER_ID"
+					+ ", USER_NAME"
+					+ ", ADMIN_FLAG");
+
+			ResultSet rs = st.executeQuery();
+				
+			while (rs.next())
+			{
+				User user = new User();
+				user.setUserId(rs.getString("ID"));
+				user.setUserName(rs.getString("NAME"));
+				user.setAdminFlag(rs.getString("FLAG"));
+				adminUserList.add(user);
+			}
+				
+			st.close();
+				
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+				
+		}finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		}
+			
+		return adminUserList;
+	}
+	
+	//管理者権限の確認
+	public int adminSearch(User user) throws Exception
+	{
+		int line = 0;
+		
+		Connection con = null;
+		PreparedStatement st = null;
+		
+		try
+		{
+			con = getConnection();
+			
+			st = con.prepareStatement("SELECT"
+					+ " USER_ID"
+					+ ", ADMIN_FLAG"
+					+ " FROM USER"
+					+ " WHERE"
+					+ " USER_ID=?"
+					+ " AND"
+					+ " ADMIN_FLAG=?"
+					+ " GROUP BY"
+					+ " USER_ID"
+					+ ", ADMIN_FLAG");
+			
+			st.setString(1, user.getUserId());
+			st.setString(2, user.getAdminFlag());
+			ResultSet rs = st.executeQuery();
+			
+			while (rs.next())
+			{
+				line += 1;
+			}
+			
+			st.close();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			
+		}finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+		}
+		
+		return line;
+	}
+	
+	//管理者権限の更新
+		public boolean adminUpdate(User user) throws Exception
+		{
+			Connection con = null;
+			boolean isOK = false;
+			PreparedStatement st = null;
+			
+			try
+			{
+				con = getConnection();
+				con.setAutoCommit(false);
+				
+				st = con.prepareStatement("UPDATE USER SET"
+						+ " ADMIN_FLAG=?"
+						+ " WHERE"
+						+ " USER_ID=?");
+				st.setString(1, user.getAdminFlag());
+				st.setString(2, user.getUserId());
+				int line = st.executeUpdate();
+				if(line != 1)
+				{
+					con.rollback();
+					isOK =  false;
+				}else
+				{
+					con.commit();
+					isOK = true;
+				}
+				
+				st.close();
+				
+			}
+			catch(SQLException e)
+			{
+				try
+				{
+					con.rollback();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+			finally
+			{
+				if(con != null)
+				{
+					try
+					{
+						con.setAutoCommit(true);
+						con.close();
+					}
+					catch (SQLException e3)
+					{
+						e3.printStackTrace();
+					}
+				}
+			}
+			
+			return isOK;
+		}
+	
 }
