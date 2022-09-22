@@ -19,8 +19,8 @@ public class RegistUserConfirmAction extends Action
 		HttpSession session = request.getSession();
 		
 		//userがnullならエラー画面に遷移(URL直接入力)
-		User user = (User)session.getAttribute("user");
-		if(user == null)
+		User inUser = (User)session.getAttribute("user");
+		if(inUser == null)
 		{
 			return "access-error.jsp";	
 		}
