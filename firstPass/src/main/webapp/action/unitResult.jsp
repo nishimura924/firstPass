@@ -6,6 +6,10 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
+	
+<c:if test="${quesitonCount == null}">
+	<jsp:forward page="access-error.jsp" />
+</c:if>
 <c:choose>
 	<c:when test="${user.userName == null }">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
