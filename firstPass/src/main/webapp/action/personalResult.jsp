@@ -44,5 +44,5 @@
 			%>
 		</table>
 	</body>
-	<%@include file="footer_menu.jsp" %>
+	<%@include file="footer_mypage.jsp" %>
 </html>
