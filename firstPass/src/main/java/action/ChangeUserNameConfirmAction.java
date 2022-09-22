@@ -6,7 +6,7 @@ package action;
  */
 
 import bean.User;
-import dao.UserDAOshimada;
+import dao.UserDAO;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -37,7 +37,7 @@ public class ChangeUserNameConfirmAction extends Action
 		
 		
 		String newUserName = request.getParameter("newUserName");
-		UserDAOshimada dao = new UserDAOshimada();
+		UserDAO dao = new UserDAO();
 		
 		//更新失敗のときはエラー画面へ遷移
 		if(! dao.update(userId, "", newUserName))

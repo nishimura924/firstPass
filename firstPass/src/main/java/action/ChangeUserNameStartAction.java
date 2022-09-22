@@ -6,7 +6,7 @@ package action;
  */
 
 import bean.User;
-import dao.UserDAOshimada;
+import dao.UserDAO;
 import tool.Action;
 import javax.servlet.http.*;
 
@@ -50,7 +50,7 @@ public class ChangeUserNameStartAction extends Action
 			return  "changeUserNameStart.jsp";
 		}
 		
-		UserDAOshimada dao = new UserDAOshimada();
+		UserDAO dao = new UserDAO();
 		
 		//変更後のユーザ名が他のユーザにて登録済だとユーザ名変更開始画面に遷移
 		if(0 < dao.search(userId, "", newUserName))
