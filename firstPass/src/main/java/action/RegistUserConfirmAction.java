@@ -18,6 +18,13 @@ public class RegistUserConfirmAction extends Action
 		//セッションの取得、生成
 		HttpSession session = request.getSession();
 		
+		//userがnullならエラー画面に遷移(URL直接入力)
+		User user = (User)session.getAttribute("user");
+		if(user == null)
+		{
+			return "access-error.jsp";	
+		}
+		
 		//リクエストパラメータの取得
 		String userId=request.getParameter("userId");
 		String userPass=request.getParameter("userPass");
