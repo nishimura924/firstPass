@@ -1,7 +1,7 @@
 package action;
 
 import bean.User;
-import dao.UserDAOmorishita;
+import dao.UserDAO;
 import tool.Action;
 import java.util.List;
 import javax.servlet.http.*;
@@ -75,7 +75,7 @@ public class RegistUserStartAction extends Action
 		}*/
 
 
-		UserDAOmorishita dao = new UserDAOmorishita();
+		UserDAO dao = new UserDAO();
 		int count = dao.countUser(userId,userName);
 		//request.setAttribute("user", user);
 		//return "registUserConfirm.jsp";
