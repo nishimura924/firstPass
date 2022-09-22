@@ -9,7 +9,7 @@
 <body>
 	
 	
-	<c:if test="${user.userName == null}">
+	<c:if test="${user == null}">
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 	
@@ -18,7 +18,14 @@
 	<br>
 	
 	パスワードの変更が完了しました。
-
+	
 </body>
-<%@include file="footer_mypage.jsp" %>
+	<c:choose>
+		<c:when test="${user.adminFlag == 0}" >
+			<%@include file="footer_mypage.jsp" %>	
+		</c:when>
+		<c:otherwise>
+			<%@include file="footer_admin.jsp" %>	
+		</c:otherwise>
+	</c:choose>
 </html>
