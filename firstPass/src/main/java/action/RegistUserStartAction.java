@@ -1,5 +1,10 @@
 package action;
 
+/**
+ * ユーザの入力を開始するためのアクション
+ * @author　森下
+ * @version　1.0.0
+ */
 import bean.User;
 import dao.UserDAO;
 import tool.Action;
