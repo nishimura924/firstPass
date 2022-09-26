@@ -48,7 +48,7 @@ public class UserListAction extends Action
 		List<User> adminUserList = new ArrayList<User>();
 		adminUserList = dao.adminSearchAll();
 		
-		session.setAttribute("adminUserList", adminUserList);
+		request.setAttribute("adminUserList", adminUserList);
 		
 		return "userList.jsp";
 	}
