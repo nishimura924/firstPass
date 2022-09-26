@@ -10,6 +10,10 @@
 		<c:if test="${user==null }">
 			<jsp:forward page="access-error.jsp"></jsp:forward>
 		</c:if>
+		
+		<c:if test="${user.adminFlag==1 }">
+			<jsp:forward page="admin.jsp"></jsp:forward>
+		</c:if>
 		${user.userName }さんのマイページ<br>
 		
 		<a href="changeUserNameStart.jsp">ユーザ名変更</a><br>
