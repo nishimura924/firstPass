@@ -20,9 +20,9 @@
 		<tr><td><a href="changeUserNameStart.jsp">自身のユーザ名変更</a></td></tr>
 		<tr><td><a href="changePasswordStart.jsp">自身のユーザパスワード変更</a></td></tr>
 		<tr><td><a href="userList.jsp">ユーザ一覧</a></td></tr>
-		<tr><td><a href="registQuestionStart.jsp">出題問題追加</a></td></tr>
+<%-- 		<tr><td><a href="registQuestionStart.jsp">出題問題追加</a></td></tr> --%>
 		<tr><td><a href="changeAdminStart.jsp">管理者権限変更</a></td></tr>
-		<tr><td><a href="userDeleteStart.jsp">ユーザ削除</a></td></tr>
+<%--		<tr><td><a href="deleteUserStart.jsp">ユーザ削除</a></td></tr> --%>
 	</table>
 
 

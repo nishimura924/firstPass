@@ -549,5 +549,116 @@ public class UserDAO extends DAO
 			
 			return isOK;
 		}
-	
+		
+		//ユーザ名がDBに存在するかの確認
+		public int userIdSearch(String userId) throws Exception
+		{
+			
+			int line = 0;
+			Connection con = null;
+			PreparedStatement st = null;
+			
+			try
+			{
+				con = getConnection();
+				
+				st = con.prepareStatement("SELECT"
+						+ " USER_ID"
+						+ " FROM USER"
+						+ " WHERE"
+						+ " USER_ID=?"
+						+ " GROUP BY"
+						+ " USER_ID");
+				st.setString(1, userId);	
+				ResultSet rs = st.executeQuery();
+				
+				while (rs.next())
+				{
+					line += 1;
+				}
+				
+				st.close();
+				
+			}catch(SQLException e)
+			{
+				e.printStackTrace();
+				
+			}finally
+			{
+				if(con != null)
+				{
+					try
+					{
+						con.close();
+					}
+					catch (SQLException e2)
+					{
+						e2.printStackTrace();
+					}
+				}
+			}
+			
+			return line;
+		}	
+		
+		//ユーザの削除
+		public boolean deleteUser(String userId) throws Exception
+		{
+			Connection con = null;
+			boolean isOK = false;
+			PreparedStatement st = null;
+			
+			try
+			{
+				con = getConnection();
+				con.setAutoCommit(false);
+						
+				st = con.prepareStatement("DELETE FROM USER "
+						+ " WHERE"
+						+ " USER_ID=?");
+				st.setString(1, userId);
+				int line = st.executeUpdate();
+				if(line != 1)
+				{
+					con.rollback();
+					isOK =  false;
+				}else
+				{
+					con.commit();
+					isOK = true;
+				}
+				
+				st.close();
+				
+			}
+			catch(SQLException e)
+			{
+				try
+				{
+					con.rollback();
+				}
+				catch (SQLException e2)
+				{
+					e2.printStackTrace();
+				}
+			}
+			finally
+			{
+				if(con != null)
+				{
+					try
+					{
+						con.setAutoCommit(true);
+						con.close();
+					}
+					catch (SQLException e3)
+					{
+						e3.printStackTrace();
+					}
+				}
+			}
+				
+			return isOK;
+		}
+
 }
