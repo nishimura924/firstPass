@@ -23,6 +23,8 @@
 <%-- 		<tr><td><a href="registQuestionStart.jsp">出題問題追加</a></td></tr> --%>
 		<tr><td><a href="changeAdminStart.jsp">管理者権限変更</a></td></tr>
 <%--		<tr><td><a href="deleteUserStart.jsp">ユーザ削除</a></td></tr> --%>
+		<tr><td><a href="../action/Logout.action">ログアウト</a></td></tr>
+
 	</table>
 
 
