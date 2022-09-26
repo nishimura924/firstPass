@@ -28,13 +28,13 @@ public class AllResultAction extends Action
 		
 		if(request.getParameter("fromDate").isEmpty())
 		{
-			request.setAttribute("errorMsgFrom", "日付を入力してください。");
+			request.setAttribute("errorMsgFrom", "日付が不正です。");
 			return "allResult.jsp";
 		}
 		
 		if(request.getParameter("toDate").isEmpty())
 		{
-			request.setAttribute("errorMsgTo", "日付を入力してください。");
+			request.setAttribute("errorMsgTo", "日付が不正です");
 			return "allResult.jsp";
 		}
 		
