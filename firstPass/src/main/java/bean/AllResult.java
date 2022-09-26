@@ -8,6 +8,7 @@ public class AllResult implements java.io.Serializable
 	private String correctCount;//正答数
 	private String[] genre;
 	private double correctRate;//正答率
+	private int rank;//順位
 
 	//getter
 	public String getUserId()
@@ -30,7 +31,10 @@ public class AllResult implements java.io.Serializable
 	{
 		return this.genre;
 	}
-	
+	public int getRank()
+	{
+		return this.rank;
+	}
 	
 	//setter
 	public void setUserId(String userId)
@@ -53,5 +57,8 @@ public class AllResult implements java.io.Serializable
 	{
 		this.genre = genre;
 	}
-
+	public void setRank(int rank)
+	{
+		this.rank = rank;
+	}
 }

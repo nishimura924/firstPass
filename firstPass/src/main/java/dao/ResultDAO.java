@@ -186,7 +186,7 @@ public class ResultDAO extends DAO
 				}
 			}
 		}
-		
+		//「ランキング」用のメソッド
 		public List<AllResult> selectResult(String difficulty,String sort,Date answerDateFrom,Date answerDateTo,AllResult allResult)throws Exception
 		{
 			//リストの取得
@@ -249,9 +249,11 @@ public class ResultDAO extends DAO
 			}
 			//メソッド共通機能（beanへの設定）
 			ResultSet rs =st.executeQuery();
+			int rank = 1;
 			while(rs.next())
 			{
 				AllResult showResult = new AllResult();
+				showResult.setRank(rank);
 				showResult.setUserId(rs.getString("USER.USER_NAME"));
 				showResult.setAnswerCount(rs.getString("COUNT(RESULT.COUNT_UNIT)"));
 				showResult.setCorrectCount(rs.getInt("SUM(RESULT.IS_CORRECT)")+"");

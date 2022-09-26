@@ -103,7 +103,7 @@ TO<input type="date" name="toDate" value=${toDate } >
 	
 	<c:forEach var="AllResult" items="${list}" varStatus="status">
 		</tr>
-		<td>${status.index +1}位</td>
+		<td>${AllResult.rank}位</td>
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>

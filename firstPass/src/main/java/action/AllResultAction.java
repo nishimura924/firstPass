@@ -49,7 +49,62 @@ public class AllResultAction extends Action
 		AllResult allResult = new AllResult();
 		allResult.setGenre(genre);
 		List<AllResult> list = dao.selectResult(difficulty,sort,answerDateFrom,answerDateTo,allResult);
+		
+		int rank = 1;
+		
+		//回答数でソートした場合
+		if(sort.equals("COUNT(COUNT_UNIT)"))
+		{
+			for(int i=1; i<list.size();i++)
+			{
+				if(list.get(i).getAnswerCount()==list.get(i-1).getAnswerCount())
+				{
+					rank =list.get(i-1).getRank();
+					list.get(i).setRank(rank);
+				}
+				else 
+				{
+					rank =i+1;
+					list.get(i).setRank(rank);
+				}
+			}
+		}
+		//正答数でソートした場合
+		else if(sort.equals("SUM(IS_CORRECT)"))
+		{
+			for(int i=1; i<list.size();i++)
+			{
+				if(list.get(i).getCorrectCount()==list.get(i-1).getCorrectCount())
+				{
+					rank =list.get(i-1).getRank();
+					list.get(i).setRank(rank);
+				}
+				else
+				{
+					rank =i+1;
+					list.get(i).setRank(rank);
+				}
+			}
+		}
+		//正答率でソートした場合
+		else if(sort.equals("collectRate"))
+		{
+			for(int i=1; i<list.size();i++)
+			{
+				if(list.get(i).getCorrectRate()==list.get(i-1).getCorrectRate())
+				{
+					rank =list.get(i-1).getRank();
+					list.get(i).setRank(rank);
+				}
+				else
+				{
+					rank =i+1;
+					list.get(i).setRank(rank);
+				}
 				
+			}
+		}
+		
 		//ソート別の算出方法の分岐
 		
 		session.setAttribute("list", list);
