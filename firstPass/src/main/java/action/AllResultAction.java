@@ -29,7 +29,7 @@ public class AllResultAction extends Action
 		Date answerDateFrom = Date.valueOf(request.getParameter("fromDate"));
 		Date answerDateTo = Date.valueOf(request.getParameter("toDate"));
 		String sort = request.getParameter("sort");
-
+		//int sort = Integer.parseInt(request.getParameter("sort"));
 		
 		//session.setAttribute("answerDateFrom",answerDateFrom);
 		//if(difficulty.equals("1")) difficulty="";

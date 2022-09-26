@@ -4,8 +4,8 @@ package bean;
 public class AllResult implements java.io.Serializable
 {
 	private String userId;//ユーザID
-	private String answerCount;//回答数
-	private String correctCount;//正答数
+	private int answerCount;//回答数
+	private int correctCount;//正答数
 	private String[] genre;
 	private double correctRate;//正答率
 	private int rank;//順位
@@ -15,11 +15,11 @@ public class AllResult implements java.io.Serializable
 	{
 		return userId;
 	}
-	public String getAnswerCount()
+	public int getAnswerCount()
 	{
 		return answerCount;
 	}
-	public String getCorrectCount()
+	public int getCorrectCount()
 	{
 		return correctCount;
 	}
@@ -41,11 +41,11 @@ public class AllResult implements java.io.Serializable
 	{
 		this.userId=userId;
 	}
-	public void setAnswerCount(String answerCount)
+	public void setAnswerCount(int answerCount)
 	{
 		this.answerCount=answerCount;
 	}
-	public void setCorrectCount(String correctCount)
+	public void setCorrectCount(int correctCount)
 	{
 		this.correctCount=correctCount;
 	}
