@@ -36,5 +36,8 @@
 </body>
 </html>
 
-<a href="myPage.jsp">マイページへ戻る</a>
+ 	<c:if test="${user != null}">
+		<a href="myPage.jsp">マイページへ戻る</a>
+	</c:if>
+
 <%@include file="footer_menu.jsp" %>
