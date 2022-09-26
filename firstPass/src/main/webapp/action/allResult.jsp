@@ -20,6 +20,7 @@
 	<input type="checkbox" name="genre" value="${genre }" checked="checked">${genre }
 </c:forEach>
 <hr>
+${errorMsg}
 
 <P>難易度</P>
 <c:choose>
@@ -41,23 +42,26 @@
 
 <P>ユーザ実施期間</P>
 <c:choose>
-<c:when test="${fromDate==null }">
+<c:when test="${fromDate == null }">
 FROM<input type="date" name="fromDate" value="2022-01-01" >
 </c:when>
-<c:when test="${fromDate!=null }">
+<c:when test="${fromDate != null }">
 FROM<input type="date" name="fromDate" value=${fromDate } >
 </c:when>
 </c:choose>
+${errorMsgFrom}
 
 <c:choose>
-<c:when test="${toDate==null }">
+<c:when test="${toDate == null }">
 TO<input type="date" name="toDate" value="2100-01-01" >
 </c:when>
-<c:when test="${toDate!=null }">
+<c:when test="${toDate != null  }">
 TO<input type="date" name="toDate" value=${toDate } >
 </c:when>
 </c:choose>
+${errorMsgTo}
 <hr>
+
 
 <c:choose>
 <c:when test="${sort==null }">

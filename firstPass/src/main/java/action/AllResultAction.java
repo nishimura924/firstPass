@@ -21,28 +21,50 @@ public class AllResultAction extends Action
 {
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{
-		HttpSession session = request.getSession();
-		//検索条件の取得
-		String[] genre = request.getParameterValues("genre");		
+		//分野条件の取得
+		String[] genre = request.getParameterValues("genre");	
+		//難易度条件の取得
 		String difficulty = request.getParameter("difficulty");
+		
+		if(request.getParameter("fromDate").isEmpty())
+		{
+			request.setAttribute("errorMsgFrom", "日付を入力してください。");
+			return "allResult.jsp";
+		}
+		
+		if(request.getParameter("toDate").isEmpty())
+		{
+			request.setAttribute("errorMsgTo", "日付を入力してください。");
+			return "allResult.jsp";
+		}
+		
 		//日付の条件設定
 		Date answerDateFrom = Date.valueOf(request.getParameter("fromDate"));
 		Date answerDateTo = Date.valueOf(request.getParameter("toDate"));
-		String sort = request.getParameter("sort");
-		//int sort = Integer.parseInt(request.getParameter("sort"));
 		
-		//session.setAttribute("answerDateFrom",answerDateFrom);
-		//if(difficulty.equals("1")) difficulty="";
-		if(answerDateFrom == null) 
+		/*if(answerDateFrom == null) 
 		{
 			request.setAttribute("errorMsgFrom", "日付を選択してください");
 			return "allResult.jsp";
 		}
+		
 		if(answerDateTo == null)
 		{
 			request.setAttribute("errorMsgTo", "日付を選択してください");
 			return "allResult.jsp";
+		}*/
+
+		//ソート順の条件取得
+		String sort = request.getParameter("sort");
+		
+		//分野を選択しない場合は「該当なし」で表示させる
+		if(genre==null)
+		{
+			request.setAttribute("errorMsg", "分野を選択してください。");
+			return "allResult.jsp";
 		}
+
+
 
 		//結果のDBから値を取得
 		ResultDAO dao = new ResultDAO();
@@ -107,7 +129,7 @@ public class AllResultAction extends Action
 		
 		//ソート別の算出方法の分岐
 		
-		session.setAttribute("list", list);
+		request.setAttribute("list", list);
 		
 		request.setAttribute("difficulty", difficulty);
 		request.setAttribute("fromDate", answerDateFrom);
