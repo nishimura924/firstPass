@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>新規登録開始</title>
 </head>
 <body>
 
@@ -17,17 +17,27 @@
 
 <form action="RegistUserStart.action" method="post">
 
-ユーザID（半角英数字）<input type="text" name="userId" value=${userId }>
+ユーザID（半角英数字）
 <br>
-パスワード（半角英数字、8文字以上）<input type="password" name="userPass"value=${userPass }>
+<input type="text" name="userId" value=${userId }>
 <br>
-パスワード（確認用）<input type="password" name="passwordConfirm"value=${passwordConfirm }>
+パスワード（半角英数字、8文字以上）
 <br>
-ユーザ名<input type="text" name="userName"value=${userName }>
+<input type="password" name="userPass"value=${userPass }>
+<br>
+パスワード（確認用）
+<br>
+<input type="password" name="passwordConfirm"value=${passwordConfirm }>
+<br>
+ユーザ名（半角・全角英数字、漢字・かな・カナ、記号（！？ー～＿＊※＠））
+<br>
+<input type="text" name="userName"value=${userName }>
 <br>
 
 <p><input type = "submit" value="次へ"></p>
 <p>${errorMessage }</p>
 </form>
+
+<%@include file="footer_menu.jsp" %>
 </body>
 </html>
