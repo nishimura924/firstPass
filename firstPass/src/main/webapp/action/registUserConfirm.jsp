@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>新規登録確認</title>
 </head>
 <body>
 <c:if test="${user != null}">
