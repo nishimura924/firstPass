@@ -294,8 +294,9 @@ public class QuestionDAO extends DAO
 			//コネクションの取得
 			con = getConnection();
 		
+			//問題TBLに登録されている年度を降順で取得
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR;");
+			st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR ORDER BY YEAR DESC;");
 			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
