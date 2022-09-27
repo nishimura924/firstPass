@@ -22,7 +22,8 @@ public class AllResultAction extends Action
 	public String execute(HttpServletRequest request,HttpServletResponse response)throws Exception
 	{
 		//分野条件の取得
-		String[] genre = request.getParameterValues("genre");	
+		String[] genreCheck = request.getParameterValues("genreCheck");	
+		String[] genreHidden = request.getParameterValues("genreHidden");	
 		//難易度条件の取得
 		String difficulty = request.getParameter("difficulty");
 		
@@ -41,35 +42,21 @@ public class AllResultAction extends Action
 		//日付の条件設定
 		Date answerDateFrom = Date.valueOf(request.getParameter("fromDate"));
 		Date answerDateTo = Date.valueOf(request.getParameter("toDate"));
-		
-		/*if(answerDateFrom == null) 
-		{
-			request.setAttribute("errorMsgFrom", "日付を選択してください");
-			return "allResult.jsp";
-		}
-		
-		if(answerDateTo == null)
-		{
-			request.setAttribute("errorMsgTo", "日付を選択してください");
-			return "allResult.jsp";
-		}*/
 
 		//ソート順の条件取得
 		String sort = request.getParameter("sort");
 		
 		//分野を選択しない場合は「該当なし」で表示させる
-		if(genre==null)
+		if(genreCheck==null)
 		{
 			request.setAttribute("errorMsg", "分野を選択してください。");
 			return "allResult.jsp";
 		}
 
-
-
 		//結果のDBから値を取得
 		ResultDAO dao = new ResultDAO();
 		AllResult allResult = new AllResult();
-		allResult.setGenre(genre);
+		allResult.setGenre(genreCheck);
 		List<AllResult> list = dao.selectResult(difficulty,sort,answerDateFrom,answerDateTo,allResult);
 		
 		int rank = 1;
@@ -127,10 +114,11 @@ public class AllResultAction extends Action
 			}
 		}
 		
-		//ソート別の算出方法の分岐
 		
+		//条件選択情報の保持
 		request.setAttribute("list", list);
-		
+		request.setAttribute("genreCheck", genreCheck);
+		request.setAttribute("genreHidden", genreHidden);
 		request.setAttribute("difficulty", difficulty);
 		request.setAttribute("fromDate", answerDateFrom);
 		request.setAttribute("toDate", answerDateTo);

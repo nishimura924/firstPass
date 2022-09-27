@@ -16,11 +16,12 @@
 			<jsp:forward page="AllResultQuestion.action"></jsp:forward>
 		</c:if>
 
-<c:forEach var="genre" items="${genreList }">
-	<input type="checkbox" name="genre" value="${genre }" checked="checked">${genre }
-</c:forEach>
+		<c:forEach var="genre" items="${genreList }">
+			<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
+		</c:forEach>
+		<br>
+		${errorMsg}
 <hr>
-${errorMsg}
 
 <P>難易度</P>
 <c:choose>
