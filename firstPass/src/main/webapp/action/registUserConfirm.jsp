@@ -35,8 +35,13 @@
 
 <p><input type = "submit" value="登録"></p>
 <p>${registError }</p>
-<a href="registUserStart.jsp">戻る</a>
 </form>
+
+<form action="registUserStart.jsp" method="post">
+		<input type="submit" value="戻る">
+</form>
+
+<%@include file="footer_menu.jsp" %>
 
 </body>
 </html>
