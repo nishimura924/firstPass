@@ -23,7 +23,7 @@ public class AllResultAction extends Action
 	{
 		//分野条件の取得
 		String[] genreCheck = request.getParameterValues("genreCheck");	
-		String[] genreHidden = request.getParameterValues("genreHidden");	
+		//String[] genreHidden = request.getParameterValues("genreHidden");	
 		//難易度条件の取得
 		String difficulty = request.getParameter("difficulty");
 		
@@ -118,7 +118,7 @@ public class AllResultAction extends Action
 		//条件選択情報の保持
 		request.setAttribute("list", list);
 		request.setAttribute("genreCheck", genreCheck);
-		request.setAttribute("genreHidden", genreHidden);
+		//request.setAttribute("genreHidden", genreHidden);
 		request.setAttribute("difficulty", difficulty);
 		request.setAttribute("fromDate", answerDateFrom);
 		request.setAttribute("toDate", answerDateTo);
