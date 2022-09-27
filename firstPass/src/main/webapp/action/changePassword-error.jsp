@@ -9,11 +9,7 @@
 
 	DB操作でエラーとなりました。<br>
 	時間を置いて再度お試しください。<br>
-	
-	<form action="index.jsp" method="post">
-		<input type="submit" value="トップ画面に戻る">
-	</form>
 
 </body>
-
+<%@include file="footer_menu.jsp" %>
 </html>

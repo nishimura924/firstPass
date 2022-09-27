@@ -41,6 +41,7 @@
 	
 	<form action="ChangeAdminConfirm.action" method="post">
 		<input type="hidden" name="userId" value=${userChangeAdmin.userId }>
+		<input type="hidden" name="userAdmin" value=${userAdmin }>	
 		<c:choose>
 			<c:when test= "${userChangeAdmin.adminFlag == 0}" >
 				<input type="hidden" name="newUserAdmin" value="1">	

@@ -38,29 +38,54 @@
 	<br>
 	
 	<form action="Answer.action" method="post">	
+	<%-- 	<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect } --%>
+		<input type="radio" name="choice" value="ア"
+			<c:if test="${choice == 'ア' }" > checked </c:if> >ア：
+			<c:choose>		
+				<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+					<img src="../img/${questionOfSet[0].choice1.choice}" /><br>
+				</c:when>
+				<c:otherwise>
+					${questionOfSet[0].choice1.choice }<br>
+				</c:otherwise>
+			</c:choose>
+		
+		<input type="radio" name="choice" value="イ"			
+			<c:if test="${choice == 'イ' }" > checked </c:if> >イ：
+			<c:choose>		
+				<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+					<img src="../img/${questionOfSet[0].choice2.choice}" /><br>
+				</c:when>
+				<c:otherwise>
+					${questionOfSet[0].choice2.choice }<br>
+				</c:otherwise>
+			</c:choose>
+				
 		<c:choose>
-			<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
-				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：<img src="../img/${questionOfSet[0].choice1.choice}" /><br>
-				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：<img src="../img/${questionOfSet[0].choice2.choice}" /><br>
-				<c:choose>
-					<c:when test="${conditions.difficulty == 0 }" >
-						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：<img src="../img/${questionOfSet[0].choice3.choice}" /><br>
-						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：<img src="../img/${questionOfSet[0].choice4.choice}" /><br><br>
-					</c:when>
-					<c:otherwise></c:otherwise>
-				</c:choose>			
-			</c:when>
-			<c:otherwise>
-				<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect }>ア：${questionOfSet[0].choice1.choice }<br>
-				<input type="radio" name="choice" value=${questionOfSet[0].choice2.isCorrect }>イ：${questionOfSet[0].choice2.choice }<br>
-				<c:choose>
-					<c:when test="${conditions.difficulty == 0 }" >		
-						<input type="radio" name="choice" value=${questionOfSet[0].choice3.isCorrect }>ウ：${questionOfSet[0].choice3.choice }<br>
-						<input type="radio" name="choice" value=${questionOfSet[0].choice4.isCorrect }>エ：${questionOfSet[0].choice4.choice }<br><br>
-					</c:when>
-					<c:otherwise></c:otherwise>	
-				</c:choose>
-			</c:otherwise>
+		<c:when test="${conditions.difficulty == 0 }" >
+		<input type="radio" name="choice" value="ウ"
+			<c:if test="${choice == 'ウ' }" > checked </c:if> >ウ：
+			<c:choose>
+				<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+					<img src="../img/${questionOfSet[0].choice3.choice}" /><br>
+				</c:when>
+				<c:otherwise>
+					${questionOfSet[0].choice3.choice }<br>
+				</c:otherwise>
+			</c:choose>					
+								
+		<input type="radio" name="choice" value="エ"
+			<c:if test="${choice == 'エ' }" > checked </c:if> >エ：
+			<c:choose>
+				<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
+					<img src="../img/${questionOfSet[0].choice4.choice}" /><br><br>
+				</c:when>
+				<c:otherwise>
+					${questionOfSet[0].choice4.choice }<br><br>
+				</c:otherwise>
+			</c:choose>					
+		</c:when>
+		<c:otherwise></c:otherwise>
 		</c:choose>
 		
 		<br>

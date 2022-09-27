@@ -116,7 +116,7 @@ public class UserDAO extends DAO
 	}
 	
 	//ユーザ名の更新
-	public boolean userNameUpdate(User user,  String newUserName) throws Exception
+	public boolean userNameUpdate(User user,  String userName, String newUserName) throws Exception
 	{
 		Connection con = null;
 		boolean isOK = false;
@@ -130,9 +130,12 @@ public class UserDAO extends DAO
 			st = con.prepareStatement("UPDATE USER SET"
 					+ " USER_NAME=?"
 					+ " WHERE"
-					+ " USER_ID=?");
+					+ " USER_ID=?"
+					+ " AND"
+					+ " USER_NAME=?");
 			st.setString(1, newUserName);
 			st.setString(2, user.getUserId());
+			st.setString(3, userName);
 			int line = st.executeUpdate();
 			
 			if(line != 1)
@@ -178,7 +181,7 @@ public class UserDAO extends DAO
 	}
 	
 	//パスワードの更新
-	public boolean userPasswordUpdate(User user, String newUserPassword) throws Exception
+	public boolean userPasswordUpdate(User user, String password, String newUserPassword) throws Exception
 	{
 		Connection con = null;
 		boolean isOK = false;
@@ -192,9 +195,13 @@ public class UserDAO extends DAO
 			st = con.prepareStatement("UPDATE USER SET"
 					+ " USER_PASSWORD=?"
 					+ " WHERE"
-					+ " USER_ID=?");
+					+ " USER_ID=?"
+					+ " AND"
+					+ " USER_PASSWORD=?");
 			st.setString(1, newUserPassword);
 			st.setString(2, user.getUserId());
+			st.setString(3, password);
+			
 			int line = st.executeUpdate();
 			if(line != 1)
 			{
@@ -319,61 +326,61 @@ public class UserDAO extends DAO
 	}
 	
 	//引数の値からDBを検索し、オブジェクトを返すメソッド
-		public User doLogin(String userId ,String password)throws Exception
+	public User doLogin(String userId ,String password)throws Exception
+	{
+		//戻り値のUserをインスタンス化
+		User user = new User();
+	
+		//初期化
+		Connection con =null; 
+		try
 		{
-			//戻り値のUserをインスタンス化
-			User user = new User();
+			//コネクションの取得
+			con = getConnection();
 			
-			//初期化
-			Connection con =null; 
-			try
+			PreparedStatement st;
+			st=con.prepareStatement("select * from USER where USER_ID=? and USER_PASSWORD=?");
+				
+			//引数のloginとpasswordを設定
+			st.setString(1, userId);
+			st.setString(2, password);
+			//SQLの実行と結果の取得
+			ResultSet rs = st.executeQuery();
+				
+			while(rs.next())
 			{
-				//コネクションの取得
-				con = getConnection();
-				
-				PreparedStatement st;
-				st=con.prepareStatement("select * from USER where USER_ID=? and USER_PASSWORD=?");
-				
-				//引数のloginとpasswordを設定
-				st.setString(1, userId);
-				st.setString(2, password);
-				//SQLの実行と結果の取得
-				ResultSet rs = st.executeQuery();
-				
-				while(rs.next())
-				{
-					//beanの生成・設定
-					user.setUserId(rs.getString("USER_ID"));
-					user.setUserName(rs.getString("USER_NAME"));
-					user.setAdminFlag(rs.getString("ADMIN_FLAG"));
+				//beanの生成・設定
+				user.setUserId(rs.getString("USER_ID"));
+				user.setUserName(rs.getString("USER_NAME"));
+				user.setAdminFlag(rs.getString("ADMIN_FLAG"));
 					
-				}
+			}
 			
-				st.close();
-				//作成したbeanを戻り値として返却
-				return user;
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
-				return user;
-			}
-			finally
-			{
-				if(con!=null)
-				{
-					try
-					{
-						con.close();	
-					}
-					catch(SQLException e)
-					{
-						e.printStackTrace();
-					}
-				}
-
-			}
+			st.close();
+			//作成したbeanを戻り値として返却
+			return user;
 		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+			return user;
+		}
+		finally
+		{
+			if(con!=null)
+			{
+				try
+				{
+					con.close();	
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+
+		}
+	}
 	
 	//ユーザ名、パスワード、管理者権限の全件確認
 	public List<User> adminSearchAll() throws Exception
@@ -489,176 +496,179 @@ public class UserDAO extends DAO
 	}
 	
 	//管理者権限の更新
-		public boolean adminUpdate(User user) throws Exception
-		{
-			Connection con = null;
-			boolean isOK = false;
-			PreparedStatement st = null;
+	public boolean adminUpdate(User user, String adminFlag) throws Exception
+	{
+		Connection con = null;
+		boolean isOK = false;
+		PreparedStatement st = null;
 			
+		try
+		{
+			con = getConnection();
+			con.setAutoCommit(false);
+				
+			st = con.prepareStatement("UPDATE USER SET"
+					+ " ADMIN_FLAG=?"
+					+ " WHERE"
+					+ " USER_ID=?"
+					+ " AND"
+					+ " ADMIN_FLAG=?");
+			st.setString(1, user.getAdminFlag());
+			st.setString(2, user.getUserId());
+			st.setString(3, adminFlag);
+			int line = st.executeUpdate();
+			if(line != 1)
+			{
+				con.rollback();
+				isOK =  false;
+			}else
+			{
+				con.commit();
+				isOK = true;
+			}
+				
+			st.close();
+				
+		}
+		catch(SQLException e)
+		{
 			try
 			{
-				con = getConnection();
-				con.setAutoCommit(false);
-				
-				st = con.prepareStatement("UPDATE USER SET"
-						+ " ADMIN_FLAG=?"
-						+ " WHERE"
-						+ " USER_ID=?");
-				st.setString(1, user.getAdminFlag());
-				st.setString(2, user.getUserId());
-				int line = st.executeUpdate();
-				if(line != 1)
-				{
-					con.rollback();
-					isOK =  false;
-				}else
-				{
-					con.commit();
-					isOK = true;
-				}
-				
-				st.close();
-				
+				con.rollback();
 			}
-			catch(SQLException e)
+			catch (SQLException e2)
+			{
+				e2.printStackTrace();
+			}
+		}
+		finally
+		{
+			if(con != null)
 			{
 				try
 				{
-					con.rollback();
+					con.setAutoCommit(true);
+					con.close();
+				}
+				catch (SQLException e3)
+				{
+					e3.printStackTrace();
+				}
+			}
+			}
+			
+		return isOK;
+		}
+		
+	//ユーザ名がDBに存在するかの確認
+	public int userIdSearch(String userId) throws Exception
+	{
+			
+		int line = 0;
+		Connection con = null;
+		PreparedStatement st = null;
+			
+		try
+		{
+			con = getConnection();
+				
+			st = con.prepareStatement("SELECT"
+					+ " USER_ID"
+					+ " FROM USER"
+					+ " WHERE"
+					+ " USER_ID=?"
+					+ " GROUP BY"
+					+ " USER_ID");
+			st.setString(1, userId);	
+			ResultSet rs = st.executeQuery();
+				
+			while (rs.next())
+			{
+				line += 1;
+			}
+				
+			st.close();
+				
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+				
+		}finally
+		{
+			if(con != null)
+			{
+				try
+				{
+					con.close();
 				}
 				catch (SQLException e2)
 				{
 					e2.printStackTrace();
 				}
 			}
-			finally
-			{
-				if(con != null)
-				{
-					try
-					{
-						con.setAutoCommit(true);
-						con.close();
-					}
-					catch (SQLException e3)
-					{
-						e3.printStackTrace();
-					}
-				}
-			}
-			
-			return isOK;
 		}
+			
+		return line;
+	}	
 		
-		//ユーザ名がDBに存在するかの確認
-		public int userIdSearch(String userId) throws Exception
+	//ユーザの削除
+	public boolean deleteUser(String userId) throws Exception
+	{
+		Connection con = null;
+		boolean isOK = false;
+		PreparedStatement st = null;
+			
+		try
 		{
-			
-			int line = 0;
-			Connection con = null;
-			PreparedStatement st = null;
-			
-			try
-			{
-				con = getConnection();
-				
-				st = con.prepareStatement("SELECT"
-						+ " USER_ID"
-						+ " FROM USER"
-						+ " WHERE"
-						+ " USER_ID=?"
-						+ " GROUP BY"
-						+ " USER_ID");
-				st.setString(1, userId);	
-				ResultSet rs = st.executeQuery();
-				
-				while (rs.next())
-				{
-					line += 1;
-				}
-				
-				st.close();
-				
-			}catch(SQLException e)
-			{
-				e.printStackTrace();
-				
-			}finally
-			{
-				if(con != null)
-				{
-					try
-					{
-						con.close();
-					}
-					catch (SQLException e2)
-					{
-						e2.printStackTrace();
-					}
-				}
-			}
-			
-			return line;
-		}	
-		
-		//ユーザの削除
-		public boolean deleteUser(String userId) throws Exception
-		{
-			Connection con = null;
-			boolean isOK = false;
-			PreparedStatement st = null;
-			
-			try
-			{
-				con = getConnection();
-				con.setAutoCommit(false);
+			con = getConnection();
+			con.setAutoCommit(false);
 						
-				st = con.prepareStatement("DELETE FROM USER "
-						+ " WHERE"
-						+ " USER_ID=?");
-				st.setString(1, userId);
-				int line = st.executeUpdate();
-				if(line != 1)
-				{
-					con.rollback();
-					isOK =  false;
-				}else
-				{
-					con.commit();
-					isOK = true;
-				}
-				
-				st.close();
-				
+			st = con.prepareStatement("DELETE FROM USER "
+					+ " WHERE"
+					+ " USER_ID=?");
+			st.setString(1, userId);
+			int line = st.executeUpdate();
+			if(line != 1)
+			{
+				con.rollback();
+				isOK =  false;
+			}else
+			{
+				con.commit();
+				isOK = true;
 			}
-			catch(SQLException e)
+				
+			st.close();
+			
+		}
+		catch(SQLException e)
+		{
+			try
+			{
+				con.rollback();
+			}
+			catch (SQLException e2)
+			{
+				e2.printStackTrace();
+			}
+		}
+		finally
+		{
+			if(con != null)
 			{
 				try
 				{
-					con.rollback();
+					con.setAutoCommit(true);
+					con.close();
 				}
-				catch (SQLException e2)
+				catch (SQLException e3)
 				{
-					e2.printStackTrace();
+					e3.printStackTrace();
 				}
 			}
-			finally
-			{
-				if(con != null)
-				{
-					try
-					{
-						con.setAutoCommit(true);
-						con.close();
-					}
-					catch (SQLException e3)
-					{
-						e3.printStackTrace();
-					}
-				}
-			}
-				
-			return isOK;
 		}
+				
+		return isOK;
+	}
 
 }

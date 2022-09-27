@@ -87,6 +87,7 @@ public class ChangePasswordStartAction extends Action
 		}
 				
 		//問題なければパスワード変更確認画面へ遷移
+		request.setAttribute("password",password);
 		request.setAttribute("newPassword",newPassword);
 		return "changePasswordConfirm.jsp";
 	}

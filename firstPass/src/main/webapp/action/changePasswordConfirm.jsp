@@ -19,6 +19,7 @@
 	<br>
 	
 	<form action="ChangePasswordConfirm.action" method="post">
+		<input type="hidden" name="password" value=${password }>
 		<input type="hidden" name="newPassword" value=${newPassword }>
 		<input type="submit" value="変更">
 	</form>

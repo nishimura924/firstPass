@@ -135,7 +135,8 @@ public class ResultAction extends Action
 		session.setAttribute("summary", summary);
 		
 		
-		//　コメントの登録(ログインユーザのみ)
+		//　コメントの登録(ログインユーザのみ)はAnswer.actionのみに変更
+		/*
 		if(user != null)
 		{
 			CommentDAO dao2 = new CommentDAO();
@@ -174,7 +175,7 @@ public class ResultAction extends Action
 			}
 			
 		}
-		
+		*/
 		
 		// ブックマークの処理(ログインユーザのみ)
 		if(user != null)

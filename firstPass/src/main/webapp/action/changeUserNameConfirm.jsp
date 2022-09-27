@@ -35,6 +35,7 @@
 	</form>
 	
 	<form action="ChangeUserNameConfirm.action" method="post">
+		<input type="hidden" name="userName" value=${userName }>
 		<input type="hidden" name="newUserName" value=${newUserName }>
 		<input type="submit" value="変更">
 	</form>

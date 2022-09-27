@@ -52,7 +52,7 @@ public class ChangeUserNameStartAction extends Action
 		//変更後のユーザ名が100文字以上だとエラー
 		if(! ValidCheck.validUserName(newUserName))
 		{
-			errorMessage = "ユーザー名が誤りです。（１００文字以下）";
+			errorMessage = "ユーザー名が誤りです。（半角・全角英数字、漢字・かな・カナ、記号（！？ー～＿＊※＠）１００文字以内）";
 			request.setAttribute("errorMessage", errorMessage);
 			return  "changeUserNameStart.jsp";
 		}
@@ -68,6 +68,7 @@ public class ChangeUserNameStartAction extends Action
 		}
 		
 		//問題なければユーザ名変更確認画面へ遷移
+		request.setAttribute("userName",userName);
 		request.setAttribute("newUserName",newUserName);
 		return "changeUserNameConfirm.jsp";
 	}

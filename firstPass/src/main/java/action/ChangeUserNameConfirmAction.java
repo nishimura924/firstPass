@@ -31,16 +31,12 @@ public class ChangeUserNameConfirmAction extends Action
 		}
 		
 		String userId = user.getUserId();
-		String userName = user.getUserName();
-		
-		//入力値チェックは実施なし
-		
-		
+		String userName = request.getParameter("userName");
 		String newUserName = request.getParameter("newUserName");
 		UserDAO dao = new UserDAO();
 		
 		//更新失敗のときはエラー画面へ遷移
-		if(! dao.userNameUpdate(user,  newUserName))
+		if(! dao.userNameUpdate(user,  userName, newUserName))
 		{
 			return "changeUserName-error.jsp";
 		}

@@ -39,13 +39,33 @@ public class AnswerAction extends Action
 		
 		//実績用に正解不正解を格納
 		//ボタン押さななかった場合は不正解
-		if(request.getParameter("choice") == null)
+		if(request.getParameter("choice")==null)
 		{
 			answer.setCorrect("0");
 		}
-		else if(request.getParameter("choice").equals("0") || request.getParameter("choice").equals("1"))
+		//アが選ばれた場合
+		else if(request.getParameter("choice").equals("ア"))
 		{
-			answer.setCorrect(request.getParameter("choice"));
+			answer.setCorrect(questionOfSet.get(0).getChoice1().getIsCorrect());
+			request.setAttribute("choice", "ア");
+		}
+		//イが選ばれた場合
+		else if(request.getParameter("choice").equals("イ"))
+		{
+			answer.setCorrect(questionOfSet.get(0).getChoice2().getIsCorrect());
+			request.setAttribute("choice", "イ");
+		}
+		//ウが選ばれた場合
+		else if(request.getParameter("choice").equals("ウ"))
+		{
+			answer.setCorrect(questionOfSet.get(0).getChoice3().getIsCorrect());
+			request.setAttribute("choice", "ウ");
+		}
+		//エが選ばれた場合
+		else if(request.getParameter("choice").equals("エ"))
+		{
+			answer.setCorrect(questionOfSet.get(0).getChoice4().getIsCorrect());
+			request.setAttribute("choice", "エ");
 		}
 		//その他の値が入っても不正解(入らない想定)
 		else

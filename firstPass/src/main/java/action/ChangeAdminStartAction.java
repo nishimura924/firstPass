@@ -70,6 +70,7 @@ public class ChangeAdminStartAction extends Action
 				
 		
 		//問題なければ管理者権限変更確認画面へ遷移
+		request.setAttribute("userAdmin", request.getParameter("adminFlag"));
 		request.setAttribute("userChangeAdmin",userChangeAdmin);
 		return "changeAdminConfirm.jsp";
 	}

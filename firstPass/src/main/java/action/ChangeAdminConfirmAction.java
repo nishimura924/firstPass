@@ -39,13 +39,14 @@ public class ChangeAdminConfirmAction extends Action
 		User userChangeAdmin = new User();
 		userChangeAdmin.setUserId(request.getParameter("userId"));
 		userChangeAdmin.setAdminFlag(request.getParameter("newUserAdmin"));
+		String userAdmin = request.getParameter("userAdmin");
 		
 		
 		UserDAO dao = new UserDAO();
 
 		
 		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移
-		if(! dao.adminUpdate(userChangeAdmin))
+		if(! dao.adminUpdate(userChangeAdmin, userAdmin))
 		{
 			return "changeAdmin-error.jsp";
 		}
