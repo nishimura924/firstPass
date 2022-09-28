@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@include file="header.jsp" %>
+<%-- <!DOCTYPE html>--%>
 <html>
 <head>
 <meta charset="UTF-8">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <title>トップページ</title>
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-
-	ITパスポート過去問道場
-	
+	<div class="float_menu ">
 	
 	<hr>
 
@@ -50,7 +50,7 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
-
+	</div>
 </body>
 <%@include file="footer_menu.jsp" %>
 </html>
