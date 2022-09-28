@@ -16,7 +16,7 @@
 	
 	${userChangeAdmin.userId }<br><br>
 	
-	■現在の管理者権限<br>
+	■現在の権限<br>
 	
 	<c:choose>
 		<c:when test= "${userChangeAdmin.adminFlag == 0}" >一般ユーザ<br><br></c:when>
@@ -24,7 +24,7 @@
 		<c:otherwise><br></c:otherwise>
 	</c:choose>
 	
-	■変更後の管理者権限<br>
+	■変更後の権限<br>
 	
 	<c:choose>
 		<c:when test= "${userChangeAdmin.adminFlag == 0}" >管理者<br><br></c:when>

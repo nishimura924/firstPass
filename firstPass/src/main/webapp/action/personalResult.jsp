@@ -8,6 +8,7 @@
 		<title>個人過去実績</title>
 	</head>
 	<body>
+	個人過去実績<br>
 			<c:if test ="${PersonalResult==null }">
 			<jsp:forward page="../action/PersonalResult.action"></jsp:forward>
 			</c:if>
