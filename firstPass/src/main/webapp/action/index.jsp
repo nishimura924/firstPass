@@ -10,8 +10,6 @@
 </head>
 <body>
 
-
-	<h2>ITパスポート過去問道場</h2>
 	<div class="float_menu ">
 	
 	<hr>
