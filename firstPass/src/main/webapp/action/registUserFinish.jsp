@@ -21,7 +21,7 @@
 	<jsp:forward page="access-error.jsp" />
 </c:if>
 
-	<h2>新規登録完了</h2>
+	<h2 class="font_box">新規登録完了</h2>
 		<div class="float_finish">
 			<p>以下の内容で登録しました。</p>
 

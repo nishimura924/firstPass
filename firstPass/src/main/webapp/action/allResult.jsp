@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-<h2>ランキング</h2>
+<h2 class="font_box">ランキング</h2>
 
 <div class="float_conditions">
 	<form action="AllResult.action" method="post">
@@ -50,7 +50,6 @@
 			${errorMsg}
 			</div>
 	<hr>
-	
 	
 	<p>難易度</p>
 	<c:choose>
@@ -128,7 +127,7 @@
 	
 	<br>
 	<hr>
-	<input type="submit" value="ランキング表示">
+	<input class="decorated-btn click-down" type="submit" value="ランキング表示">
 	</form>
 </div>
 

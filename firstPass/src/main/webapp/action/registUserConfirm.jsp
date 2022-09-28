@@ -19,7 +19,7 @@
 	<jsp:forward page="access-error.jsp" />
 </c:if>
 
-	<h2>新規登録確認</h2>
+	<h2 class="font_box">新規登録確認</h2>
 		<div class="float_registUser">
 			<p>以下の内容でよろしいでしょうか。</p>
 

@@ -10,23 +10,21 @@
 </head>
 <body>
 
-	<div class="float_menu ">
-	
-	<hr>
-
 	こんにちは！
 	<c:choose>
 		<c:when test="${user == null}">ゲスト さん！</c:when>
 		<c:otherwise>${user.userName }　さん！</c:otherwise>
 	</c:choose>
 	
-	<br><br>
+	<div class="indexImg "></div>
 	
+	<br><br>
+	<div class="float_menu ">
 	<c:choose>
 		<%--　一般ユーザ(ログイン済) --%>
 		<c:when test="${user.adminFlag == 0}">
 			<table>
-				<tr><td><a href="myPage.jsp">マイページ</a></td>
+				<tr><td><a href="myPage.jsp" class="btn-square-shadow">マイページ</a></td>
 					<td><a href="selectQuestion.jsp">出題条件設定</a></td></tr>
 				<tr><td><a href="allResult.jsp">全体ランキング</a></td></tr>
 			</table>
@@ -43,10 +41,10 @@
 		<%--ゲストユーザ --%>
 		<c:otherwise>
 			<table>
-				<tr><td><a href="login.jsp">ログイン</a></td>
-					<td><a href="registUserStart.jsp">新規会員登録</a></td></tr>
-				<tr><td><a href="selectQuestion.jsp">出題条件設定</a></td>
-					<td><a href="allResult.jsp">全体ランキング</a><br></td></tr>
+				<tr><td><a href="login.jsp" class="btn-square-shadow">ログイン</a></td>
+					<td><a href="registUserStart.jsp" class="btn-square-shadow">新規会員登録</a></td></tr>
+				<tr><td><a href="selectQuestion.jsp" class="btn-square-shadow">出題条件設定</a></td>
+					<td><a href="allResult.jsp" class="btn-square-shadow">全体ランキング</a><br></td></tr>
 			</table>
 		</c:otherwise>
 	</c:choose>

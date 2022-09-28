@@ -34,19 +34,41 @@
 		}
 		body
 		{
-			    
+			background-color:#FFFFFF;
+			margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:100px;
+    			margin-bottom:30px;
+    			margin-left:100px;
+    			box-shadow:0px 0px 3px 3px #C0C0C0;
+    			-moz-box-shadow:0px 0px 3px 3px #C0C0C0;
+    			-webkit-box-shadow:0px 0px 3px 3px #C0C0C0;
 		}
 		html
 		{
-			background-color: #f5efe5;
+			background-color:#F0F8FF ;
 		}
-		
+	/*float画像*/
+		.indexImg
+		{
+			background-image:url(bg_doujou.jpg);     /* 画像のURLを指定       */
+    		background-repeat:  no-repeat;         /* 画像の繰り返しを指定  */              
+    		background-size:contain;				/* 画像のサイズを指定  */
+    		width:350px;                            /* 横幅のサイズを指定    */
+    		height:350px;   						/* 縦幅のサイズを指定    */
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:auto;
+    			margin-bottom:30px;
+    			margin-left:auto;
+    			
+		}
+
 		
 	/*floatタグ*/	
 		.float_menu /*トップ、マイページ、管理者メニュー*/
 		{
-			height: 300px;              /* 高さ指定 */
-    		width: 700px;               /* 幅指定 */
+			
     		background-color: #FFFACD;
     		margin: 0 auto 40px;
     			margin-top:0px;
@@ -68,11 +90,12 @@
     			margin-right:auto;
     			margin-bottom:60px;
     			margin-left:auto;
-    		
+  
     		
 		}
 		.float_changeUserNameAlert/*ユーザ名変更の注意文言*/
 		{
+			
 		}
 
 		.float_finish/*登録系画面の完了メッセージ（共通）*/
@@ -80,9 +103,16 @@
 		}
 		.float_errorMsg/*エラーメッセージ共通(共通）*/
 		{
+			color:#FF0000;
 		}
 		.float_conditions/*出題問題選択、ランキングの条件選択*/
 		{
+			background-color: #FFFACD;
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:auto;
+    			margin-bottom:60px;
+    			margin-left:auto;
 		}
 		.float_questionInfo/*出題問題の年度分野の情報*/
 		{
@@ -129,4 +159,55 @@
 		.float_userAdminList/*管理ユーザリスト*/
 		{
 		}
+		
+		.font_box /*見出し用*/
+		{
+  		 	color: #ffffff ;
+  			background: #23a951;
+  			font-size: 16pt ;
+  			line-height: 1;
+  			margin:10px 0px;
+  			padding: 10px 5px 10px 5px;
+    		box-shadow:1px 3px 7px 0px #666666 ;
+    		border-bottom:3px solid #bfc77e;
+    		border-radius: 5px ;
+		}
+		.btn-square-shadow /*遷移ボタン用*/
+		{
+  			display: inline-block;
+  			padding: 0.5em 1em;
+  			text-decoration: none;
+ 			background: #668ad8;/*ボタン色*/
+  			color: #FFF;
+ 			border-bottom: solid 4px #627295;
+  			border-radius: 3px;
+		}
+		.btn-square-shadow:active 
+		{
+  		/*ボタンを押したとき*/
+  			-webkit-transform: translateY(4px);
+  			transform: translateY(4px);/*下に動く*/
+  			box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+  			border-bottom: none;
+		}
+		.decorated-btn /*決定ボタン用*/
+		{
+  			background-color: gold;
+  			color: #FFF;
+  			font-size: 15px;
+  			border-radius: 5px;
+  			border-bottom: solid 3px orange;
+  			box-shadow: 3px 3px 3px gray;
+  			transition: 0.3s;
+		}
+		.click-down:active 
+		{
+  			transform: translateY(2px);
+  			border-bottom: none;
+		}
 
+		.decorated-btn:hover 
+		{
+  			background-color: orange;
+		}
+		

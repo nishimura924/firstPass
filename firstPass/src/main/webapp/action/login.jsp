@@ -14,7 +14,7 @@
 		</c:if>	
 	
 	
-		ログイン
+		<h2 class="font_box">ログイン</h2>
 		<div class="float_login">
 		
 		<form action="Login.action" method="post">
@@ -22,7 +22,8 @@
 		<p>パスワード<input type="password" name="password"></p>
 		
 		<p>${errorMsg }</p>
-		<p><input type="submit" value="ログイン"></p>
+		<p><input class="decorated-btn click-down" type="submit" value="ログイン"></p>
+		
 		</form>	
 		</div>
 		

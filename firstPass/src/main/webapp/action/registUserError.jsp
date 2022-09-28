@@ -9,11 +9,9 @@
 
 　	既にログイン済みのため、<br>
 	再度新規登録される場合はログアウトしてください。<br>
-	
-	<form action="index.jsp" method="post">
-		<input type="submit" value="トップ画面に戻る">
-	</form>
+
 
 </body>
+<%@include file="footer_menu.jsp" %>
 
 </html>

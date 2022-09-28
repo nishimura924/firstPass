@@ -16,7 +16,7 @@
 		<jsp:forward page="registUserError.jsp" />
 	</c:if>
 
-	<h2>新規登録開始</h2>
+	<h2 class="font_box">新規登録開始</h2>
 	<div class="float_registUser">
 
 		<p>以下を入力してください。</p>
