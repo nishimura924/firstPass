@@ -1,0 +1,30 @@
+       
+       /*全般的なスタイル*/
+       
+       table{
+            border-collapse: collapse;
+            border: solid 1px black;
+        }
+        th, td{
+            border: solid 1px black;
+            padding: 1em;
+        }
+        h1{
+			text-align: center;
+		}
+		p{
+			text-align: center;
+		}
+		hr
+		{
+		}
+		form{
+			text-align: center;
+		}
+		body
+		{
+		}
+		html
+		{
+			
+		}
