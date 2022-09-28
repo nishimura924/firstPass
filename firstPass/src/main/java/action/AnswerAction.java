@@ -104,7 +104,6 @@ public class AnswerAction extends Action
 			Comment comment = new Comment();
 			comment.setYear(questionOfSet.get(0).getYear());
 			comment.setQuestionNo(questionOfSet.get(0).getQuestionNo());
-			comment.setUserId(user.getUserId());
 			
 			List<Comment> allComment = new ArrayList<Comment>();
 			allComment = dao.search(comment);

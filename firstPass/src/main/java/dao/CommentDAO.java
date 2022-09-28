@@ -19,10 +19,9 @@ public class CommentDAO extends DAO
 		try
 		{
 			con = getConnection();
-			st = con.prepareStatement("SELECT * FROM COMMENT where YEAR=? AND QUESTION_NO=? AND USER_ID=?");
+			st = con.prepareStatement("SELECT * FROM COMMENT where YEAR=? AND QUESTION_NO=?");
 			st.setString(1, comment.getYear());
 			st.setInt(2, comment.getQuestionNo());
-			st.setString(3, comment.getUserId());
 		
 			ResultSet rs = st.executeQuery();
 			
