@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録確認</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 <c:if test="${user != null}">

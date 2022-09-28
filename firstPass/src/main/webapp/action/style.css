@@ -30,41 +30,51 @@
 		}
 		form
 		{
-			text-align: center;
+			
 		}
 		body
 		{
-		
+			    
 		}
 		html
 		{
-			
+			background-color: #f5efe5;
 		}
 		
 		
 	/*floatタグ*/	
 		.float_menu /*トップ、マイページ、管理者メニュー*/
 		{
+			height: 300px;              /* 高さ指定 */
+    		width: 700px;               /* 幅指定 */
+    		background-color: #FFFACD;
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:auto;
+    			margin-bottom:60px;
+    			margin-left:auto;
+		
 		}
 		.float_login/*ログイン*/
 		{
 		}
-		.float_registUser/*新規登録*/
+		.float_registUser, .float_changeUserName, .float_changeUserPassword, .float_adminChange/*登録系ページ*/
 		{
-			height: 150px;              /* 高さ指定 */
-    		width: 150px;               /* 幅指定 */
-    		background-color: #f00;     /* 背景色指定 */
-    		margin:  10px;              /* 周りの余白指定 */
-		}
-		.float_changeUserName/*ユーザ名変更*/
-		{
+			height: 300px;              /* 高さ指定 */
+    		width: 700px;               /* 幅指定 */
+    		background-color: #FFFACD;
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:auto;
+    			margin-bottom:60px;
+    			margin-left:auto;
+    		
+    		
 		}
 		.float_changeUserNameAlert/*ユーザ名変更の注意文言*/
 		{
 		}
-		.float_changeUserPassword/*ユーザパスワード変更*/
-		{
-		}
+
 		.float_finish/*登録系画面の完了メッセージ（共通）*/
 		{
 		}
@@ -119,15 +129,4 @@
 		.float_userAdminList/*管理ユーザリスト*/
 		{
 		}
-		.float_adminChange/*管理者権限変更*/
-		{
-		}
-		.float_/**/
-		{
-		}
-		.float_/**/
-		{
-		}
-		.float_/**/
-		{
-		}
+
