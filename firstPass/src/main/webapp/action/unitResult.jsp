@@ -10,11 +10,11 @@
 <c:if test="${questionCount == null}">
 	<jsp:forward page="access-error.jsp" />
 </c:if>
+<form>
 <c:choose>
 	<c:when test="${user.userName == null }">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
 </c:choose>
-<form>
 さんの今回のテスト結果（難易度：
 <c:choose>
 <c:when test ="${conditions.difficulty =='0'}">normal</c:when>
@@ -32,12 +32,12 @@
 正答率：${correctRate}％
 
 <br>
+	<hr>
+ 	<c:if test="${user != null}">
+		<a href="myPage.jsp">マイページへ戻る</a>
+	</c:if>
+	<a href="index.jsp">トップページへ戻る</a>
 </form>
 </body>
 </html>
 
- 	<c:if test="${user != null}">
-		<a href="myPage.jsp">マイページへ戻る</a>
-	</c:if>
-
-<%@include file="footer_menu.jsp" %>
