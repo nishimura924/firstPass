@@ -68,7 +68,7 @@
 					<p>${errorMsg }</p>
 				</div>
 	
-				<input type="submit" value="出題開始">
+				<input class="decorated-btn click-down"　type="submit" value="出題開始">
 			</form>
 		</div>
 	

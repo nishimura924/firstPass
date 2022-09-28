@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-	<h2>得点結果・分析</h2>
+	<h2 class="font_box">得点結果・分析</h2>
 	
 	<c:if test="${questionCount == null}">
 		<jsp:forward page="access-error.jsp" />

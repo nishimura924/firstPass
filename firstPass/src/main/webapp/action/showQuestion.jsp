@@ -104,7 +104,7 @@
 
 		<br>
 		<c:if test="${answer == null}">
-			<input type="submit" value="回答">
+			<input class="decorated-btn click-down" type="submit" value="回答">
 		</c:if>
 		</form>
 		</div>
@@ -164,9 +164,9 @@
 				</c:if>
 			</div>
 			<br>		
-			<input type="submit" name="submitComment" value="コメント登録">
-			<input type="submit" name="submitFinish" value="途中終了">
-			<input type="submit" name="submitNext" value="次へ">
+			<input class="decorated-btn click-down" type="submit" name="submitComment" value="コメント登録">
+			<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
+			<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
 		</form>
 		
 	</c:if>

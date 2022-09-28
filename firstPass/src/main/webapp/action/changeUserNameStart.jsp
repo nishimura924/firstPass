@@ -15,7 +15,8 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 	
-	ユーザ名の変更<br>
+	<h2 class="font_box">ユーザ名の変更</h2>
+	<br>
 	<div class="float_changeUserName">
 	
 	■現在のユーザ名<br>
@@ -25,7 +26,7 @@
 		■新しいユーザ名<br>
 		<input type="text" name="newUserName"><br>
 		${errorMessage }<br>
-		<input type="submit" value="次へ">
+		<input class="decorated-btn click-down" type="submit" value="次へ">
 	</form>
 	</div>
 	＜注意事項＞<br>

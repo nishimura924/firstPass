@@ -19,7 +19,7 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 	
-	ユーザ名の変更
+	<h2 class="font_box">ユーザ名の変更</h2>
 	<div class="float_changeUserName">
 	<br>
 	
@@ -33,13 +33,13 @@
 	
 	
 	<form action="changeUserNameStart.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input class="decorated-btn click-down" type="submit" value="戻る">
 	</form>
 	
 	<form action="ChangeUserNameConfirm.action" method="post">
 		<input type="hidden" name="userName" value=${userName }>
 		<input type="hidden" name="newUserName" value=${newUserName }>
-		<input type="submit" value="変更">
+		<input class="decorated-btn click-down" type="submit" value="変更">
 	</form>
 	</div>
 </body>

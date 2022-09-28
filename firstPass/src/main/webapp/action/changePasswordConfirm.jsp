@@ -10,13 +10,14 @@
 </head>
 <body>
 
-	パスワードの変更確認<br>
+	<h2 class="font_box">パスワードの変更確認</h2>
+	<br>
 	<div class="float_changeUserPassword">
 	パスワードを変更します。よろしいですか？<br>
 	※セキュリティ都合上、新しいパスワードは表示しません。<br>
 	
 	<form action="changePasswordStart.jsp" method="post">
-		<input type="submit" value="戻る">
+		<input class="decorated-btn click-down" type="submit" value="戻る">
 	</form>
 	
 	<br>
@@ -24,7 +25,7 @@
 	<form action="ChangePasswordConfirm.action" method="post">
 		<input type="hidden" name="password" value=${password }>
 		<input type="hidden" name="newPassword" value=${newPassword }>
-		<input type="submit" value="変更">
+		<input class="decorated-btn click-down" type="submit" value="変更">
 	</form>
 	</div>
 </body>

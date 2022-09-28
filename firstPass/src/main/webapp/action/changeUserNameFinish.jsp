@@ -15,7 +15,7 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 
-	ユーザ名の変更
+	<h2 class="font_box">ユーザ名の変更</h2>
 	<div class="float_changeUserName">
 	<br>
 	

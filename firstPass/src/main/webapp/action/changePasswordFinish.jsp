@@ -15,7 +15,7 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 	
-	パスワードの変更
+	<h2 class="font_box">パスワードの変更</h2>
 	<div class="float_changeUserPassword">
 	<br>
 	

@@ -15,7 +15,8 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 	
-	パスワードの変更<br>
+	<h2 class="font_box">パスワードの変更</h2>
+	<br>
 	<div class="float_changeUserPassword">
 	
 	<form action="ChangePasswordStart.action" method="post">
@@ -32,7 +33,7 @@
 		<br>
 		${errorMessage }<br>
 	
-		<input type="submit" value="次へ">
+		<input class="decorated-btn click-down" type="submit" value="次へ">
 	</form>
 	</div>
 </body>

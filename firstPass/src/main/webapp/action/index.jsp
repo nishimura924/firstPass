@@ -23,29 +23,51 @@
 	<c:choose>
 		<%--　一般ユーザ(ログイン済) --%>
 		<c:when test="${user.adminFlag == 0}">
-			<table>
-				<tr><td><a href="myPage.jsp" class="btn-square-shadow">マイページ</a></td>
-					<td><a href="selectQuestion.jsp">出題条件設定</a></td></tr>
-				<tr><td><a href="allResult.jsp">全体ランキング</a></td></tr>
-			</table>
+					<nav>
+					<ul>
+					<li class=”current”><a href="myPage.jsp"  >マイページ</a></li>
+					<li><a href="selectQuestion.jsp">出題条件設定</a></li>
+					<li><a href="allResult.jsp">全体ランキング</a></li>
+					</ul>
+					</nav>
+			
+			<%---<table>
+				<tr><td><a href="myPage.jsp" class="btn-square-shadow" class="btn-square-shadow">マイページ</a></td>
+					<td><a href="selectQuestion.jsp" class="btn-square-shadow">出題条件設定</a></td>
+					<td><a href="allResult.jsp" class="btn-square-shadow">全体ランキング</a></td></tr>
+			</table>--%>
 		</c:when>
 		
 		<%--　管理者ユーザ --%>
 		<c:when test="${user.adminFlag == 1}">
-			<table>
-				<tr><td><a href="allResult.jsp">全体ランキング</a></td></tr>
-				<tr><td><a href="admin.jsp">管理者メニュ</a></td></tr>
-			</table>
+					<nav>
+					<ul>
+					<li class=”current”><a href="allResult.jsp" >全体ランキング</a></li>
+					<li><a href="admin.jsp" >管理者メニュ</a></li>
+					</ul>
+					</nav>
+			<%--- <table>
+				<tr><td><a href="allResult.jsp" class="btn-square-shadow">全体ランキング</a></td>
+					<td><a href="admin.jsp" class="btn-square-shadow">管理者メニュ</a></td></tr>
+			</table>--%>
 		</c:when>
 		
 		<%--ゲストユーザ --%>
 		<c:otherwise>
-			<table>
+					<nav>
+					<ul>
+					<li class=”current”><a href="login.jsp" >ログイン</a></li>
+					<li><a href="registUserStart.jsp" >新規会員登録</a></li>
+					<li><a href="selectQuestion.jsp" >出題条件設定</a></li>
+					<li><a href="allResult.jsp" >全体ランキング</a></li>
+					</ul>
+					</nav>
+			<%-- <table>
 				<tr><td><a href="login.jsp" class="btn-square-shadow">ログイン</a></td>
-					<td><a href="registUserStart.jsp" class="btn-square-shadow">新規会員登録</a></td></tr>
-				<tr><td><a href="selectQuestion.jsp" class="btn-square-shadow">出題条件設定</a></td>
+					<td><a href="registUserStart.jsp" class="btn-square-shadow">新規会員登録</a></td>
+					<td><a href="selectQuestion.jsp" class="btn-square-shadow">出題条件設定</a></td>
 					<td><a href="allResult.jsp" class="btn-square-shadow">全体ランキング</a><br></td></tr>
-			</table>
+			</table>--%>
 		</c:otherwise>
 	</c:choose>
 	</div>
