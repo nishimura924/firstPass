@@ -160,11 +160,23 @@
 		{
 		}
 		
-		.font_box /*見出し用*/
+		.font_boxTop /*トップ見出し用*/
 		{
   		 	color: #ffffff ;
   			background: #23a951;
   			font-size: 16pt ;
+  			line-height: 1;
+  			margin:10px 0px;
+  			padding: 10px 5px 10px 5px;
+    		box-shadow:1px 3px 7px 0px #666666 ;
+    		border-bottom:3px solid #bfc77e;
+    		border-radius: 5px ;
+		}
+		.font_box /*見出し用*/
+		{
+  		 	color: #ffffff ;
+  			background: #23a951;
+  			font-size: 12pt ;
   			line-height: 1;
   			margin:10px 0px;
   			padding: 10px 5px 10px 5px;

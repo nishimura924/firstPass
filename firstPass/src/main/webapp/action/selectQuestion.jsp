@@ -20,7 +20,7 @@
 		</c:if>
 		
 		
-		<h2>出題条件選択</h2>
+		<h2 class="font_box">出題条件選択</h2>
 		<c:choose>
 			<c:when test="${user == null}">ゲスト</c:when>
 			<c:otherwise>${user.userName }</c:otherwise>

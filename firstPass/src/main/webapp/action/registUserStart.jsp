@@ -39,7 +39,7 @@
 		<br>
 		<input type="text" name="userName"value=${userName }>
 		<br>
-		<p><input type = "submit" value="次へ"></p>
+		<p><input class="decorated-btn click-down"　type = "submit" value="次へ"></p>
 		
 		<div class="float_float_errorMsg">
 			<p>${errorMessage }</p>
