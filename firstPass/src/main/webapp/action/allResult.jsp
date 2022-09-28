@@ -16,9 +16,32 @@
 			<jsp:forward page="AllResultQuestion.action"></jsp:forward>
 		</c:if>
 
-		<c:forEach var="genre" items="${genreList }">
-			<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
-		</c:forEach>
+		<c:choose>
+			<c:when test="${list == null }" >
+				<c:forEach var="genre" items="${genreList }">
+					<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<% boolean isChecked = false;  %>
+		 		<c:forEach var="genre" items="${genreList }">
+		 			<% isChecked = false;  %>
+					<c:forEach var="genreCheck" items="${genreCheck }">
+						<c:if test="${genre == genreCheck }">
+							<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
+							<% isChecked = true; %>
+						</c:if>
+					</c:forEach>
+					<% if (! isChecked) {%>
+						<input type="checkbox" name="genreCheck" value="${genre }" >${genre }
+					<% } %>	 
+				</c:forEach>
+			</c:otherwise>
+			
+		</c:choose>
+		
+		<input type="hidden" name="genreList" value="${genreList }">
+		
 		<br>
 		${errorMsg}
 <hr>
