@@ -1,15 +1,20 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
+<%@include file="header.jsp" %>
+<%-- <!DOCTYPE html>--%>
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<title>得点結果・分析</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
+	<h2>得点結果・分析</h2>
 	
-<c:if test="${questionCount == null}">
-	<jsp:forward page="access-error.jsp" />
-</c:if>
+	<c:if test="${questionCount == null}">
+		<jsp:forward page="access-error.jsp" />
+	</c:if>
+	
 <form>
 <c:choose>
 	<c:when test="${user.userName == null }">ゲスト</c:when>
@@ -24,14 +29,17 @@
 <c:when test ="${conditions.difficulty ==null}">出力エラー</c:when>
 </c:choose>
 ）
-<br>
-出題数:${questionCount }問
-<br>
-正答数：${correctCount }問
-<br>
-正答率：${correctRate}％
 
-<br>
+<div class="float_result">
+	<br>
+	出題数:${questionCount }問
+	<br>
+	正答数：${correctCount }問
+	<br>
+	正答率：${correctRate}％
+	
+	<br>
+</div>
 	<hr>
  	<c:if test="${user != null}">
 		<a href="myPage.jsp">マイページへ戻る</a>

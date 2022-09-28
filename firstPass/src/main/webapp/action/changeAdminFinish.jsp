@@ -1,25 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@include file="header.jsp" %>
+<%-- <!DOCTYPE html>--%>
 <html>
-<head>
-<meta charset="UTF-8">
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title>管理者権限変更</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+		<title>管理者権限変更</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
 	
-	管理者権限変更<br><br>
+		<h2>管理者権限変更</h2>
+		
+		<c:if test="${user.adminFlag != 1}">
+			<c:redirect url="index.jsp" />
+		</c:if>
 	
-	<c:if test="${user.adminFlag != 1}">
-		<c:redirect url="index.jsp" />
-	</c:if>
-
+		<div class="float_finish">
+			<br>
+			
+			管理者権限の変更が完了しました。
+		</div>
 	
-	<br>
-	
-	管理者権限の変更が完了しました。
-
-</body>
+	</body>
 	<c:choose>
 		<c:when test="${user.adminFlag == 0}" >
 			<%@include file="footer_mypage.jsp" %>	
