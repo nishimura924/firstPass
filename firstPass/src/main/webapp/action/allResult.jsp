@@ -7,7 +7,7 @@
 		<title>ランキング</title>
 	</head>
 	<body>
-
+<h2>ランキング</h2>
 
 <form action="AllResult.action" method="post">
 
@@ -119,23 +119,25 @@ ${errorMsgTo}
 <input type="submit" value="ランキング表示">
 </form>
 
+<h1>ランキング</h1>
 <br>
 
-<table border="1" width="600" cellspacing="0" cellpadding="5">
+<table>
 	<tr>
 	<td>順位</td>
 	<td>ユーザ名</td>
 	<td>回答数</td>
 	<td>正答数</td>
 	<td>正答率</td>
-	
+	</tr>
 	<c:forEach var="AllResult" items="${list}" varStatus="status">
-		</tr>
+		<tr>
 		<td>${AllResult.rank}位</td>
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>
 		<td>${Math.round(AllResult.correctRate)}％</td>
+		</tr>
 	</c:forEach>
 </table>
 
