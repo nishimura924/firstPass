@@ -1,30 +1,133 @@
        
-       /*全般的なスタイル*/
+     /*個別のタグ*/
        
-       table{
+       　table
+       	{
             border-collapse: collapse;
             border: solid 1px black;
         }
-        th, td{
+        th, td
+        {
             border: solid 1px black;
             padding: 1em;
         }
-        h1{
+        h1/*トップの見出し*/
+        {
 			text-align: center;
+			
 		}
-		p{
-			text-align: center;
+		h2/*各ページの見出し*/
+		{
+			
+		}
+		p
+		{
+			
 		}
 		hr
 		{
+		
 		}
-		form{
+		form
+		{
 			text-align: center;
 		}
 		body
 		{
+		
 		}
 		html
 		{
 			
+		}
+		
+		
+	/*floatタグ*/	
+		.float_menu /*トップ、マイページ、管理者メニュー*/
+		{
+		}
+		.float_login/*ログイン*/
+		{
+		}
+		.float_registUser/*新規登録*/
+		{
+			height: 150px;              /* 高さ指定 */
+    		width: 150px;               /* 幅指定 */
+    		background-color: #f00;     /* 背景色指定 */
+    		margin:  10px;              /* 周りの余白指定 */
+		}
+		.float_changeUserName/*ユーザ名変更*/
+		{
+		}
+		.float_changeUserNameAlert/*ユーザ名変更の注意文言*/
+		{
+		}
+		.float_changeUserPassword/*ユーザパスワード変更*/
+		{
+		}
+		.float_finish/*登録系画面の完了メッセージ（共通）*/
+		{
+		}
+		.float_errorMsg/*エラーメッセージ共通(共通）*/
+		{
+		}
+		.float_conditions/*出題問題選択、ランキングの条件選択*/
+		{
+		}
+		.float_questionInfo/*出題問題の年度分野の情報*/
+		{
+		}
+		.float_question/*出題問題文*/
+		{
+		}
+		.float_choice/*出題問題選択肢*/
+		{
+		}
+		.float_judge/*正誤結果*/
+		{
+		}
+		.float_correct/*正解*/
+		{
+		}
+		.float_flag/*ブックマーク登録フラグ*/
+		{
+		}
+		.float_bookmarkregist/*ブックマーク登録チェック*/
+		{
+		}
+		.float_commentRegist/*コメント登録*/
+		{
+		}
+		.float_commentPast/*過去コメント*/
+		{
+		}
+		.float_result/*得点結果*/
+		{
+		}
+		.float_PSresult/*個人過去実績*/
+		{
+		}
+		.float_ranking/*ランキング*/
+		{
+		}
+		.float_userListText/*ユーザ一覧の案内文*/
+		{
+		}
+		.float_userList/*一般ユーザーリスト*/
+		{
+		}
+		.float_userAdminList/*管理ユーザリスト*/
+		{
+		}
+		.float_adminChange/*管理者権限変更*/
+		{
+		}
+		.float_/**/
+		{
+		}
+		.float_/**/
+		{
+		}
+		.float_/**/
+		{
 		}
