@@ -7,7 +7,7 @@
 		<title>ランキング</title>
 	</head>
 	<body>
-
+<h2>ランキング</h2>
 
 <form action="AllResult.action" method="post">
 
@@ -16,9 +16,32 @@
 			<jsp:forward page="AllResultQuestion.action"></jsp:forward>
 		</c:if>
 
-		<c:forEach var="genre" items="${genreList }">
-			<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
-		</c:forEach>
+		<c:choose>
+			<c:when test="${list == null }" >
+				<c:forEach var="genre" items="${genreList }">
+					<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<% boolean isChecked = false;  %>
+		 		<c:forEach var="genre" items="${genreList }">
+		 			<% isChecked = false;  %>
+					<c:forEach var="genreCheck" items="${genreCheck }">
+						<c:if test="${genre == genreCheck }">
+							<input type="checkbox" name="genreCheck" value="${genre }" checked="checked">${genre }
+							<% isChecked = true; %>
+						</c:if>
+					</c:forEach>
+					<% if (! isChecked) {%>
+						<input type="checkbox" name="genreCheck" value="${genre }" >${genre }
+					<% } %>	 
+				</c:forEach>
+			</c:otherwise>
+			
+		</c:choose>
+		
+		<input type="hidden" name="genreList" value="${genreList }">
+		
 		<br>
 		${errorMsg}
 <hr>
@@ -96,23 +119,25 @@ ${errorMsgTo}
 <input type="submit" value="ランキング表示">
 </form>
 
+<h1>ランキング</h1>
 <br>
 
-<table border="1" width="600" cellspacing="0" cellpadding="5">
+<table>
 	<tr>
 	<td>順位</td>
 	<td>ユーザ名</td>
 	<td>回答数</td>
 	<td>正答数</td>
 	<td>正答率</td>
-	
+	</tr>
 	<c:forEach var="AllResult" items="${list}" varStatus="status">
-		</tr>
+		<tr>
 		<td>${AllResult.rank}位</td>
 		<td>${AllResult.userId}</td>
 		<td>${AllResult.answerCount}問</td>
 		<td>${AllResult.correctCount}問</td>
 		<td>${Math.round(AllResult.correctRate)}％</td>
+		</tr>
 	</c:forEach>
 </table>
 

@@ -123,6 +123,7 @@ public class AllResultAction extends Action
 		request.setAttribute("fromDate", answerDateFrom);
 		request.setAttribute("toDate", answerDateTo);
 		request.setAttribute("sort", sort);
+		request.setAttribute("genreList", request.getAttribute("genreList"));
 		
 		return "allResult.jsp";
 		
