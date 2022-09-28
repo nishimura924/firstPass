@@ -4,6 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="date" class="java.util.Date"/>
 <title>出題・解答</title>
 </head>
 <body>
@@ -133,9 +135,9 @@
 			
 			<c:if test="${user != null }" >
 				＜コメント登録＞<br>
-				（500文字超の場合、501文字目以降は削除されます。）<br>
+				（500文字超の場合、501文字目以降は削除されます。また改行も削除されます。）<br>
 				<textarea name="comment" ></textarea><br><br>
-			
+				
 				＜過去のコメント＞<br>
 				<c:forEach var="commentPast" items="${answer.allComment }">
 					${commentPast.commentDate }　　${commentPast.userId }　　${commentPast.comment }<br>

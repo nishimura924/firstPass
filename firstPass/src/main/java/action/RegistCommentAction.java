@@ -51,7 +51,8 @@ public class RegistCommentAction extends Action
 			//コメントがあれば登録
 			else
 			{
-				String commentString = request.getAttribute("comment").toString();
+				//改行は削除
+				String commentString = request.getAttribute("comment").toString().replaceAll("\\r\\n|\\r|\\n", "");
 				
 				//500文字超はカット
 				if(! ValidCheck.validComment(commentString))

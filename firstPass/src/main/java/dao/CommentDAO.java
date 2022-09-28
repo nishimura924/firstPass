@@ -2,7 +2,10 @@ package dao;
 
 import java.sql.*;
 import java.util.*;
+import java.time.*;
+import java.time.format.*;
 import bean.Comment;
+
 
 public class CommentDAO extends DAO
 {
@@ -24,13 +27,14 @@ public class CommentDAO extends DAO
 			ResultSet rs = st.executeQuery();
 			
 			commentList = new ArrayList<Comment>();
-		
+			DateTimeFormatter dtformat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
+			
 			while (rs.next())
 			{
 				Comment commentDB = new Comment();
 				commentDB.setYear(rs.getString("YEAR"));
 				commentDB.setQuestionNo(rs.getInt("QUESTION_NO"));
-				commentDB.setCommentDate(rs.getTimestamp("COMMENT_DATE").toLocalDateTime());
+				commentDB.setCommentDate(dtformat.format(rs.getTimestamp("COMMENT_DATE").toLocalDateTime()));
 				commentDB.setUserId(rs.getString("USER_ID"));
 				commentDB.setComment(rs.getString("COMMENT"));
 				commentList.add(commentDB);

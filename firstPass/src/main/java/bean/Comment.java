@@ -7,7 +7,8 @@ public class Comment implements java.io.Serializable
 {
 	private String year;//年度
 	private int questionNo;//問題番号
-	private LocalDateTime commentDate;//コメント日時
+	//private LocalDateTime commentDate;//コメント日時
+	private String commentDate;//コメント日時、フォーマット変換するためString
 	private String userId;//ユーザID
 	private String comment;//コメント内容
 	
@@ -20,7 +21,9 @@ public class Comment implements java.io.Serializable
 	{
 		return questionNo;
 	}
-	public LocalDateTime getCommentDate()
+	
+	//public LocalDateTime getCommentDate()
+	public String getCommentDate()
 	{
 		return commentDate;
 	}
@@ -42,7 +45,8 @@ public class Comment implements java.io.Serializable
 	{
 		this.questionNo=questionNo;
 	}
-	public void setCommentDate(LocalDateTime commentDate)
+	//public void setCommentDate(LocalDateTime commentDate)
+	public void setCommentDate(String commentDate)
 	{
 		this.commentDate=commentDate;
 	}

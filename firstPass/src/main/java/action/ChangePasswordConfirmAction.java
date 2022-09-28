@@ -29,8 +29,6 @@ public class ChangePasswordConfirmAction extends Action
 		{
 			return "access-error.jsp";	
 		}
-
-		String userId = user.getUserId();
 		
 		//入力値チェックは不要
 		
