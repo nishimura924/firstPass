@@ -10,7 +10,7 @@
 	</head>
 <body>
 
-	<h2>管理者メニュ</h2>
+	<h2 class="font_box">管理者メニュ</h2>
 	
 	
 	<c:if test="${user.adminFlag != 1}">

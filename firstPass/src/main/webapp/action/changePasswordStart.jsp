@@ -31,7 +31,9 @@
 		確認のため、新しいパスワードをもう一度入力してください。<br>
 		<input type="password" name="newPasswordCheck"><br>
 		<br>
+		<div class="float_errorMsg">
 		${errorMessage }<br>
+		</div>
 	
 		<input class="decorated-btn click-down" type="submit" value="次へ">
 	</form>

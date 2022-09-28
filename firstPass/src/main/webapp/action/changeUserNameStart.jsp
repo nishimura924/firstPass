@@ -25,7 +25,9 @@
 	<form action="ChangeUserNameStart.action" method="post">
 		■新しいユーザ名<br>
 		<input type="text" name="newUserName"><br>
+		<div class="float_errorMsg">
 		${errorMessage }<br>
+		</div>
 		<input class="decorated-btn click-down" type="submit" value="次へ">
 	</form>
 	</div>

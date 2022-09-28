@@ -13,7 +13,7 @@
 	</head>
 	
 	<body>
-		<h2>個人過去実績</h2>
+		<h2 class="font_box">個人過去実績</h2>
 		<c:if test ="${PersonalResult==null }">
 			<jsp:forward page="../action/PersonalResult.action"></jsp:forward>
 		</c:if>
