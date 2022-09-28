@@ -18,16 +18,25 @@
 	</c:if>
 	
 	<div class="float_menu">
-		<table>
+		        <nav>
+				<ul>
+				<li class=”current”><a href="changeUserNameStart.jsp">自身のユーザ名変更</a></li>
+				<li><a href="changePasswordStart.jsp">自身のユーザパスワード変更</a></li>
+				<li><a href="userList.jsp">ユーザ一覧</a></li>
+				<li><a href="changeAdminStart.jsp">管理者権限変更</a></li>
+				<li><a href="../action/Logout.action">ログアウト</a></li>
+				</ul>
+				</nav>
+		<%-- <table>
 			<tr><td><a href="changeUserNameStart.jsp">自身のユーザ名変更</a></td></tr>
 			<tr><td><a href="changePasswordStart.jsp">自身のユーザパスワード変更</a></td></tr>
 			<tr><td><a href="userList.jsp">ユーザ一覧</a></td></tr>
 	<%-- 		<tr><td><a href="registQuestionStart.jsp">出題問題追加</a></td></tr> --%>
-			<tr><td><a href="changeAdminStart.jsp">管理者権限変更</a></td></tr>
+		<%-- <tr><td><a href="changeAdminStart.jsp">管理者権限変更</a></td></tr>--%>
 	<%--		<tr><td><a href="deleteUserStart.jsp">ユーザ削除</a></td></tr> --%>
-			<tr><td><a href="../action/Logout.action">ログアウト</a></td></tr>
+		<%--<tr><td><a href="../action/Logout.action">ログアウト</a></td></tr>
 	
-		</table>
+		</table> --%>
 	</div>
 
 

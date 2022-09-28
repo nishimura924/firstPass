@@ -18,16 +18,24 @@
 			<jsp:forward page="admin.jsp"></jsp:forward>
 		</c:if>
 		
-		<h2>マイページ</h2>
+		<h2 class="font_box">マイページ</h2>
 		${user.userName }さんのマイページ<br>
 		
 		<div class="float_menu">
-			<table>
+				<nav>
+				<ul>
+				<li class=”current”><a href="changeUserNameStart.jsp">ユーザ名変更</a></li>
+				<li><a href="changePasswordStart.jsp">パスワード変更</a></li>
+				<li><a href="../action/PersonalResult.action">過去実績</a></li>
+				<li><a href="../action/Logout.action">ログアウト</a></li>
+				</ul>
+				</nav>
+			<%--- <table>
 				<tr><td><a href="changeUserNameStart.jsp">ユーザ名変更</a></td>
 					<td><a href="changePasswordStart.jsp">パスワード変更</a></td></tr>
 				<tr><td><a href="../action/PersonalResult.action">過去実績</a></td>
 					<td><a href="../action/Logout.action">ログアウト</a></td></tr>
-			</table>
+			</table>--%>
 		</div>
 		
 	</body>
