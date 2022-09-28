@@ -16,13 +16,13 @@ public class ShowSelectQuestionAction extends Action
 	{
 		//TBLに登録されている全ての年度を取得する
 		QuestionDAO dao = new QuestionDAO();
-		List<String> yearList = dao.getYear(); //メソッド名追記
+		List<String> yearList = dao.getYear();
 		
 		//リクエスト属性yearListに年度リストをセット
 		request.setAttribute("yearList", yearList);
 		
 		//TBLに登録されている全ての分野を取得する
-		List<String> genreList = dao.getGenre();//メソッド名追記
+		List<String> genreList = dao.getGenre();
 		
 		//リクエスト属性genreListに分野リストをセット
 		request.setAttribute("genreList", genreList);
