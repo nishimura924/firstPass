@@ -24,7 +24,6 @@
 			<table class="common-table col4t">
 			<thead>
 				<tr>
-					<th></th>
 					<th>実施回数</th>
 					<th>実施問題数</th>
 					<th>難易度</th>
@@ -40,7 +39,6 @@
 				{
 				%>
 				<tr>
-				<td></td>
 				<td>第<%=array[i].getCountUnit() %>回目</td>
 				<td><%=array[i].getTotalQuestionCount() %></td>
 				<td><%=array[i].getDifficulty() %></td>

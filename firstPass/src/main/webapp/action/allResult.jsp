@@ -135,7 +135,6 @@
 	<table class="common-table col4t">
 		<thead>
 		<tr>
-			<th> </th>
 			<th>順位</th>
 			<th>ユーザ名</th>
 			<th>回答数</th>
@@ -144,7 +143,6 @@
 		</tr>
 		<c:forEach var="AllResult" items="${list}" varStatus="status">
 			<tr>
-			<td></td>
 			<td>${AllResult.rank}位</td>
 			<td>${AllResult.userId}</td>
 			<td>${AllResult.answerCount}問</td>
