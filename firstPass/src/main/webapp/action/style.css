@@ -158,11 +158,10 @@
 		{
 			padding: 0.5em 1em;
 		}
-		.float_choice/*出題問題選択肢*/
+		.float_choice1, .float_choice2, .float_choice3, .float_choice4/*出題問題選択肢*/
         {
             padding: 0.5em 1em;
             color: #000000;
-            background:#f5f5f5;
             margin:10px;
             width:95％;
         }
