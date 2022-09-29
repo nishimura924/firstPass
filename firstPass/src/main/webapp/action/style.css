@@ -159,9 +159,13 @@
 			padding: 0.5em 1em;
 		}
 		.float_choice/*出題問題選択肢*/
-		{
-			padding: 0.5em 1em;
-		}
+        {
+            padding: 0.5em 1em;
+            color: #000000;
+            background:#f5f5f5;
+            margin:10px;
+            width:95％;
+        }
 		.float_judgeCorrect/*正誤判定(正解)*/
 		{
 			color:#FF0000;
