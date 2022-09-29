@@ -21,7 +21,9 @@ public class AnswerAction extends Action
 	
 	/**
 	 * mainメソッド
-	 * daoでsearch後、showQuestion.jspに遷移する
+	 * 条件選択画面でquestionOfSetにそれぞれの選択肢が正解かどうか、正解の選択肢は何かを格納済のため
+	 * 判定後にshowQuestion.jspに返す
+	 * また、DB検索して当該の問題にコメントがあれば併せてshowQuestion.jspに返す
 	 */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
@@ -46,7 +48,10 @@ public class AnswerAction extends Action
 		//アが選ばれた場合
 		else if(request.getParameter("choice").equals("ア"))
 		{
+			//正解不正解を格納
 			answer.setCorrect(questionOfSet.get(0).getChoice1().getIsCorrect());
+			
+			//JSPでの表示用に選択したものをセット
 			request.setAttribute("choice", "ア");
 		}
 		//イが選ばれた場合
@@ -73,7 +78,7 @@ public class AnswerAction extends Action
 			answer.setCorrect("0");
 		}
 		
-		//正解の選択肢を問題から抽出
+		//そもそも正解が何かをセット
 		if (questionOfSet.get(0).getChoice1().getIsCorrect() == "1")
 		{
 			answer.setCorrectChar('ア');
@@ -95,7 +100,6 @@ public class AnswerAction extends Action
 		}
 	
 		//コメントの取得(ログインユーザのみ)
-		//answer.setAllComment(List<Comment>);
 		User user = (User)session.getAttribute("user");
 		
 		if(user != null)

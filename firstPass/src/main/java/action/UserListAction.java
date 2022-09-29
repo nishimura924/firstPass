@@ -1,6 +1,6 @@
 package action;
 /**
- * パスワード変更時に現在のパスワードが正しいかどうか判定するプログラム
+ * 管理者用のユーザ一覧を取得するためのプログラム
  * @author　島田
  * @version　1.0.0
  */
@@ -22,7 +22,7 @@ public class UserListAction extends Action
 
 /**
  * mainメソッド
- * daoでselectしてsession格納後、changePasswordConfirm.jspに遷移する
+ * USER TABLEの値を取得してuserList.jspに返す
  */
 	
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception

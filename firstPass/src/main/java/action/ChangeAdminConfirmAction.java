@@ -16,6 +16,7 @@ public class ChangeAdminConfirmAction extends Action
 
 /**
  * mainメソッド
+ * ChangeAdminStart.actionでの入力値チェックを踏まえて、実際にDBを更新する
  * 
  */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -46,6 +47,7 @@ public class ChangeAdminConfirmAction extends Action
 
 		
 		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移
+		//ブラウザのマルチタブでの操作などによるエラーを想定
 		if(! dao.adminUpdate(userChangeAdmin, userAdmin))
 		{
 			return "changeAdmin-error.jsp";

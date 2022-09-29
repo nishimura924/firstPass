@@ -1,7 +1,7 @@
 package action;
 /**
- * 回答実績・コメント登録用のプログラム
- * 問題は解く毎にsessionのリスト上から削除する
+ * 回答実績登録、ブックマーク登録・解除用のプログラム
+ * 問題は解く毎にsessionのリスト上の一番上(当該の問題)を削除する
  * @author　島田
  * @version　1.0.0
  */
@@ -27,7 +27,7 @@ public class ResultAction extends Action
 	
 	/**
 	 * mainメソッド
-	 * daoでupdate後、showQuestion.jspに遷移する
+	 * 回答実績とブックマークを更新後、showQuestion.jspに遷移する
 	 * 問題が残っていないのであれば。unitResult.jspに遷移する
 	 */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
@@ -40,14 +40,14 @@ public class ResultAction extends Action
 		{
 			return "access-error.jsp";
 		}
-		
 		Answer answer = (Answer)session.getAttribute("answer");
 		if(answer == null)
 		{
 			return "access-error.jsp";
 		}
 		
-		//コメント登録の場合は、実績登録などはまだしない(「次へ」ボタンのときにする)
+		
+		//コメント登録の場合は実績登録などをせずに、コメント登録のみのactionへ遷移
 		if(request.getParameter("submitComment") != null)
 		{
 			request.setAttribute("comment", request.getParameter("comment"));
@@ -117,7 +117,7 @@ public class ResultAction extends Action
 		summaryThis.setGenre(questionOfSet.get(0).getGenre());
 		summaryThis.setCorrect(answer.getCorrect());
 		
-		//sessionのsummaryに今回分をセット
+		//sessionのsummaryに今回分をセット(summaryはunitResult.jspで使用)
 		List<SummaryOfResult> summary;
 		
 		if (session.getAttribute("summary") == null)
@@ -133,49 +133,6 @@ public class ResultAction extends Action
 		
 		summary.add(summaryThis);
 		session.setAttribute("summary", summary);
-		
-		
-		//　コメントの登録(ログインユーザのみ)はAnswer.actionのみに変更
-		/*
-		if(user != null)
-		{
-			CommentDAO dao2 = new CommentDAO();
-			Comment comment = new Comment();
-			comment.setYear(questionOfSet.get(0).getYear());
-			comment.setQuestionNo(questionOfSet.get(0).getQuestionNo());
-			comment.setUserId(user.getUserId());
-			
-			//コメントなければ何もしない
-			if(request.getParameter("comment") == null || request.getParameter("comment").trim().isEmpty())
-			{
-				
-			}
-			//コメントがあれば登録
-			else
-			{
-				String commentString = request.getParameter("comment");
-				
-				//500文字超はカット
-				if(! ValidCheck.validComment(commentString))
-				{
-					commentString = commentString.substring(0,500);
-				}
-				
-				comment.setComment(commentString);
-				if(dao2.insert(comment) != 1)
-				{
-					//DB登録処理のエラー
-					String errorMessage = "コメント登録ができません。";
-					request.setAttribute("errorMessage", errorMessage);
-				}
-				else
-				{
-					//ok
-				}
-			}
-			
-		}
-		*/
 		
 		// ブックマークの処理(ログインユーザのみ)
 		if(user != null)

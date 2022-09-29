@@ -16,7 +16,7 @@ public class ChangePasswordConfirmAction extends Action
 
 /**
  * mainメソッド
- * daoでupdate後、changePasswordFinish.jspに遷移する
+ * ChangePasswordStart.actionでの入力値チェックを踏まえて、実際にDBを更新する
  */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
@@ -30,14 +30,13 @@ public class ChangePasswordConfirmAction extends Action
 			return "access-error.jsp";	
 		}
 		
-		//入力値チェックは不要
-		
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("newPassword");
 		UserDAO dao = new UserDAO();
 
 		
 		//画面入力のパスワードがパスワード変更開始画面時ではDBの値と一致にも関わらず、DBの値と異なる場合はエラー画面へ遷移
+		//ブラウザのマルチタブでの操作などによるエラーを想定
 		if(! dao.userPasswordUpdate(user, password, newPassword))
 		{
 			return "changePassword-error.jsp";

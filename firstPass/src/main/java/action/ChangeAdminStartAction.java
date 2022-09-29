@@ -16,7 +16,7 @@ public class ChangeAdminStartAction extends Action
 
 /**
  * mainメソッド
- * daoでselectしてsession格納後、changeAdminConfirm.jspに遷移する
+ * 入力値チェック及びDBとのデータ整合チェックを行う
  */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{

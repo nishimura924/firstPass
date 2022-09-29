@@ -1,6 +1,6 @@
 package action;
 /**
- * コメント登録単体用のプログラム
+ * コメント登録用のプログラム
  * @author　島田
  * @version　1.0.0
  */
@@ -20,6 +20,7 @@ public class RegistCommentAction extends Action
 	
 	/**
 	 * mainメソッド
+	 * コメントエリアに記載の内容をDBに登録
 	 */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
@@ -70,7 +71,7 @@ public class RegistCommentAction extends Action
 				}
 				else
 				{
-					//DB正常登録時、改めて読込み
+					//DB正常登録時改めて読込んで、過去コメントと併せてshowQuestion.jspに返す
 					List<Comment> allComment = new ArrayList<Comment>();
 					allComment = dao.search(comment);
 					Answer answer = (Answer)session.getAttribute("answer");

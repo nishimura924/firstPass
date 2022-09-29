@@ -16,7 +16,7 @@ public class ChangeUserNameStartAction extends Action
 
 /**
  * mainメソッド
- * daoでsearchしてrequest格納後、changePasswordConfirm.jspに遷移する
+ * 入力値チェック及びDBとのデータ整合チェックを行う
  */
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
