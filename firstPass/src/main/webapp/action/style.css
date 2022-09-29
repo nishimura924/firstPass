@@ -51,15 +51,15 @@
 	/*float画像*/
 		.indexImg
 		{
-			background-image:url(bg_doujou.jpg);     /* 画像のURLを指定       */
+			background-image:url(doujou.jpg);     /* 画像のURLを指定       */
     		background-repeat:  no-repeat;         /* 画像の繰り返しを指定  */              
     		background-size:contain;				/* 画像のサイズを指定  */
-    		width:350px;                            /* 横幅のサイズを指定    */
-    		height:350px;   						/* 縦幅のサイズを指定    */
+    		width:800px;                            /* 横幅のサイズを指定    */
+    		height:450px;   						/* 縦幅のサイズを指定    */
     		margin: 0 auto 40px;
     			margin-top:0px;
     			margin-right:auto;
-    			margin-bottom:30px;
+    			margin-bottom:auto;
     			margin-left:auto;
     			
 		}
@@ -69,11 +69,11 @@
 		.float_menu /*トップ、マイページ、管理者メニュー*/
 		{
     		background-color: #FFFACD;
-    		margin: 0 auto 40px;
-    			margin-top:0px;
+    		/*margin: 0 auto 40px;
+    			margin-top:auto;
     			margin-right:auto;
     			margin-bottom:60px;
-    			margin-left:auto;
+    			margin-left:auto;*/
 		
 		}
 		.float_login/*ログイン*/
@@ -97,9 +97,7 @@
     			margin-top:0px;
     			margin-right:auto;
     			margin-bottom:60px;
-    			margin-left:auto;
-  
-    		
+    			margin-left:auto;	
 		}
 		.float_changeUserNameAlert/*ユーザ名変更の注意文言*/
 		{
@@ -142,7 +140,7 @@
 		}
 		.float_correct/*正解*/
 		{
-			color:#FF0000;
+			
 		}
 		.float_flag/*ブックマーク登録フラグ*/
 		{
@@ -199,7 +197,9 @@
     		border-bottom:3px solid #bfc77e;
     		border-radius: 5px ;
 		}
-		.btn-square-shadow /*遷移ボタン用*/
+		
+		 /*遷移ボタン用*/
+		.btn-square-shadow
 		{
   			display: inline-block;
   			padding: 0.5em 1em;
@@ -214,30 +214,35 @@
   		/*ボタンを押したとき*/
   			-webkit-transform: translateY(4px);
   			transform: translateY(4px);/*下に動く*/
-  			box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
+  			box-shadow: 0px 0px 1px gray;/*影を小さく*/
   			border-bottom: none;
 		}
+		
+		
 		.decorated-btn /*決定ボタン用*/
 		{
-  			background-color: gold;
+  			 position: relative;
+  			display: inline-block;
+	  		padding: 0.25em 0.5em;
+	  		text-decoration: none;
   			color: #FFF;
-  			font-size: 15px;
-  			border-radius: 5px;
-  			border-bottom: solid 3px orange;
-  			box-shadow: 3px 3px 3px gray;
-  			transition: 0.3s;
+  			background: #fd9535;/*色*/
+  			border-radius: 4px;/*角の丸み*/
+  			box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+  			font-weight: bold;
+  			border: solid 2px #d27d00;/*線色*/
 		}
 		.click-down:active 
 		{
-  			transform: translateY(2px);
-  			border-bottom: none;
+  			/*押したとき*/
+  			box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
 		}
-
 		.decorated-btn:hover 
 		{
   			background-color: orange;
 		}
 		
+		/*メニューボタン用*/
 		nav
 		{
 			border-bottom: 1px solid #ccc;
@@ -266,7 +271,7 @@
 			width: 100%;
 			padding: 10px 0;
 			text-decoration: none;
-			color: #ccc;
+			color: #A52A2A;
 		}
 		nav ul li a:hover
 		{
@@ -282,3 +287,92 @@
 			border-bottom: 5px solid #00B0F0;
 			color: #00B0F0;
 		}
+		
+		/***　共通テーブル　***/
+    	.common-table
+    	{
+         	width:100%;
+       		border-collapse: collapse;
+         	border: none;
+         	border-spacing: 0px 10px ;
+    	}
+
+
+
+   		.common-table tbody td,
+    	.common-table tfoot td
+    	{
+        	text-align: center;
+   		}
+   		/* 上部ヘッダー（背景：パステルカラー） */
+    	.common-table thead th
+    	{
+        	color: #FFF;
+         	font-weight: bold;
+         	background:#23a951;
+    	}
+   		/* 上部ヘッダーの丸み */
+    	.common-table thead th:nth-child(2)
+    	{
+        	 border-radius: 10px 0 0 0;
+    	}
+    	.common-table thead th:last-child
+    	{
+       		border-radius: 0 10px  0 0;
+    	}
+		.common-table th,
+    	.common-table td
+    	{
+        	padding-bottom: 10px;
+        	padding-top: 10px;
+        	border: 0 none !important;
+        	text-align: center;
+    	}
+
+		/* １行ずつ色変更　不要なら削除 even:奇数行　odd:偶数行 */
+    	.common-table tr:nth-child(even) td
+    	{
+         	background: #f5f5f5;
+   		}
+    	.common-table tr:nth-child(odd) td
+   		 {
+        	 background: #FDFDFD;
+   		}
+   		/* ヘッダーセル先頭・ボディ項目・フッター項目 */
+    	.common-table tbody th,
+    	.common-table tfoot th,
+    	.common-table thead th:first-child
+    	{
+         	background:none;
+         	color:#666;
+         	font-weight: bold;
+         	line-height:4.5em;
+         	text-align:right;
+    	}
+    	/*（共通）　項目の多いテーブルの幅を調整*/
+   		 @media (max-width: 767px) {
+    	.col6t th,
+     	.col6t td
+     	{	
+         	font-size:0.4em;
+         	padding: 10px 0px;
+     	}
+     	.col5t th,
+     	.col5t td
+     	{
+         	font-size:0.5em;
+        	padding: 10px 0px;
+     	}
+    	.col4t th,
+    	.col4t td
+    	{
+        	font-size:0.7em;
+         	padding: 10px 5px;
+    	}
+    	.col3t th,
+     	.col3t td
+     	{
+        	font-size:0.8em;
+        	padding: 10px 10px;
+    	}
+}

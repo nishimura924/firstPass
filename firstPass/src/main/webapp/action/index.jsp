@@ -17,8 +17,7 @@
 	</c:choose>
 	
 	<div class="indexImg "></div>
-	
-	<br><br>
+	<br>
 	<div class="float_menu ">
 	<c:choose>
 		<%--　一般ユーザ(ログイン済) --%>
