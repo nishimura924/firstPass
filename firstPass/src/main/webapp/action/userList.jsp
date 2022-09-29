@@ -23,7 +23,7 @@
 	</div>
 	
 	<form action="UserList.action" method="post">
-		<p><input type = "submit" value="一覧表示"></p>
+		<input class="decorated-btn click-down" type = "submit" value="一覧表示">
 	</form>
 	
 	<hr>
