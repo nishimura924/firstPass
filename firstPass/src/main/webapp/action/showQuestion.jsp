@@ -160,11 +160,11 @@
 			</div>
 			<br><br>
 
-			<div class="float_commentRegist">
+				<div class="float_commentRegist">
 				<c:if test="${user != null }" >
 					＜コメント登録＞<br>
-					（500文字超の場合、501文字目以降は削除されます。また改行も削除されます。）<br>
-					<textarea name="comment" ></textarea><br><br>
+						（500文字超の場合、501文字目以降は削除されます。また改行も削除されます。）<br>
+						<textarea name="comment" ></textarea><br><br>
 
 				<div class="float_commentPast">
 					＜過去のコメント＞<br>
