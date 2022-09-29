@@ -18,8 +18,9 @@
 			<jsp:forward page="../action/PersonalResult.action"></jsp:forward>
 		</c:if>
 	
-	
-		「${user.userName }」さんの正答率実績<br>
+		<div class="float_free">
+			${user.userName }さんの正答率実績<br>
+		</div>
 		<div class="float_psResult">
 			<table class="common-table col4t">
 			<thead>
@@ -40,7 +41,7 @@
 				%>
 				<tr>
 				<td>第<%=array[i].getCountUnit() %>回目</td>
-				<td><%=array[i].getTotalQuestionCount() %></td>
+				<td><%=array[i].getTotalQuestionCount() %>問</td>
 				<td><%=array[i].getDifficulty() %></td>
 				<td><%=array[i].getCorrectOnTotal() %>％</td>			
 				<td><%=array[i].getCorrectOnStrategy()%>％</td>

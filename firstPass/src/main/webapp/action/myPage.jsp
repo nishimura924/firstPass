@@ -19,7 +19,9 @@
 		</c:if>
 		
 		<h2 class="font_box">マイページ</h2>
-		${user.userName }さんのマイページ<br>
+		<div class="float_free">
+			${user.userName }さんのマイページ<br>
+		</div>
 		
 		<div class="float_menu">
 				<nav>
