@@ -48,9 +48,13 @@
 		}
 		hr
 		{
-			height: 1px;
-  			background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#ccc), to(transparent));
-  			background-image: linear-gradient(to right, transparent, #ccc, transparent);
+   			border-top:dashed 2px #ddbc00;
+  			border-bottom:none 1px #C0C0C0;
+		}
+		.hr2
+		{
+   			border-top:dashed 2px #BDB76B;
+  			border-bottom:none 1px #C0C0C0;
 		}
 		form
 		{
