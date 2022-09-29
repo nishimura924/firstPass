@@ -23,9 +23,9 @@
 </c:choose>
 さんの今回のテスト結果（難易度：
 <c:choose>
-<c:when test ="${conditions.difficulty =='0'}">normal</c:when>
+<c:when test ="${conditions.difficulty =='0'}">Normal</c:when>
 	
-<c:when test ="${conditions.difficulty =='1'}">easy</c:when>
+<c:when test ="${conditions.difficulty =='1'}">Easy</c:when>
 
 <c:when test ="${conditions.difficulty ==null}">出力エラー</c:when>
 </c:choose>
