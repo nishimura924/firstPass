@@ -158,7 +158,7 @@
 				</c:choose>
 				</c:if>
 			</div>
-			<br><br>
+			<br>
 
 				<div class="float_commentRegist">
 				<c:if test="${user != null }" >
