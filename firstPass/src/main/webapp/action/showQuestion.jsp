@@ -19,8 +19,10 @@
 		<jsp:forward page="access-error.jsp" />
 	</c:if>
 
- 	<div class="float_questionInfo">
+ 	<div class="float_questionNumber">
 		第　${questionOfSet[0].index}　問<br>
+	</div>
+	<div class="float_questionInfo">
 		${questionOfSet[0].year }　問${questionOfSet[0].questionNo }<br>
 		${questionOfSet[0].genre }<br>
 		<br>
@@ -41,8 +43,9 @@
 	
 	<br>
 	
-	<div class="float_choice">
+	
 	<form action="Answer.action" method="post">	
+	<div class="float_choice">
 	<%-- 	<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect } --%>
 		<input type="radio" name="choice" value="ア"
 			<c:if test="${choice == 'ア' }" > checked </c:if> >ア：
@@ -101,13 +104,13 @@
 				<c:otherwise><br></c:otherwise>
 			</c:choose>
 		</div>
-
+		</div>
 		<br>
 		<c:if test="${answer == null}">
 			<input class="decorated-btn click-down" type="submit" value="回答">
 		</c:if>
 		</form>
-		</div>
+		
 	
 
 	<hr>
@@ -120,7 +123,7 @@
 				<div class="float_judgeIncorrect">×：不正解！</div>
 				</c:otherwise>
 			</c:choose>
-			</div>
+			
 		<br>
 
 	

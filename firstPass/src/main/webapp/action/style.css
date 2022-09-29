@@ -1,7 +1,22 @@
        
      /*個別のタグ*/
        
-       　table
+       　/*リンクタグ用*/
+       	a:visited
+       	{
+  			color : #ff4081;
+		}
+        a:hover
+        {
+  			color : #32CD32;
+		}
+        a:active 
+        {
+ 			color: #FF0000;
+ 			text-decoration: underline;
+		}
+		
+       	table
        	{
             border-collapse: collapse;
             border: solid 1px black;
@@ -46,7 +61,8 @@
 		}
 		html
 		{
-			background-color:#F0F8FF ;
+			background-image:url(tatami.jpg);     /* 画像のURLを指定       */
+			
 		}
 	/*float画像*/
 		.indexImg
@@ -101,11 +117,18 @@
 		}
 		.float_changeUserNameAlert/*ユーザ名変更の注意文言*/
 		{
-			
+			padding: 0.5em 1em;
 		}
 
 		.float_finish/*登録系画面の完了メッセージ（共通）*/
 		{
+			padding: 0.5em 1em;
+			background-color: #FFFACD;
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:20px;
+    			margin-bottom:60px;
+    			margin-left:20px;
 		}
 		.float_errorMsg/*エラーメッセージ共通(共通）*/
 		{
@@ -113,22 +136,31 @@
 		}
 		.float_conditions/*出題問題選択、ランキングの条件選択*/
 		{
-			
+			padding: 0.5em 1em;
 			background-color: #FFFACD;
     		margin: 0 auto 40px;
     			margin-top:0px;
-    			margin-right:auto;
+    			margin-right:20px;
     			margin-bottom:60px;
-    			margin-left:auto;
+    			margin-left:20px;
+		}
+		.float_questionNumber/*出題問題番号*/
+		{
+			padding: 0.5em 1em;
 		}
 		.float_questionInfo/*出題問題の年度分野の情報*/
 		{
+			color:#808080;
+			text-align: right;
+			padding: 0.5em 1em;
 		}
 		.float_question/*出題問題文*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_choice/*出題問題選択肢*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_judgeCorrect/*正誤判定(正解)*/
 		{
@@ -140,37 +172,47 @@
 		}
 		.float_correct/*正解*/
 		{
-			
+			padding: 0.5em 1em;
 		}
 		.float_flag/*ブックマーク登録フラグ*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_bookmarkregist/*ブックマーク登録チェック*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_commentRegist/*コメント登録*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_commentPast/*過去コメント*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_result/*得点結果*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_PSresult/*個人過去実績*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_ranking/*ランキング*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_userListText/*ユーザ一覧の案内文*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_userList/*一般ユーザーリスト*/
 		{
+			padding: 0.5em 1em;
 		}
 		.float_userAdminList/*管理ユーザリスト*/
 		{
+			padding: 0.5em 1em;
 		}
 		
 		.font_boxTop /*トップ見出し用*/
@@ -312,7 +354,7 @@
          	background:#23a951;
     	}
    		/* 上部ヘッダーの丸み */
-    	.common-table thead th:nth-child(2)
+    	.common-table thead th:nth-child(1)
     	{
         	 border-radius: 10px 0 0 0;
     	}
@@ -340,8 +382,7 @@
    		}
    		/* ヘッダーセル先頭・ボディ項目・フッター項目 */
     	.common-table tbody th,
-    	.common-table tfoot th,
-    	.common-table thead th:first-child
+    	.common-table tfoot th
     	{
          	background:none;
          	color:#666;
@@ -349,6 +390,8 @@
          	line-height:4.5em;
          	text-align:right;
     	}
+    	
+    	
     	/*（共通）　項目の多いテーブルの幅を調整*/
    		 @media (max-width: 767px) {
     	.col6t th,

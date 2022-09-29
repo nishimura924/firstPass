@@ -36,12 +36,12 @@
 				<input type="hidden" name="userName" value=${userName }>
 				<input type="hidden" name="adminFlag" value="0">
 
-				<p><input class="decorated-btn click-down"　type = "submit" value="登録"></p>
+				<p><input class="decorated-btn click-down" type = "submit" value="登録"></p>
 				<p>${registError }</p>
 			</form>
 
 			<form action="registUserStart.jsp" method="post">
-				<input class="decorated-btn click-down"　type="submit" value="戻る">
+				<input class="decorated-btn click-down" type="submit" value="戻る">
 			</form>
 		</div>
 
