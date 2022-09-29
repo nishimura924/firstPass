@@ -48,7 +48,9 @@
 		}
 		hr
 		{
-		
+			height: 1px;
+  			background-image: -webkit-gradient(linear, left top, right top, from(transparent), color-stop(#ccc), to(transparent));
+  			background-image: linear-gradient(to right, transparent, #ccc, transparent);
 		}
 		form
 		{
@@ -233,8 +235,8 @@
   			line-height: 1;
   			margin:10px 0px;
   			padding: 10px 5px 10px 5px;
-    		box-shadow:1px 3px 7px 0px #666666 ;
-    		border-bottom:3px solid #bfc77e;
+    		/*box-shadow:1px 3px 7px 0px #666666 ;*/
+    		/*border-bottom:3px solid #bfc77e;*/
     		border-radius: 5px ;
 		}
 		.font_box /*見出し用*/
@@ -245,8 +247,8 @@
   			line-height: 1;
   			margin:10px 0px;
   			padding: 10px 5px 10px 5px;
-    		box-shadow:1px 3px 7px 0px #666666 ;
-    		border-bottom:3px solid #bfc77e;
+    		/*box-shadow:1px 3px 7px 0px #666666 ;
+    		border-bottom:3px solid #bfc77e;*/
     		border-radius: 5px ;
 		}
 		
