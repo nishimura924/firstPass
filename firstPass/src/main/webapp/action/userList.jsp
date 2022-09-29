@@ -31,9 +31,13 @@
 	
 	<c:if test="${adminUserList != null}">
 	<div class="float_userList">
-		＜一般ユーザ＞<br>
-		<table>
-			<tr><td>ユーザID</td><td>ユーザ名</td></tr>
+	＜一般ユーザ＞<br>
+		<table class="common-table col4t">
+		<thead>
+			<tr>
+				<th>ユーザID</th>
+				<th>ユーザ名</th>
+			</tr>
 			
 			<c:forEach var="adminUserList" items="${adminUserList }">
 				<c:if test="${adminUserList.adminFlag == 0}">
@@ -42,14 +46,19 @@
 					</tr>
 				</c:if>
 			</c:forEach>
+		</thead>
 		</table>
 	</div>
 	
-	<div class="float_adminList">
-		<br>
-		＜管理者ユーザ＞<br>
-		<table>
-			<tr><td>ユーザID</td><td>ユーザ名</td></tr>
+	<br>
+	<div class="float_userAdminList">
+	＜管理者ユーザ＞<br>
+		<table class="common-table col4t">
+		<thead>
+			<tr>
+				<th>ユーザID</th>
+				<th>ユーザ名</th>
+			</tr>
 			
 			<c:forEach var="adminUserList" items="${adminUserList }">
 				<c:if test="${adminUserList.adminFlag == 1}">
@@ -58,6 +67,7 @@
 					</tr>
 				</c:if>
 			</c:forEach>
+		</thead>
 		</table>
 	</div>
 	
