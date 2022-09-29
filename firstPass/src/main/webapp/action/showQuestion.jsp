@@ -22,6 +22,7 @@
  	<div class="float_questionNumber">
 		第　${questionOfSet[0].index}　問<br>
 	</div>
+	
 	<div class="float_questionInfo">
 		${questionOfSet[0].year }　問${questionOfSet[0].questionNo }<br>
 		${questionOfSet[0].genre }<br>
@@ -29,24 +30,18 @@
 	</div>
 	
 	<div class="float_question">
-		<c:choose>
-			<c:when test="${questionOfSet[0].choicePicFlg == 1 }" >
-				<img src="../img/${questionOfSet[0].question }" />
-			</c:when>
-			<c:otherwise>
-				${questionOfSet[0].question }
-			</c:otherwise>
-			
-		</c:choose>
+		${questionOfSet[0].question }
+			<c:if test="${questionOfSet[0].questionPic != null }" >
+				<img src="../img/${questionOfSet[0].questionPic }" />
+			</c:if>
 	</div>
 	<br><br>
 	
-	<br>
+	<form action="Answer.action" method="post">
 	
-	
-	<form action="Answer.action" method="post">	
-	<div class="float_choice">
+	<div class="float_choice1">
 	<%-- 	<input type="radio" name="choice" value=${questionOfSet[0].choice1.isCorrect } --%>
+		<br>
 		<input type="radio" name="choice" value="ア"
 			<c:if test="${choice == 'ア' }" > checked </c:if> >ア：
 			<c:choose>		
@@ -57,7 +52,10 @@
 					${questionOfSet[0].choice1.choice }<br>
 				</c:otherwise>
 			</c:choose>
-		
+	</div>
+	
+	<div class="float_choice2">
+		<br>
 		<input type="radio" name="choice" value="イ"			
 			<c:if test="${choice == 'イ' }" > checked </c:if> >イ：
 			<c:choose>		
@@ -68,9 +66,12 @@
 					${questionOfSet[0].choice2.choice }<br>
 				</c:otherwise>
 			</c:choose>
-				
-		<c:choose>
-		<c:when test="${conditions.difficulty == 0 }" >
+	</div>
+	
+	<c:choose>
+	<c:when test="${conditions.difficulty == 0 }" >
+	<div class="float_choice3">		
+		<br>
 		<input type="radio" name="choice" value="ウ"
 			<c:if test="${choice == 'ウ' }" > checked </c:if> >ウ：
 			<c:choose>
@@ -80,8 +81,10 @@
 				<c:otherwise>
 					${questionOfSet[0].choice3.choice }<br>
 				</c:otherwise>
-			</c:choose>					
-								
+			</c:choose>	
+	</div>			
+	<div class="float_choice4">
+		<br>			
 		<input type="radio" name="choice" value="エ"
 			<c:if test="${choice == 'エ' }" > checked </c:if> >エ：
 			<c:choose>
@@ -91,19 +94,19 @@
 				<c:otherwise>
 					${questionOfSet[0].choice4.choice }<br><br>
 				</c:otherwise>
-			</c:choose>					
-		</c:when>
-		<c:otherwise></c:otherwise>
-		</c:choose>
-		
-		<br>
+			</c:choose>
+	</div>				
+	</c:when>
+	<c:otherwise></c:otherwise>
+
+	</c:choose>
+
 		
 		<div class="float_bookmarkFlag">
 			<c:choose>
 				<c:when test="${questionOfSet[0].bookmarkFlg == 1 }" >ブックマーク登録済<br></c:when>	
 				<c:otherwise><br></c:otherwise>
 			</c:choose>
-		</div>
 		</div>
 		<br>
 		<c:if test="${answer == null}">
@@ -174,7 +177,6 @@
 			<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
 			<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
 		</form>
-		
 	</c:if>
 	
 </body>
