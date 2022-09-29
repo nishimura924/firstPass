@@ -45,7 +45,23 @@ public class QuestionDAO extends DAO
 			con = getConnection();
 		
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT QUESTION.YEAR,QUESTION.QUESTION_NO,QUESTION.GENRE,QUESTION.QUESTION,QUESTION.QUESTION_FILE_NAME,QUESTION.CORRECT,QUESTION.INCORRECT_1,QUESTION.INCORRECT_2,QUESTION.INCORRECT_3,QUESTION.IS_SELECT_FILE,BOOKMARK.USER_ID FROM QUESTION LEFT JOIN BOOKMARK ON QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO AND QUESTION.YEAR = BOOKMARK.YEAR  WHERE QUESTION.YEAR IN("+ yearCond +") and QUESTION.GENRE IN("+ genreCond +") ");
+			st=con.prepareStatement("SELECT"
+					+ " QUESTION.YEAR"
+					+ ",QUESTION.QUESTION_NO"
+					+ ",QUESTION.GENRE"
+					+ ",QUESTION.QUESTION"
+					+ ",QUESTION.QUESTION_FILE_NAME"
+					+ ",QUESTION.CORRECT"
+					+ ",QUESTION.INCORRECT_1"
+					+ ",QUESTION.INCORRECT_2"
+					+ ",QUESTION.INCORRECT_3"
+					+ ",QUESTION.IS_SELECT_FILE"
+					+ ",BOOKMARK.USER_ID"
+					+ " FROM QUESTION LEFT JOIN BOOKMARK ON"
+					+ " QUESTION.QUESTION_NO = BOOKMARK.QUESTION_NO"
+					+ " AND QUESTION.YEAR = BOOKMARK.YEAR"
+					+ " WHERE QUESTION.YEAR"
+					+ " IN("+ yearCond +") and QUESTION.GENRE IN("+ genreCond +") ");
 			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
@@ -296,7 +312,9 @@ public class QuestionDAO extends DAO
 		
 			//問題TBLに登録されている年度を降順で取得
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR ORDER BY YEAR DESC;");
+			st=con.prepareStatement("SELECT YEAR FROM QUESTION"
+					+ " GROUP BY YEAR"
+					+ " ORDER BY YEAR DESC;");
 			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
@@ -343,7 +361,8 @@ public class QuestionDAO extends DAO
 			con = getConnection();
 		
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT GENRE FROM QUESTION GROUP BY GENRE;");
+			st=con.prepareStatement("SELECT GENRE FROM QUESTION"
+					+ " GROUP BY GENRE;");
 		
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class UserDAO extends DAO
 {
-	//ユーザ名がDBに存在するかの確認
+	//ユーザ名がDBに存在するかの確認のメソッド
 	public int userNameSearch(String newUserName) throws Exception
 	{
 		
@@ -20,8 +20,10 @@ public class UserDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			
+			//SQL文の作成
 			st = con.prepareStatement("SELECT"
 					+ " USER_NAME"
 					+ " FROM USER"
@@ -30,8 +32,11 @@ public class UserDAO extends DAO
 					+ " GROUP BY"
 					+ " USER_NAME");
 			st.setString(1, newUserName);	
+			
+			//SQL実行
 			ResultSet rs = st.executeQuery();
 			
+			//検索結果の取得
 			while (rs.next())
 			{
 				line += 1;
@@ -49,6 +54,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション接続
 					con.close();
 				}
 				catch (SQLException e2)
@@ -61,7 +67,7 @@ public class UserDAO extends DAO
 		return line;
 	}
 	
-	//パスワードがDBに存在するかの確認
+	//パスワードがDBに存在するかの確認メソッド
 	public int userPasswordSearch(User user, String password) throws Exception
 	{
 		
@@ -71,21 +77,23 @@ public class UserDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			
+			//SQL文の作成
 			st = con.prepareStatement("SELECT"
 					+ " USER_PASSWORD"
 					+ " FROM USER"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " AND"
-					+ " USER_PASSWORD=?"
-					+ " GROUP BY"
-					+ " USER_PASSWORD");
+					+ " WHERE USER_ID=?"
+					+ " AND　USER_PASSWORD=?"
+					+ " GROUP BY USER_PASSWORD");
 			st.setString(1, user.getUserId());
 			st.setString(2, password);
+			
+			//SQL実行
 			ResultSet rs = st.executeQuery();
 			
+			//検索結果の取得
 			while (rs.next())
 			{
 				line += 1;
@@ -103,6 +111,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.close();
 				}
 				catch (SQLException e2)
@@ -115,7 +124,7 @@ public class UserDAO extends DAO
 		return line;
 	}
 	
-	//ユーザ名の更新
+	//ユーザ名の更新メソッド
 	public boolean userNameUpdate(User user,  String userName, String newUserName) throws Exception
 	{
 		Connection con = null;
@@ -124,20 +133,23 @@ public class UserDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
 			
+			//SQL文の作成
 			st = con.prepareStatement("UPDATE USER SET"
 					+ " USER_NAME=?"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " AND"
-					+ " USER_NAME=?");
+					+ " WHERE USER_ID=?"
+					+ " AND USER_NAME=?");
 			st.setString(1, newUserName);
 			st.setString(2, user.getUserId());
 			st.setString(3, userName);
+			
+			//SQL実行
 			int line = st.executeUpdate();
 			
+			//更新成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -167,6 +179,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
@@ -180,7 +193,7 @@ public class UserDAO extends DAO
 		return isOK;
 	}
 	
-	//パスワードの更新
+	//パスワードの更新メソッド
 	public boolean userPasswordUpdate(User user, String password, String newUserPassword) throws Exception
 	{
 		Connection con = null;
@@ -189,20 +202,23 @@ public class UserDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
 			
+			//SQL文の作成
 			st = con.prepareStatement("UPDATE USER SET"
 					+ " USER_PASSWORD=?"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " AND"
-					+ " USER_PASSWORD=?");
+					+ " WHERE USER_ID=?"
+					+ " AND USER_PASSWORD=?");
 			st.setString(1, newUserPassword);
 			st.setString(2, user.getUserId());
 			st.setString(3, password);
 			
+			//SQL実行
 			int line = st.executeUpdate();
+			
+			//更新成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -233,6 +249,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
@@ -253,7 +270,11 @@ public class UserDAO extends DAO
 		
 		try
 		{
-			PreparedStatement st = con.prepareStatement("SELECT COUNT(*) AS kensu FROM USER WHERE USER_ID=? OR USER_NAME=? ");
+			PreparedStatement st = con.prepareStatement("SELECT"
+					+ " COUNT(*) AS kensu"
+					+ " FROM USER"
+					+ " WHERE USER_ID=?"
+					+ " OR USER_NAME=? ");
 			st.setString(1, userId);
 			st.setString(2, userName);
 			//SQLの実行・結果
@@ -293,7 +314,8 @@ public class UserDAO extends DAO
 		int line = 0;
 		try
 		{
-			PreparedStatement st = con.prepareStatement("INSERT INTO USER VALUES(?,?,?,?)");
+			PreparedStatement st = con.prepareStatement("INSERT INTO USER"
+					+ " VALUES(?,?,?,?)");
 			st.setString(1,user.getUserId());
 			st.setString(2,user.getUserPass());
 			st.setString(3, user.getUserName());
@@ -339,7 +361,9 @@ public class UserDAO extends DAO
 			con = getConnection();
 			
 			PreparedStatement st;
-			st=con.prepareStatement("select * from USER where USER_ID=? and USER_PASSWORD=?");
+			st=con.prepareStatement("select * from USER"
+					+ " where USER_ID=?"
+					+ " and USER_PASSWORD=?");
 				
 			//引数のloginとpasswordを設定
 			st.setString(1, userId);
@@ -382,7 +406,7 @@ public class UserDAO extends DAO
 		}
 	}
 	
-	//ユーザ名、パスワード、管理者権限の全件確認
+	//ユーザ名、パスワード、管理者権限の全件検索メソッド
 	public List<User> adminSearchAll() throws Exception
 	{
 		
@@ -392,19 +416,23 @@ public class UserDAO extends DAO
 			
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			
+			//SQL文の作成
 			st = con.prepareStatement("SELECT"
 					+ " USER_ID AS ID"
 					+ ", USER_NAME AS NAME"
 					+ ", ADMIN_FLAG AS FLAG"
-					+ " FROM USER GROUP BY"
-					+ " USER_ID"
+					+ " FROM USER"
+					+ " GROUP BY USER_ID"
 					+ ", USER_NAME"
 					+ ", ADMIN_FLAG");
 
+			//SQL実行
 			ResultSet rs = st.executeQuery();
-				
+			
+			//検索結果の格納
 			while (rs.next())
 			{
 				User user = new User();
@@ -426,6 +454,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.close();
 				}
 				catch (SQLException e2)
@@ -438,7 +467,7 @@ public class UserDAO extends DAO
 		return adminUserList;
 	}
 	
-	//管理者権限の確認
+	//管理者権限の確認メソッド
 	public int adminSearch(User user) throws Exception
 	{
 		int line = 0;
@@ -448,24 +477,25 @@ public class UserDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			
+			//SQL文の作成
 			st = con.prepareStatement("SELECT"
 					+ " USER_ID"
 					+ ", ADMIN_FLAG"
 					+ " FROM USER"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " AND"
-					+ " ADMIN_FLAG=?"
-					+ " GROUP BY"
-					+ " USER_ID"
+					+ " WHERE USER_ID=?"
+					+ " AND ADMIN_FLAG=?"
+					+ " GROUP BY USER_ID"
 					+ ", ADMIN_FLAG");
-			
 			st.setString(1, user.getUserId());
 			st.setString(2, user.getAdminFlag());
+			
+			//SQL実行
 			ResultSet rs = st.executeQuery();
 			
+			//検索成否の判定
 			while (rs.next())
 			{
 				line += 1;
@@ -483,6 +513,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.close();
 				}
 				catch (SQLException e2)
@@ -495,7 +526,7 @@ public class UserDAO extends DAO
 		return line;
 	}
 	
-	//管理者権限の更新
+	//管理者権限の更新メソッド
 	public boolean adminUpdate(User user, String adminFlag) throws Exception
 	{
 		Connection con = null;
@@ -504,19 +535,23 @@ public class UserDAO extends DAO
 			
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
-				
+			
+			//SQL文の作成
 			st = con.prepareStatement("UPDATE USER SET"
 					+ " ADMIN_FLAG=?"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " AND"
-					+ " ADMIN_FLAG=?");
+					+ " WHERE USER_ID=?"
+					+ " AND ADMIN_FLAG=?");
 			st.setString(1, user.getAdminFlag());
 			st.setString(2, user.getUserId());
 			st.setString(3, adminFlag);
+			
+			//SQL実行
 			int line = st.executeUpdate();
+			
+			//更新成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -547,6 +582,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
@@ -560,7 +596,7 @@ public class UserDAO extends DAO
 		return isOK;
 		}
 		
-	//ユーザ名がDBに存在するかの確認
+	//ユーザ名がDBに存在するかの検索メソッド
 	public int userIdSearch(String userId) throws Exception
 	{
 			
@@ -570,18 +606,21 @@ public class UserDAO extends DAO
 			
 		try
 		{
+			//コネクション接続
 			con = getConnection();
-				
+			
+			//SQL文の作成
 			st = con.prepareStatement("SELECT"
 					+ " USER_ID"
 					+ " FROM USER"
-					+ " WHERE"
-					+ " USER_ID=?"
-					+ " GROUP BY"
-					+ " USER_ID");
+					+ " WHERE USER_ID=?"
+					+ " GROUP BY USER_ID");
 			st.setString(1, userId);	
+			
+			//SQL実行
 			ResultSet rs = st.executeQuery();
-				
+			
+			//検索成否の判定
 			while (rs.next())
 			{
 				line += 1;
@@ -599,6 +638,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.close();
 				}
 				catch (SQLException e2)
@@ -611,7 +651,8 @@ public class UserDAO extends DAO
 		return line;
 	}	
 		
-	//ユーザの削除
+	//ユーザの削除メソッド(ただし、actionをアップロードしていないため使用なし)
+	//USER TABLEの外部参照制約により、COMMENT,BOOKMARK,RESILTがあるとUSER削除不可
 	public boolean deleteUser(String userId) throws Exception
 	{
 		Connection con = null;
@@ -620,14 +661,19 @@ public class UserDAO extends DAO
 			
 		try
 		{
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
-						
+			
+			//SQL文の作成
 			st = con.prepareStatement("DELETE FROM USER "
-					+ " WHERE"
-					+ " USER_ID=?");
+					+ " WHERE USER_ID=?");
 			st.setString(1, userId);
+			
+			//SQL実行
 			int line = st.executeUpdate();
+			
+			//削除の成否判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -658,6 +704,7 @@ public class UserDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}

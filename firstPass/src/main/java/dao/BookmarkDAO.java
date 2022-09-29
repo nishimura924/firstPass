@@ -5,6 +5,7 @@ import java.sql.*;
 
 public class BookmarkDAO extends DAO
 {
+	//ブックマーク登録用のメソッド
 	public int insert(Bookmark bookmark) throws Exception
 	{
 		int line = 0;
@@ -12,16 +13,21 @@ public class BookmarkDAO extends DAO
 		PreparedStatement st = null;
 		
 		try {
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
-		
-			st = con.prepareStatement("INSERT INTO BOOKMARK VALUES(?, ?, ?)");
+			
+			//SQL文の定義
+			st = con.prepareStatement("INSERT INTO BOOKMARK"
+					+ " VALUES(?, ?, ?)");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());
-		
+			
+			//SQLの実行
 			line = st.executeUpdate();
 			
+			//実行成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -50,6 +56,7 @@ public class BookmarkDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
@@ -63,7 +70,7 @@ public class BookmarkDAO extends DAO
 		return line;
 	}
 	
-
+	//ブックマーク登録解除用のメソッド
 	public int delete(Bookmark bookmark) throws Exception
 	{
 		
@@ -72,16 +79,23 @@ public class BookmarkDAO extends DAO
 		PreparedStatement st = null;
 		
 		try {
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
-		
-			st = con.prepareStatement("DELETE FROM BOOKMARK WHERE USER_ID=? AND YEAR=? AND QUESTION_NO=?");
+			
+			//SQL文の作成
+			st = con.prepareStatement("DELETE FROM BOOKMARK"
+					+ " WHERE USER_ID=?"
+					+ " AND　YEAR=?"
+					+ " AND QUESTION_NO=?");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());
 		
+			//SQL実行
 			line = st.executeUpdate();
 			
+			//SQL成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -110,6 +124,7 @@ public class BookmarkDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}

@@ -10,7 +10,7 @@ import bean.UnitResult;
 
 public class ResultDAO extends DAO
 {
-	
+	//一般USERの回答結果を登録するメソッド
 	public int insert(Result result) throws Exception
 	{
 		
@@ -19,11 +19,13 @@ public class ResultDAO extends DAO
 		PreparedStatement st = null;
 		
 		try {
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
 		
-			st = con.prepareStatement("INSERT INTO RESULT VALUES(?, ?, ?, ?, ?, ?, ?, now())");
-		
+			//SQL文の作成
+			st = con.prepareStatement("INSERT INTO RESULT"
+					+ " VALUES(?, ?, ?, ?, ?, ?, ?, now())");
 			st.setInt(1, result.getCountUnit());
 			st.setString(2, result.getYear());
 			st.setInt(3, result.getQuestionNo());
@@ -32,8 +34,10 @@ public class ResultDAO extends DAO
 			st.setString(6, result.getCorrect());
 			st.setString(7, result.getDifficulty());
 			
+			//SQL実行
 			line = st.executeUpdate();
 			
+			//登録成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -62,6 +66,7 @@ public class ResultDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
@@ -88,7 +93,10 @@ public class ResultDAO extends DAO
 				con = getConnection();
 			
 				PreparedStatement st;
-				st=con.prepareStatement("SELECT MAX(COUNT_UNIT) AS COUNT_UNIT FROM RESULT WHERE USER_ID=?");
+				st=con.prepareStatement("SELECT"
+						+ " MAX(COUNT_UNIT) AS COUNT_UNIT"
+						+ " FROM RESULT"
+						+ " WHERE USER_ID=?");
 				
 				//userIdをセット
 				st.setString(1, userId);
@@ -140,7 +148,18 @@ public class ResultDAO extends DAO
 				con = getConnection();
 				
 				PreparedStatement st;
-				st = con.prepareStatement("SELECT COUNT_UNIT,GENRE,DIFFICULTY, COUNT(*),SUM(IS_CORRECT) FROM RESULT WHERE USER_ID =? GROUP BY COUNT_UNIT,GENRE,DIFFICULTY ORDER BY COUNT_UNIT DESC, GENRE;");
+				st = con.prepareStatement("SELECT"
+						+ " COUNT_UNIT"
+						+ ",GENRE,DIFFICULTY"
+						+ ",COUNT(*)"
+						+ ",SUM(IS_CORRECT)"
+						+ " FROM RESULT"
+						+ " WHERE USER_ID =?"
+						+ " GROUP BY　COUNT_UNIT"
+						+ ",GENRE"
+						+ ",DIFFICULTY"
+						+ " ORDER BY COUNT_UNIT DESC"
+						+ ",GENRE;");
 				
 				//userIdをセット
 				st.setString(1, userId);
@@ -208,17 +227,56 @@ public class ResultDAO extends DAO
 				//回答数でソートした場合
 				if(sort.equals("COUNT(COUNT_UNIT)"))
 				{
-					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT)  AS 'sum',(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE DIFFICULTY =? AND RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
+					st=con.prepareStatement("SELECT"
+							+ " USER.USER_NAME"
+							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
+							+ ",SUM(RESULT.IS_CORRECT)  AS 'sum'"
+							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT"
+							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " WHERE　DIFFICULTY =?"
+							+ " AND　RESULT.GENRE"
+							+ " IN("+ genreCond +")"
+									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
 				}
 				//正答数でソートした場合
 				else if(sort.equals("SUM(IS_CORRECT)"))
 				{
-					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT) AS 'sum',(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE DIFFICULTY =? AND RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY SUM(RESULT.IS_CORRECT) DESC;");	
+					st=con.prepareStatement("SELECT"
+							+ " USER.USER_NAME"
+							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
+							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
+							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT"
+							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " WHERE DIFFICULTY =?"
+							+ " AND RESULT.GENRE"
+							+ " IN("+ genreCond +")"
+									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY SUM(RESULT.IS_CORRECT) DESC;");	
 				}
 				//正答率でソートした場合
 				else if(sort.equals("collectRate"))
 				{
-					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT) AS 'sum',(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE DIFFICULTY =? AND RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY (100 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) DESC;");	
+					st=con.prepareStatement("SELECT"
+							+ " USER.USER_NAME"
+							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
+							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
+							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT"
+							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " WHERE DIFFICULTY =?"
+							+ " AND RESULT.GENRE"
+							+ " IN("+ genreCond +")"
+									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY (100 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) DESC;");	
 				}	
 				
 					st.setString(1,difficulty);
@@ -232,12 +290,36 @@ public class ResultDAO extends DAO
 				//回答数でソートした場合
 				if(sort.equals("COUNT(COUNT_UNIT)"))
 				{
-					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT) AS 'sum',(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
+					st=con.prepareStatement("SELECT"
+							+ " USER.USER_NAME"
+							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
+							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
+							+ ",(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT"
+							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " WHERE RESULT.GENRE"
+							+ " IN("+ genreCond +")"
+									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
 				}	
 				//正答数でソートした場合
 				else if(sort.equals("SUM(IS_CORRECT)"))
 				{
-					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT) AS 'sum',(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY SUM(RESULT.IS_CORRECT='1') DESC;");	
+					st=con.prepareStatement("SELECT"
+							+ " USER.USER_NAME"
+							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
+							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
+							+ ",(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT INNER"
+							+ " JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " WHERE RESULT.GENRE"
+							+ " IN("+ genreCond +")"
+									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY SUM(RESULT.IS_CORRECT='1') DESC;");	
 				}	
 				//正答率でソートした場合
 				else if(sort.equals("collectRate"))

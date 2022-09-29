@@ -9,6 +9,7 @@ import bean.Comment;
 
 public class CommentDAO extends DAO
 {
+	//コメントを表示するための検索メソッド
 	public  List<Comment>search(Comment comment) throws Exception
 	{
 		
@@ -18,16 +19,22 @@ public class CommentDAO extends DAO
 		
 		try
 		{
+			//コネクション接続
 			con = getConnection();
-			st = con.prepareStatement("SELECT * FROM COMMENT where YEAR=? AND QUESTION_NO=?");
+			
+			//SQL文作成
+			st = con.prepareStatement("SELECT * FROM COMMENT"
+					+ " where YEAR=?"
+					+ " AND QUESTION_NO=?");
 			st.setString(1, comment.getYear());
 			st.setInt(2, comment.getQuestionNo());
-		
+			
+			//SQL実行
 			ResultSet rs = st.executeQuery();
 			
+			//検索結果の格納
 			commentList = new ArrayList<Comment>();
 			DateTimeFormatter dtformat = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
-			
 			while (rs.next())
 			{
 				Comment commentDB = new Comment();
@@ -52,6 +59,7 @@ public class CommentDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.close();
 				}
 				catch (SQLException e2)
@@ -65,7 +73,7 @@ public class CommentDAO extends DAO
 		
 	}
 	
-	
+	//コメント登録のメソッド
 	public int insert(Comment comment) throws Exception
 	{
 		
@@ -74,18 +82,22 @@ public class CommentDAO extends DAO
 		PreparedStatement st = null;
 		
 		try {
+			//コネクション接続
 			con = getConnection();
 			con.setAutoCommit(false);
 		
-			st = con.prepareStatement("INSERT INTO COMMENT VALUES(?, ?, now(), ?, ?)");
-		
+			//SQL文の作成
+			st = con.prepareStatement("INSERT INTO COMMENT"
+					+ " VALUES(?, ?, now(), ?, ?)");
 			st.setString(1, comment.getYear());
 			st.setInt(2, comment.getQuestionNo());
 			st.setString(3, comment.getUserId());
 			st.setString(4, comment.getComment());
 			
+			//SQL実行
 			line = st.executeUpdate();
 			
+			//登録成否の判定
 			if(line != 1)
 			{
 				con.rollback();
@@ -114,6 +126,7 @@ public class CommentDAO extends DAO
 			{
 				try
 				{
+					//コネクション切断
 					con.setAutoCommit(true);
 					con.close();
 				}
