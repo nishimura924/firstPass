@@ -94,11 +94,11 @@ public class PersonalResultAction extends Action
 				//表示用に変換し、難易度をセット
 				if(difficult.equals("0"))
 				{
-					pr.setDifficulty("normal");
+					pr.setDifficulty("Normal");
 				}
 				else if(difficult.equals("1"))
 				{
-					pr.setDifficulty("easy");
+					pr.setDifficulty("Easy");
 				}
 				
 				//実施回数-1の添え字配列にオブジェクト格納（4回目のデータは、prArray[3]に）
