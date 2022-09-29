@@ -132,16 +132,19 @@
 </div>
 
 <div class="float_ranking">
-	<table>
+	<table class="common-table col4t">
+		<thead>
 		<tr>
-		<td>順位</td>
-		<td>ユーザ名</td>
-		<td>回答数</td>
-		<td>正答数</td>
-		<td>正答率</td>
+			<th> </th>
+			<th>順位</th>
+			<th>ユーザ名</th>
+			<th>回答数</th>
+			<th>正答数</th>
+			<th>正答率</th>
 		</tr>
 		<c:forEach var="AllResult" items="${list}" varStatus="status">
 			<tr>
+			<td></td>
 			<td>${AllResult.rank}位</td>
 			<td>${AllResult.userId}</td>
 			<td>${AllResult.answerCount}問</td>
@@ -149,6 +152,7 @@
 			<td>${Math.round(AllResult.correctRate)}％</td>
 			</tr>
 		</c:forEach>
+		</thead>
 	</table>
 </div>
 
