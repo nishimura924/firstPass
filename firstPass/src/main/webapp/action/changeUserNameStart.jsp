@@ -31,8 +31,10 @@
 		<input class="decorated-btn click-down" type="submit" value="次へ">
 	</form>
 	</div>
+	<div class="float_free">
 	＜注意事項＞<br>
 	※既に登録済のユーザ名は設定できません。
+	</div>
 	
 </body>
 	<c:choose>

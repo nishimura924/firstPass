@@ -109,9 +109,11 @@
 			</c:choose>
 		</div>
 		<br>
+		<div class="float_free">
 		<c:if test="${answer == null}">
 			<input class="decorated-btn click-down" type="submit" value="回答">
 		</c:if>
+		</div>
 		</form>
 		
 	
@@ -173,9 +175,11 @@
 				</c:if>
 			</div>
 			<br>		
+			<div class="float_free">
 			<input class="decorated-btn click-down" type="submit" name="submitComment" value="コメント登録">
 			<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
 			<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
+			</div>
 		</form>
 	</c:if>
 	

@@ -141,6 +141,7 @@
 		}
 		.float_errorMsg/*エラーメッセージ共通(共通）*/
 		{
+			padding: 0.5em 1em;
 			color:#FF0000;
 		}
 		.float_conditions/*出題問題選択、ランキングの条件選択*/
@@ -176,10 +177,12 @@
         }
 		.float_judgeCorrect/*正誤判定(正解)*/
 		{
+			padding: 0.5em 1em;
 			color:#FF0000;
 		}
 		.float_judgeIncorrect/*正誤判定（不正解）*/
 		{
+			padding: 0.5em 1em;
 			color:#0000FF;
 		}
 		.float_correct/*正解*/
