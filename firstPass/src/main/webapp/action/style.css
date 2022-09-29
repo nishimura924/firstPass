@@ -132,13 +132,17 @@
 		.float_choice/*出題問題選択肢*/
 		{
 		}
-		.float_judge/*正誤結果*/
+		.float_judgeCorrect/*正誤判定(正解)*/
 		{
 			color:#FF0000;
 		}
+		.float_judgeIncorrect/*正誤判定（不正解）*/
+		{
+			color:#0000FF;
+		}
 		.float_correct/*正解*/
 		{
-			
+			color:#FF0000;
 		}
 		.float_flag/*ブックマーク登録フラグ*/
 		{
@@ -262,7 +266,7 @@
 			width: 100%;
 			padding: 10px 0;
 			text-decoration: none;
-			color: #aaa;
+			color: #ccc;
 		}
 		nav ul li a:hover
 		{

@@ -112,12 +112,15 @@
 
 	<hr>
 	<c:if test="${answer != null}">
-		<div class="float_judge">
 			<c:choose>
-				<c:when test="${answer.correct == 1 }">〇：正解！</c:when>
-				<c:otherwise>×：不正解！</c:otherwise>
+				<c:when test="${answer.correct == 1 }">
+				<div class="float_judgeCorrect">〇：正解！</div>
+				</c:when>
+				<c:otherwise>
+				<div class="float_judgeIncorrect">×：不正解！</div>
+				</c:otherwise>
 			</c:choose>
-		</div>
+			</div>
 		<br>
 
 	
