@@ -31,6 +31,7 @@
 	
 	<div class="float_question">
 		${questionOfSet[0].question }
+		<br>
 			<c:if test="${questionOfSet[0].questionPic != null }" >
 				<img src="../img/${questionOfSet[0].questionPic }" />
 			</c:if>

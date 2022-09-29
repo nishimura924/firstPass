@@ -79,8 +79,8 @@
 			background-image:url(doujou.jpg);     /* 画像のURLを指定       */
     		background-repeat:  no-repeat;         /* 画像の繰り返しを指定  */              
     		background-size:contain;				/* 画像のサイズを指定  */
-    		width:800px;                            /* 横幅のサイズを指定    */
-    		height:450px;   						/* 縦幅のサイズを指定    */
+    		width:700px;                            /* 横幅のサイズを指定    */
+    		height:400px;   						/* 縦幅のサイズを指定    */
     		margin: 0 auto 40px;
     			margin-top:0px;
     			margin-right:auto;
