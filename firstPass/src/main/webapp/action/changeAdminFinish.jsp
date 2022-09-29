@@ -11,7 +11,6 @@
 	<body>
 	
 		<h2>管理者権限変更</h2>
-		
 		<c:if test="${user.adminFlag != 1}">
 			<c:redirect url="index.jsp" />
 		</c:if>

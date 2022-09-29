@@ -36,7 +36,7 @@
 		
 		
 		<form action="changeAdminStart.jsp" method="post">
-			<input type="submit" value="戻る">
+			<input class="decorated-btn click-down" type="submit" value="戻る">
 		</form>
 		
 		<br>
@@ -53,7 +53,7 @@
 				</c:when>
 			</c:choose>
 			
-			<input type="submit" value="変更">
+			<input class="decorated-btn click-down" type="submit" value="変更">
 		</form>
 	</div>
 

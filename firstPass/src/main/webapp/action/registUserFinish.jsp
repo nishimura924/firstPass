@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録完了</title>
-<link rel="stylesheet" type="text/css" href="../style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 

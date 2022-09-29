@@ -33,7 +33,7 @@
 				${errorMessage }<br>
 			</div>
 		
-			<input type="submit" value="次へ">
+			<input class="decorated-btn click-down" type="submit" value="次へ">
 		</form>
 	</div>
 

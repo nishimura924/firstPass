@@ -106,7 +106,7 @@
 		}
 		.float_registUser, .float_changeUserName, .float_changeUserPassword, .float_adminChange/*登録系ページ*/
 		{
-			height: 300px;              /* 高さ指定 */
+			height: 350px;              /* 高さ指定 */
     		width: 700px;               /* 幅指定 */
     		background-color: #FFFACD;
     		margin: 0 auto 40px;
