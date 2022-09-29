@@ -1,14 +1,21 @@
        
      /*個別のタグ*/
        
-       　/*リンクタグ用*/
+       /*汎用float*/
+       　.float_free
+		{
+    		padding: 0.5em 1em;
+
+		}
+       /*リンクタグ用*/
        	a:visited
        	{
-  			color : #ff4081;
+  			
 		}
         a:hover
         {
-  			color : #32CD32;
+  			color :#800000;
+  			font-weight: bold;
 		}
         a:active 
         {
@@ -94,6 +101,7 @@
 		}
 		.float_login/*ログイン*/
 		{
+			padding: 0.5em 1em;
 			height: 200px;              /* 高さ指定 */
     		width: 700px;               /* 幅指定 */
     		background-color: #FFFACD;
@@ -106,6 +114,7 @@
 		}
 		.float_registUser, .float_changeUserName, .float_changeUserPassword, .float_adminChange/*登録系ページ*/
 		{
+			padding: 0.5em 1em;
 			height: 350px;              /* 高さ指定 */
     		width: 700px;               /* 幅指定 */
     		background-color: #FFFACD;
@@ -205,19 +214,14 @@
 		{
 			padding: 0.5em 1em;
 		}
-		.float_userListText/*ユーザ一覧の案内文*/
+		.float_userListText, .float_free/*ユーザ一覧の案内文*/
 		{
 			padding: 0.5em 1em;
 		}
-		.float_userList/*一般ユーザーリスト*/
+		.float_userList, .float_userAdminList/*一般ユーザーリスト*/
 		{
 			padding: 0.5em 1em;
 		}
-		.float_userAdminList/*管理ユーザリスト*/
-		{
-			padding: 0.5em 1em;
-		}
-		
 		.font_boxTop /*トップ見出し用*/
 		{
   		 	color: #ffffff ;

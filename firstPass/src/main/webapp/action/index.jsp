@@ -9,12 +9,13 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-
+	<div class="float_free">
 	こんにちは！
 	<c:choose>
 		<c:when test="${user == null}">ゲスト さん！</c:when>
 		<c:otherwise>${user.userName }　さん！</c:otherwise>
 	</c:choose>
+	</div>
 	
 	<div class="indexImg "></div>
 	<br>

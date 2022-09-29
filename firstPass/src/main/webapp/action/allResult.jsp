@@ -54,16 +54,16 @@
 	<p>難易度</p>
 	<c:choose>
 	<c:when test="${difficulty==null }">
-	<input type="radio" name="difficulty" value="1" checked>normal＆easy
-	<input type="radio" name="difficulty" value="0" >normalのみ
+	<input type="radio" name="difficulty" value="1" checked>Normal＆Easy
+	<input type="radio" name="difficulty" value="0" >Normalのみ
 	</c:when>
 	<c:when test="${difficulty==1 }">
-	<input type="radio" name="difficulty" value="1" checked>normal＆easy
-	<input type="radio" name="difficulty" value="0" >normalのみ
+	<input type="radio" name="difficulty" value="1" checked>Normal＆Easy
+	<input type="radio" name="difficulty" value="0" >Normalのみ
 	</c:when>
 	<c:when test="${difficulty==0 }">
-	<input type="radio" name="difficulty" value="1" >normal＆easy
-	<input type="radio" name="difficulty" value="0" checked>normalのみ
+	<input type="radio" name="difficulty" value="1" >Normal＆Easy
+	<input type="radio" name="difficulty" value="0" checked>Normalのみ
 	</c:when>
 	</c:choose>
 	
@@ -72,10 +72,10 @@
 	<p>ユーザ実施期間</p>
 	<c:choose>
 	<c:when test="${fromDate == null }">
-	FROM<input type="date" name="fromDate" value="2022-01-01" >
+	From <input type="date" name="fromDate" value="2022-01-01" >
 	</c:when>
 	<c:when test="${fromDate != null }">
-	FROM<input type="date" name="fromDate" value=${fromDate } >
+	From <input type="date" name="fromDate" value=${fromDate } >
 	</c:when>
 	</c:choose>
 	
@@ -85,10 +85,10 @@
 	
 	<c:choose>
 	<c:when test="${toDate == null }">
-	TO<input type="date" name="toDate" value="2100-01-01" >
+	To 　 <input type="date" name="toDate" value="2100-01-01" >
 	</c:when>
 	<c:when test="${toDate != null  }">
-	TO<input type="date" name="toDate" value=${toDate } >
+	To 　 <input type="date" name="toDate" value=${toDate } >
 	</c:when>
 	</c:choose>
 	

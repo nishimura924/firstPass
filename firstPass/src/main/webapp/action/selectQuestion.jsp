@@ -21,16 +21,20 @@
 		
 		
 		<h2 class="font_box">出題条件選択</h2>
+		<div class="float_free">
 		<c:choose>
 			<c:when test="${user == null}">ゲスト</c:when>
 			<c:otherwise>${user.userName }</c:otherwise>
 		</c:choose>
 		
 		さん、条件を選んで出題開始してください。<br>
+		</div>
 		
+		<div class="float_free">
 		<c:if test ="${user == null }">
 			ログインがお済でない方は<a href="login.jsp">こちら</a>
 		</c:if>
+		</div>
 		
 		<div class="float_conditions">
 			<form action="SelectQuestion.action" method="post">
@@ -41,19 +45,19 @@
 				
 				年度
 				<c:forEach var="year" items="${yearList }">
-					<input type="checkbox" name="year" value="${year }" checked="checked">${year }
+					　<input type="checkbox" name="year" value="${year }" checked="checked">${year }
 				</c:forEach>
 				<hr>
 				
 				分野
 				<c:forEach var="genre" items="${genreList }">
-					<input type="checkbox" name="genre" value="${genre }" checked="checked">${genre }
+					　<input type="checkbox" name="genre" value="${genre }" checked="checked">${genre }
 				</c:forEach>
 				<hr>
 				
 				難易度
-				<input type="radio"	name="difficulty" value="0" checked="checked">normal
-				<input type="radio"	name="difficulty" value="1" >easy
+				<input type="radio"	name="difficulty" value="0" checked="checked">Normal
+				<input type="radio"	name="difficulty" value="1" >Easy
 				<hr>
 				
 				問題数

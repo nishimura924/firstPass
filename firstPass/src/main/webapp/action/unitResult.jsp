@@ -16,6 +16,7 @@
 	</c:if>
 	
 <form>
+<div class="float_result">
 <c:choose>
 	<c:when test="${user.userName == null }">ゲスト</c:when>
 	<c:otherwise>${user.userName }</c:otherwise>
@@ -30,7 +31,7 @@
 </c:choose>
 ）
 
-<div class="float_result">
+
 	<br>
 	出題数:${questionCount }問
 	<br>
