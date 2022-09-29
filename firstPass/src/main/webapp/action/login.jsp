@@ -21,7 +21,9 @@
 		<p>ログインID<input type="text" name="userId"></p>
 		<p>パスワード<input type="password" name="password"></p>
 		
+		<div class="float_errorMsg">
 		<p>${errorMsg }</p>
+		</div>
 		<p><input class="decorated-btn click-down" type="submit" value="ログイン"></p>
 		
 		</form>	

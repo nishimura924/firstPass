@@ -46,7 +46,7 @@
 			<input type="hidden" name="genreList" value="${genreList }">
 			
 			<br>
-			<div class="errorMsg">
+			<div class="float_errorMsg">
 			${errorMsg}
 			</div>
 	<hr>
@@ -79,7 +79,7 @@
 	</c:when>
 	</c:choose>
 	
-	<div class="errorMsg">
+	<div class="float_errorMsg">
 	${errorMsgFrom}
 	</div>
 	
@@ -92,7 +92,7 @@
 	</c:when>
 	</c:choose>
 	
-	<div class="errorMsg">
+	<div class="float_errorMsg">
 	${errorMsgTo}
 	</div>
 	<hr>

@@ -68,7 +68,6 @@
 	/*floatタグ*/	
 		.float_menu /*トップ、マイページ、管理者メニュー*/
 		{
-			
     		background-color: #FFFACD;
     		margin: 0 auto 40px;
     			margin-top:0px;
@@ -79,6 +78,15 @@
 		}
 		.float_login/*ログイン*/
 		{
+			height: 200px;              /* 高さ指定 */
+    		width: 700px;               /* 幅指定 */
+    		background-color: #FFFACD;
+    		margin: 0 auto 40px;
+    			margin-top:0px;
+    			margin-right:auto;
+    			margin-bottom:60px;
+    			margin-left:auto;
+  
 		}
 		.float_registUser, .float_changeUserName, .float_changeUserPassword, .float_adminChange/*登録系ページ*/
 		{
@@ -107,6 +115,7 @@
 		}
 		.float_conditions/*出題問題選択、ランキングの条件選択*/
 		{
+			
 			background-color: #FFFACD;
     		margin: 0 auto 40px;
     			margin-top:0px;
@@ -125,9 +134,11 @@
 		}
 		.float_judge/*正誤結果*/
 		{
+			color:#FF0000;
 		}
 		.float_correct/*正解*/
 		{
+			
 		}
 		.float_flag/*ブックマーク登録フラグ*/
 		{
