@@ -33,7 +33,7 @@
 
 
 	<br>
-	出題数:${questionCount }問
+	出題数：${questionCount }問
 	<br>
 	正答数：${correctCount }問
 	<br>
