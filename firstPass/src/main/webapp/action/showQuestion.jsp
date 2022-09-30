@@ -177,7 +177,9 @@
 			</div>
 			<br>		
 			<div class="float_free">
-			<input class="decorated-btn click-down" type="submit" name="submitComment" value="コメント登録">
+			<c:if test="${user != null }" >
+				<input class="decorated-btn click-down" type="submit" name="submitComment" value="コメント登録">
+			</c:if>
 			<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
 			<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
 			</div>
