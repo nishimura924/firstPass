@@ -110,7 +110,7 @@
 			</c:choose>
 		</div>
 		<br>
-		<div class="float_free">
+		<div class="float_answer">
 		<c:if test="${answer == null}">
 			<input class="decorated-btn click-down" type="submit" value="回答">
 		</c:if>
@@ -176,12 +176,14 @@
 				</c:if>
 			</div>
 			<br>		
-			<div class="float_free">
+			<div class="float_nextButton">
 			<c:if test="${user != null }" >
 				<input class="decorated-btn click-down" type="submit" name="submitComment" value="コメント登録">
 			</c:if>
-			<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
-			<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
+				<input class="decorated-btn click-down" type="submit" name="submitNext" value="次へ">
+			</div>
+			<div class="float_retireButton">
+				<input class="decorated-btn click-down" type="submit" name="submitFinish" value="途中終了">
 			</div>
 		</form>
 	</c:if>
