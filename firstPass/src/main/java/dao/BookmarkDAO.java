@@ -18,8 +18,7 @@ public class BookmarkDAO extends DAO
 			con.setAutoCommit(false);
 			
 			//SQL文の定義
-			st = con.prepareStatement("INSERT INTO BOOKMARK"
-					+ " VALUES(?, ?, ?)");
+			st = con.prepareStatement("INSERT INTO BOOKMARK VALUES(?, ?, ?)");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());
@@ -84,10 +83,7 @@ public class BookmarkDAO extends DAO
 			con.setAutoCommit(false);
 			
 			//SQL文の作成
-			st = con.prepareStatement("DELETE FROM BOOKMARK"
-					+ " WHERE USER_ID=?"
-					+ " AND　YEAR=?"
-					+ " AND QUESTION_NO=?");
+			st = con.prepareStatement("DELETE FROM BOOKMARK WHERE USER_ID=? AND YEAR=? AND QUESTION_NO=?");
 			st.setString(1, bookmark.getUserId());
 			st.setString(2, bookmark.getYear());
 			st.setInt(3, bookmark.getQuestionNo());

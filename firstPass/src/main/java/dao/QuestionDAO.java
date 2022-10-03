@@ -312,9 +312,7 @@ public class QuestionDAO extends DAO
 		
 			//問題TBLに登録されている年度を降順で取得
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT YEAR FROM QUESTION"
-					+ " GROUP BY YEAR"
-					+ " ORDER BY YEAR DESC;");
+			st=con.prepareStatement("SELECT YEAR FROM QUESTION GROUP BY YEAR ORDER BY YEAR DESC;");
 			
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();
@@ -361,8 +359,7 @@ public class QuestionDAO extends DAO
 			con = getConnection();
 		
 			PreparedStatement st;
-			st=con.prepareStatement("SELECT GENRE FROM QUESTION"
-					+ " GROUP BY GENRE;");
+			st=con.prepareStatement("SELECT GENRE FROM QUESTION GROUP BY GENRE;");
 		
 			//SQLの実行と結果の取得
 			ResultSet rs = st.executeQuery();

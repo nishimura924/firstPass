@@ -81,12 +81,7 @@ public class UserDAO extends DAO
 			con = getConnection();
 			
 			//SQL文の作成
-			st = con.prepareStatement("SELECT"
-					+ " USER_PASSWORD"
-					+ " FROM USER"
-					+ " WHERE USER_ID=?"
-					+ " AND　USER_PASSWORD=?"
-					+ " GROUP BY USER_PASSWORD");
+			st = con.prepareStatement("SELECT USER_PASSWORD FROM USER WHERE USER_ID=? AND USER_PASSWORD=? GROUP BY USER_PASSWORD");
 			st.setString(1, user.getUserId());
 			st.setString(2, password);
 			

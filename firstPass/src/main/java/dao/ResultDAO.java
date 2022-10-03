@@ -155,7 +155,7 @@ public class ResultDAO extends DAO
 						+ ",SUM(IS_CORRECT)"
 						+ " FROM RESULT"
 						+ " WHERE USER_ID =?"
-						+ " GROUP BY　COUNT_UNIT"
+						+ " GROUP BY COUNT_UNIT"
 						+ ",GENRE"
 						+ ",DIFFICULTY"
 						+ " ORDER BY COUNT_UNIT DESC"
@@ -230,7 +230,7 @@ public class ResultDAO extends DAO
 					st=con.prepareStatement("SELECT"
 							+ " USER.USER_NAME"
 							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
-							+ ",SUM(RESULT.IS_CORRECT)  AS 'sum'"
+							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
 							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
 							+ " FROM RESULT"
 							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
@@ -279,9 +279,9 @@ public class ResultDAO extends DAO
 									+ " ORDER BY (100 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) DESC;");	
 				}	
 				
-					st.setString(1,difficulty);
-					st.setDate(2,(java.sql.Date) answerDateFrom);
-					st.setDate(3,(java.sql.Date) answerDateTo);
+				st.setString(1,difficulty);
+				st.setDate(2,(java.sql.Date) answerDateFrom);
+				st.setDate(3,(java.sql.Date) answerDateTo);
 					
 			}
 			//難易度を「normal＆easy」で選択した場合
@@ -311,23 +311,24 @@ public class ResultDAO extends DAO
 							+ " USER.USER_NAME"
 							+ ",COUNT(RESULT.COUNT_UNIT) AS 'count'"
 							+ ",SUM(RESULT.IS_CORRECT) AS 'sum'"
-							+ ",(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
-							+ " FROM RESULT INNER"
-							+ " JOIN USER ON RESULT.USER_ID=USER.USER_ID"
-							+ " WHERE RESULT.GENRE"
+							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
+							+ " FROM RESULT"
+							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
+							+ " AND RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-							+ " AND RESULT.ANSWER_DATE >= ?"
-							+ " AND RESULT.ANSWER_DATE <= ?"
-							+ " GROUP BY USER.USER_NAME"
-							+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");		
+									+ " AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE <= ?"
+									+ " GROUP BY USER.USER_NAME"
+									+ " ORDER BY SUM(RESULT.IS_CORRECT) DESC;");	
 				}	
 				//正答率でソートした場合
 				else if(sort.equals("collectRate"))
 				{
 					st=con.prepareStatement("SELECT USER.USER_NAME,COUNT(RESULT.COUNT_UNIT) AS 'count',SUM(RESULT.IS_CORRECT) AS 'sum',(100.0 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) AS 'rate' FROM RESULT INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID WHERE RESULT.GENRE IN("+ genreCond +")AND RESULT.ANSWER_DATE >= ? AND RESULT.ANSWER_DATE <= ? GROUP BY USER.USER_NAME ORDER BY (100 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) DESC;");	
 				}	
-					st.setDate(1,(java.sql.Date) answerDateFrom);
-					st.setDate(2,(java.sql.Date) answerDateTo);
+				
+				st.setDate(1,(java.sql.Date) answerDateFrom);
+				st.setDate(2,(java.sql.Date) answerDateTo);
 			}
 			//メソッド共通機能（beanへの設定）
 			ResultSet rs =st.executeQuery();

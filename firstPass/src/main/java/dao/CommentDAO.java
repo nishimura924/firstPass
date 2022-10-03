@@ -23,9 +23,7 @@ public class CommentDAO extends DAO
 			con = getConnection();
 			
 			//SQL文作成
-			st = con.prepareStatement("SELECT * FROM COMMENT"
-					+ " where YEAR=?"
-					+ " AND QUESTION_NO=?");
+			st = con.prepareStatement("SELECT * FROM COMMENT where YEAR=? AND QUESTION_NO=?");
 			st.setString(1, comment.getYear());
 			st.setInt(2, comment.getQuestionNo());
 			
@@ -87,8 +85,7 @@ public class CommentDAO extends DAO
 			con.setAutoCommit(false);
 		
 			//SQL文の作成
-			st = con.prepareStatement("INSERT INTO COMMENT"
-					+ " VALUES(?, ?, now(), ?, ?)");
+			st = con.prepareStatement("INSERT INTO COMMENT VALUES(?, ?, now(), ?, ?)");
 			st.setString(1, comment.getYear());
 			st.setInt(2, comment.getQuestionNo());
 			st.setString(3, comment.getUserId());
