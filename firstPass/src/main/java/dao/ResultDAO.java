@@ -234,10 +234,10 @@ public class ResultDAO extends DAO
 							+ ",(100.0*(SUM(RESULT.IS_CORRECT))/ ( COUNT(RESULT.COUNT_UNIT))) AS 'rate'"
 							+ " FROM RESULT"
 							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
-							+ " WHERE　DIFFICULTY =?"
-							+ " AND　RESULT.GENRE"
+							+ " WHERE DIFFICULTY =?"
+							+ " AND RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE >= ?"
 									+ " AND RESULT.ANSWER_DATE <= ?"
 									+ " GROUP BY USER.USER_NAME"
 									+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
@@ -255,7 +255,7 @@ public class ResultDAO extends DAO
 							+ " WHERE DIFFICULTY =?"
 							+ " AND RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE >= ?"
 									+ " AND RESULT.ANSWER_DATE <= ?"
 									+ " GROUP BY USER.USER_NAME"
 									+ " ORDER BY SUM(RESULT.IS_CORRECT) DESC;");	
@@ -273,7 +273,7 @@ public class ResultDAO extends DAO
 							+ " WHERE DIFFICULTY =?"
 							+ " AND RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE >= ?"
 									+ " AND RESULT.ANSWER_DATE <= ?"
 									+ " GROUP BY USER.USER_NAME"
 									+ " ORDER BY (100 * (SUM(RESULT.IS_CORRECT)) / ( COUNT(RESULT.COUNT_UNIT))) DESC;");	
@@ -299,7 +299,7 @@ public class ResultDAO extends DAO
 							+ " INNER JOIN USER ON RESULT.USER_ID=USER.USER_ID"
 							+ " WHERE RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-									+ "　AND RESULT.ANSWER_DATE >= ?"
+									+ " AND RESULT.ANSWER_DATE >= ?"
 									+ " AND RESULT.ANSWER_DATE <= ?"
 									+ " GROUP BY USER.USER_NAME"
 									+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");	
@@ -316,10 +316,10 @@ public class ResultDAO extends DAO
 							+ " JOIN USER ON RESULT.USER_ID=USER.USER_ID"
 							+ " WHERE RESULT.GENRE"
 							+ " IN("+ genreCond +")"
-									+ "　AND RESULT.ANSWER_DATE >= ?"
-									+ " AND RESULT.ANSWER_DATE <= ?"
-									+ " GROUP BY USER.USER_NAME"
-									+ " ORDER BY SUM(RESULT.IS_CORRECT='1') DESC;");	
+							+ " AND RESULT.ANSWER_DATE >= ?"
+							+ " AND RESULT.ANSWER_DATE <= ?"
+							+ " GROUP BY USER.USER_NAME"
+							+ " ORDER BY COUNT(RESULT.COUNT_UNIT) DESC;");		
 				}	
 				//正答率でソートした場合
 				else if(sort.equals("collectRate"))
