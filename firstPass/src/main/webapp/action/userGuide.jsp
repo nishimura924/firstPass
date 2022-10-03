@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<title>ユーザーガイド</title>
+<title>ユーザガイド</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-	<h2 class="font_box">ユーザーガイド</h2>
+	<h2 class="font_box">ユーザガイド</h2>
 	
 	<h3 class="font_box2">ITパスポート過去問道場とは？</h3>
 	<div class="float_userGuide">
@@ -55,7 +55,7 @@
 	<br>
 	<h3 class="font_box2">ユーザ向け機能</h3>
 	<div class="float_userGuide">
-	本サイトではユーザー登録により以下の機能がご利用いただけます。
+	本サイトではユーザ登録により以下の機能がご利用いただけます。
 	<br>
 	　＜コメント機能＞
 	<br>
