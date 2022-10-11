@@ -52,16 +52,24 @@ public class RegistCommentAction extends Action
 			//コメントがあれば登録
 			else
 			{
-				//改行は削除
+				//コメント（改行は削除）
 				String commentString = request.getAttribute("comment").toString().replaceAll("\\r\\n|\\r|\\n", "");
 				
-				//500文字超はカット
+				//使用禁止文字の判定
 				if(! ValidCheck.validComment(commentString))
 				{
-					commentString = commentString.substring(0,500);
-
+					String errorMessage = "コメント登録は半角・全角英数字、漢字・かな・カナ、一部記号（！？ー～＿＊＠ etc）以外は使用禁止となります。";
+					request.setAttribute("errorMessage", errorMessage);
+					return "showQuestion.jsp";
+					
 				}
+				//500文字超の削除
+				else if (! ValidCheck.validCommentLength(commentString))
+				{
+					commentString = commentString.substring(0,500);
 				
+				}			
+								
 				comment.setComment(commentString);
 				if(dao.insert(comment) != 1)
 				{
